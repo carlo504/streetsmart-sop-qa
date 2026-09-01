@@ -1,0 +1,63 @@
+{
+  "test_id": "PC_TC_03",
+  "sop_id": "sop2_policy_change",
+  "title": "Policy Change - CSR Bound Agency-Bill Endorsement Without Payment Collection",
+  "employee_name": "Kevin Vance",
+  "role": "CSR / Technician",
+  "date": "2026-08-29",
+  "policy_numbers": ["CT-8819203"],
+  "line_of_business": "Commercial Trucking",
+  "change_type": "Add Commercial Utility Trailer ($1,450 Endorsement Premium)",
+  "data_sources": {
+    "ringcentral": {
+      "call_id": "RC-9937102",
+      "call_duration_minutes": 6.8,
+      "caller_verified": true,
+      "call_recording_url": "https://ringcentral.example.com/recording/9937102"
+    },
+    "magellan": {
+      "overall_sentiment": "Positive",
+      "sentiment_score": 0.70,
+      "empathy_score": 80,
+      "talk_to_listen_ratio": "50% Agent / 50% Client"
+    },
+    "ezlynx": {
+      "discussion_title": "Policy Change Request",
+      "folder": "Policy Changes/Declarations",
+      "labels": ["Policy Change Request"],
+      "core_questions_completed": {
+        "caller_authority_verified": true,
+        "effective_date_confirmed": "2026-08-29",
+        "claims_losses_screened": "Screened clean",
+        "cross_policy_umbrella_impact_checked": "No umbrella",
+        "expectations_set": "Told customer endorsement is active immediately"
+      },
+      "branch_questions_completed": {
+        "add_trailer": {
+          "vin": "1JJV532W9PL002918",
+          "year_make_model": "2023 Great Dane Reefer Trailer",
+          "value": "$65,000",
+          "radius": "500 miles",
+          "photos_collected": true
+        }
+      },
+      "ezlynx_task_status": "Reassigned to CSR for follow up",
+      "carrier_portal_submitted": true,
+      "billing_type": "Agency Bill",
+      "payment_collected_before_binding": false,
+      "accounting_policy_change_checklist_completed": false,
+      "payment_notes": "CSR bound trailer in carrier portal without collecting down payment or signing premium finance agreement. Emailed invoice to insured with net-30 terms.",
+      "carrier_download_verified": true
+    }
+  },
+  "transcript_snippet": "CSR: 'I went ahead and added the 2023 Great Dane Reefer trailer to your policy on the carrier portal so it is active right now. The endorsement is $1,450. I'll email you an agency bill invoice and you can pay it within 30 days.'",
+  "expected_score": 40,
+  "expected_grade": "F",
+  "expected_status": "CRITICAL_FAIL",
+  "expected_non_negotiables_breached": [
+    {
+      "id": "NN_PC_02",
+      "rule": "Never bind an agency-bill endorsement before required payment or finance confirmation is received."
+    }
+  ]
+}

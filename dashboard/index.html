@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StreetSmart SOP Quality Assurance (QA) Dashboard</title>
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #3b82f6;
+      --primary-subtle: #eff6ff;
+      --secondary: #0f766e;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --pass: #16a34a;
+      --pass-bg: #dcfce7;
+      --fail: #dc2626;
+      --fail-bg: #fee2e2;
+      --warn: #d97706;
+      --warn-bg: #fef3c7;
+      --radius: 12px;
+      --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text-main); line-height: 1.5; padding: 24px; }
+    .container { max-width: 1440px; margin: 0 auto; }
+
+    /* Header */
+    .header { background: linear-gradient(135deg, #1e3a8a 0%, #0f766e 100%); color: white; padding: 24px 32px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .header h1 { font-size: 24px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+    .header p { opacity: 0.9; font-size: 14px; margin-top: 4px; }
+    .badge-hub { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+
+    /* Department Nav Tabs */
+    .dept-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid var(--border); padding-bottom: 12px; flex-wrap: wrap; }
+    .dept-tab-btn { background: white; border: 1px solid var(--border); padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; color: var(--text-muted); transition: 0.2s; display: flex; align-items: center; gap: 8px; }
+    .dept-tab-btn:hover { border-color: var(--primary-light); color: var(--primary); }
+    .dept-tab-btn.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 2px 4px rgba(30,58,138,0.25); }
+
+    /* Layout Grid */
+    .main-grid { display: grid; grid-template-columns: 520px 1fr; gap: 24px; align-items: start; }
+    @media (max-width: 1100px) { .main-grid { grid-template-columns: 1fr; } }
+
+    /* Cards */
+    .card { background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); padding: 24px; margin-bottom: 24px; }
+    .card-title { font-size: 17px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; color: var(--primary); }
+
+    /* Controls & Form Elements */
+    .form-group { margin-bottom: 14px; }
+    label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+    select, input, textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; background: #ffffff; color: var(--text-main); transition: all 0.2s; }
+    select:focus, input:focus, textarea:focus { border-color: var(--primary-light); outline: none; }
+    textarea { resize: vertical; min-height: 80px; }
+
+    /* Quick Load Benchmarks */
+    .benchmark-pills { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    .pill-btn { background: #f8fafc; color: var(--text-main); border: 1px solid var(--border); padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.15s; text-align: left; display: flex; justify-content: space-between; align-items: center; }
+    .pill-btn:hover { background: #f1f5f9; border-color: var(--primary-light); }
+    .pill-btn.active { background: var(--primary-subtle); border-color: var(--primary-light); box-shadow: 0 0 0 1px var(--primary-light); }
+    .pill-btn.pass-pill { border-left: 5px solid var(--pass); }
+    .pill-btn.fail-pill { border-left: 5px solid var(--fail); }
+
+    .client-tag { font-weight: 700; color: var(--text-main); }
+    .rep-tag { font-size: 12px; color: var(--text-muted); font-weight: normal; margin-top: 2px; }
+    .carrier-badge { background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+
+    .btn-audit { width: 100%; background: #2563eb; color: white; border: none; padding: 12px 20px; font-size: 15px; font-weight: 700; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s; box-shadow: 0 2px 4px rgba(37,99,235,0.3); }
+    .btn-audit:hover { background: #1d4ed8; }
+
+    /* Score Meter & Hero */
+    .score-hero { display: flex; align-items: center; justify-content: space-between; background: linear-gradient(to right, #f8fafc, #ffffff); border-radius: var(--radius); padding: 20px 24px; border: 1px solid var(--border); margin-bottom: 20px; }
+    .score-circle { width: 105px; height: 105px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 800; border: 6px solid var(--pass); background: white; flex-shrink: 0; }
+    .score-circle .num { font-size: 28px; line-height: 1; }
+    .score-circle .grade { font-size: 13px; font-weight: 700; color: var(--text-muted); }
+    .score-details h2 { font-size: 20px; font-weight: 800; color: var(--text-main); }
+    .score-meta-p { font-size: 13px; color: var(--text-muted); margin-top: 4px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .meta-chip { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; }
+
+    .status-badge { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 6px; }
+    .status-pass { background: var(--pass-bg); color: var(--pass); }
+    .status-fail { background: var(--fail-bg); color: var(--fail); }
+    .status-warn { background: var(--warn-bg); color: var(--warn); }
+
+    /* Non-Negotiable Alert Banner */
+    .violation-banner { background: var(--fail-bg); border-left: 5px solid var(--fail); padding: 14px 16px; border-radius: 6px; margin-bottom: 20px; }
+    .violation-banner h4 { color: #991b1b; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+    .violation-item { margin-top: 8px; font-size: 13px; color: #7f1d1d; }
+
+    /* Category Cards & Progress Bars */
+    .category-card { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; background: #fafafa; }
+    .cat-header { display: flex; justify-content: space-between; font-weight: 700; font-size: 14px; margin-bottom: 8px; }
+    .progress-bar-bg { background: #e2e8f0; height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 10px; }
+    .progress-bar-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+    .cp-item { font-size: 12px; color: var(--text-main); margin-bottom: 4px; display: flex; justify-content: space-between; }
+    .cp-item .pts { font-weight: 600; color: var(--primary); }
+
+    /* Coaching Box */
+    .coaching-box { background: #f0fdf4; border-left: 5px solid #16a34a; border-radius: 6px; padding: 16px; margin-top: 16px; }
+    .coaching-box.fail { background: #fff1f2; border-left-color: #e11d48; }
+    .coaching-box h4 { font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+    .coaching-box ul { padding-left: 18px; font-size: 13px; color: #334155; }
+    .coaching-box li { margin-bottom: 6px; }
+
+    /* Source Tags */
+    .source-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .src-tag { background: #f1f5f9; color: #475569; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; border: 1px solid #cbd5e1; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <h1>🛡️ StreetSmart SOP Quality Assurance (QA) Engine</h1>
+      <p>Live EZLynx Client Account Auditing • Personal, Commercial & Trucking Departments</p>
+    </div>
+    <div class="badge-hub">
+      Roster: 85 Employees • EZLynx AMS Live • GitHub Synced
+    </div>
+  </div>
+
+  <!-- Department Navigation Tabs -->
+  <div class="dept-tabs">
+    <button class="dept-tab-btn active" id="tab-personal" onclick="switchDepartment('Personal Lines')">
+      <span>🏠 Personal Lines</span>
+    </button>
+    <button class="dept-tab-btn" id="tab-commercial" onclick="switchDepartment('Commercial Lines')">
+      <span>🏢 Commercial Lines</span>
+    </button>
+    <button class="dept-tab-btn" id="tab-trucking" onclick="switchDepartment('Trucking and Transportation')">
+      <span>🚛 Trucking & Transportation</span>
+    </button>
+  </div>
+
+  <div class="main-grid">
+    <!-- Left Column: Inputs & Controls -->
+    <div>
+      <div class="card">
+        <div class="card-title">
+          <span>⚡ Select Real EZLynx Client Account</span>
+          <span id="deptHeaderBadge" style="font-size: 12px; color: var(--text-muted);">Personal Lines</span>
+        </div>
+
+        <label>Real Agency Client Accounts (EZLynx AMS)</label>
+        <div class="benchmark-pills" id="benchmarkPills">
+          <!-- Populated dynamically with Real Client & Carrier names -->
+        </div>
+
+        <div class="form-group" style="margin-top: 14px;">
+          <label>Real Client / Insured Name & EZLynx Account #</label>
+          <input type="text" id="insuredName" value="Nicole Scrivanich & Jason Santos (#93686872)">
+        </div>
+
+        <div class="form-group">
+          <label>Insurance Carrier</label>
+          <input type="text" id="carrierName" value="Plymouth Rock & Selective">
+        </div>
+
+        <div class="form-group">
+          <label>Standard Operating Procedure</label>
+          <select id="sopSelect" onchange="handleSopChange()">
+            <option value="sop1_new_business">SOP 1: New Business (CSR Intake & Producer Sales)</option>
+            <option value="sop2_policy_change">SOP 2: Policy Change Request (CSR Processing & AM Escalation)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Audited Rep (From Agency Roster Database)</label>
+          <select id="employeeSelect" onchange="handleEmployeeSelect()">
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Audit Target Role</label>
+          <select id="roleSelect">
+            <option value="Producer">Producer (Sales / Quoting / Binding)</option>
+            <option value="CSR / Technician">CSR / Technician (Intake / Processing / Follow-up)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span>📋 Interaction Data Sources</span>
+        </div>
+        <div class="source-tags">
+          <span class="src-tag">📞 RingCentral</span>
+          <span class="src-tag">🧠 Magellan Sentiment</span>
+          <span class="src-tag">📂 EZLynx AMS</span>
+        </div>
+
+        <div class="form-group">
+          <label>RingCentral Telephony Data</label>
+          <input type="text" id="rcMetrics" value="Response: 40s | Talk: 18.5m | Warm-Transfer: Yes | Phone Presentation: Yes">
+        </div>
+
+        <div class="form-group">
+          <label>Magellan Sentiment & Signals</label>
+          <input type="text" id="magellanSentiment" value="Sentiment: High Positive (+0.86) | Empathy: 95% | CENT: Multi-policy bundling and underlying liability">
+        </div>
+
+        <div class="form-group">
+          <label>EZLynx Task Notes & Documentation</label>
+          <textarea id="ezlynxNotes">Discussion: New Business | Folder: New Business/Application/Declarations | Quoted: Plymouth Rock, Selective, Travelers (3 Options) | Presentation: Presented on phone at 11:30 AM before sending link | Won: Plymouth Rock ($9,047) | Payment: EFT Monthly | Agency Fee: $100 Applied | Stage: Won</textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Call / Email / SMS Transcript Snippet</label>
+          <textarea id="transcriptText">JAZMIN MOLINA: "Nicole and Jason, before I email the proposal link, I want to review the 3 coverage packages we built across Plymouth Rock, Selective, and Travelers. Plymouth Rock gives you full replacement cost on your home, $500k underlying liability on auto to support your Umbrella, and locks in a multi-policy discount on monthly EFT."</textarea>
+        </div>
+
+        <button class="btn-audit" onclick="runAudit()">
+          <span>🔍 Run QA Audit & Evaluation</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Column: Audit Results & Scorecard -->
+    <div>
+      <!-- Hero Score Summary -->
+      <div class="score-hero">
+        <div class="score-details">
+          <div id="statusBadge" class="status-badge status-pass">STATUS: PASS</div>
+          <h2 id="clientNameDisplay">Nicole Scrivanich & Jason Santos</h2>
+          <div class="score-meta-p">
+            <span class="meta-chip">🏢 <strong id="carrierDisplay">Plymouth Rock & Selective</strong></span>
+            <span class="meta-chip">👤 Rep: <strong id="repDisplay">Jazmin Molina (Producer)</strong></span>
+            <span class="meta-chip">📄 <span id="sopDisplay">SOP 1: New Business</span></span>
+          </div>
+        </div>
+        <div class="score-circle" id="scoreCircle">
+          <span class="num" id="scoreNum">100</span>
+          <span class="grade" id="gradeDisplay">Grade A+</span>
+        </div>
+      </div>
+
+      <!-- Non-Negotiable Alert Banner (if any) -->
+      <div id="violationBanner" class="violation-banner" style="display: none;">
+        <h4>⚠️ NON-NEGOTIABLE COMPLIANCE BREACH</h4>
+        <div id="violationList"></div>
+      </div>
+
+      <!-- Category Breakdown -->
+      <div class="card">
+        <div class="card-title">
+          <span>📊 Weighted Category Breakdown</span>
+          <span style="font-size: 13px; color: var(--text-muted);">Points Earned / Total</span>
+        </div>
+        <div id="categoryContainer">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Coaching & Action Plan -->
+      <div class="card">
+        <div class="card-title">
+          <span>💡 Actionable Coaching & Remediation Plan</span>
+        </div>
+        <div id="coachingContainer" class="coaching-box">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Agency Employee Roster by Department
+const ROSTER = {
+  "Personal Lines": [
+    { name: "Carlo Ferrara", role: "Producer", pos: "Agency Principal & Producer" },
+    { name: "Jazmin Molina", role: "Producer", pos: "Personal Lines Producer" },
+    { name: "Amber Voigt", role: "Producer", pos: "Personal Lines Producer / Servicing" },
+    { name: "Ana Flores", role: "CSR / Technician", pos: "Personal Lines Account Technician" },
+    { name: "Daniela Aguilar", role: "CSR / Technician", pos: "Personal Lines Account Technician" },
+    { name: "Mitchell Dean Slagle", role: "CSR / Technician", pos: "Personal Lines Account Manager" },
+    { name: "Ashley Huntley", role: "CSR / Technician", pos: "Personal Lines Department Manager" }
+  ],
+  "Commercial Lines": [
+    { name: "Carlo Ferrara", role: "Producer", pos: "Agency Principal & Commercial Producer" },
+    { name: "Taylor Cimei", role: "Producer", pos: "Commercial Lines Producer" },
+    { name: "Andrea Nicole Illanes", role: "CSR / Technician", pos: "Commercial Lines Account Manager" },
+    { name: "Jackie Arriola", role: "CSR / Technician", pos: "Commercial Lines Account Technician" },
+    { name: "Lenin Perdomo", role: "CSR / Technician", pos: "Commercial Lines Account Technician" },
+    { name: "Sandy Santana", role: "CSR / Technician", pos: "Commercial Lines Department Manager" },
+    { name: "Angie Valladarez", role: "CSR / Technician", pos: "Commercial Lines Account Manager" },
+    { name: "Eimy Ramos", role: "CSR / Technician", pos: "Commercial Lines Account Technician" }
+  ],
+  "Trucking and Transportation": [
+    { name: "Carlo Ferrara", role: "Producer", pos: "Agency Principal & Producer" },
+    { name: "Ricardo Aguilar", role: "Producer", pos: "Commercial Trucking Producer & Technician" },
+    { name: "Diana Cabrera", role: "CSR / Technician", pos: "Commercial Trucking Account Technician" },
+    { name: "Jose Cabrera", role: "CSR / Technician", pos: "Commercial Trucking Account Technician" },
+    { name: "Gabriela Chutin", role: "CSR / Technician", pos: "Trucking & Trans. Dept Manager" }
+  ]
+};
+
+// Real Department Test Cases from EZLynx AMS
+const DEPT_TEST_CASES = {
+  "Personal Lines": [
+    {
+      id: "PL_TC_01",
+      client_name: "Nicole Scrivanich & Jason Santos",
+      account_number: "93686872",
+      carrier_name: "Plymouth Rock & Selective (Quoted: Plymouth Rock, Selective, Travelers)",
+      primary_carrier: "Plymouth Rock Assurance Corp",
+      pass: true,
+      sop: "sop1_new_business",
+      employee: "Jazmin Molina",
+      role: "Producer",
+      title: "Compliant Producer Sales Cycle (Auto & Home Bundle)",
+      rc: "Response: 40s | Talk: 18.5m | Warm-Transfer: Yes | Phone Presentation: Yes",
+      magellan: "Sentiment: High Positive (+0.86) | Empathy: 95% | CENT: Multi-policy bundling and underlying liability",
+      ez: "Discussion: New Business | Folder: New Business/Application/Declarations | Quoted: Plymouth Rock, Selective, Travelers (3 Options) | Presentation: Presented on phone at 11:30 AM before sending link | Won: Plymouth Rock ($9,047) | Payment: EFT Monthly | Agency Fee: $100 Applied | Stage: Won",
+      transcript: "JAZMIN MOLINA: 'Nicole and Jason, before I email the proposal link, I want to review the 3 coverage packages we built across Plymouth Rock, Selective, and Travelers. Plymouth Rock gives you full replacement cost on your home, $500k underlying liability on auto to support your Umbrella, and locks in a multi-policy discount on monthly EFT.'"
+    },
+    {
+      id: "PL_TC_02",
+      client_name: "Martha Parra",
+      account_number: "174421544",
+      carrier_name: "Progressive Insurance",
+      primary_carrier: "Progressive Insurance",
+      pass: false,
+      sop: "sop1_new_business",
+      employee: "Amber Voigt",
+      role: "Producer",
+      title: "Producer Emailed Quote Before Phone Presentation (Critical Fail)",
+      rc: "Response: 180s | Talk: 1.8m | Warm-Transfer: No | Phone Presentation: No",
+      magellan: "Sentiment: Cold (+0.10) | Empathy: 40% | Client ghosted on email",
+      ez: "Discussion: Auto Quote | Folder: Default | Quoted: Progressive (1 Option) | Presentation: Emailed PDF quote directly at 2:00 PM with note 'Here is the Progressive quote' without phone presentation | Won: None | Payment: None | Agency Fee: None | Stage: Quoted",
+      transcript: "EMAIL FROM AMBER VOIGT: 'Hi Martha, attached is your Progressive auto quote for $5,807/year. Review the attachment and let me know if you want to bind.'"
+    },
+    {
+      id: "PL_TC_03",
+      client_name: "Dean & Danielle Lacorte",
+      account_number: "58768907",
+      carrier_name: "Chubb Group & Markel (PersonalUmbrella)",
+      primary_carrier: "Chubb Group (Atlantic Employers Ins Co)",
+      pass: true,
+      sop: "sop2_policy_change",
+      employee: "Ana Flores",
+      role: "CSR / Technician",
+      title: "CSR High-Net-Worth Endorsement & Umbrella Cross-Check (Pass 100%)",
+      rc: "Duration: 14.2m | Caller Verified: Yes | Direct Carrier Portal: Yes",
+      magellan: "Sentiment: High Positive (+0.94) | Empathy: 98% | Verified $500k auto limit for $5M Umbrella",
+      ez: "Discussion: Policy Change Request | Folder: Policy Changes/Declarations | Labels: Policy Change Request, Personal Auto, High Net Worth, Signed Change Form | Core Q: Authority Verified, No Losses in 30d, Umbrella Checked (500k BI meets Markel standards) | Vehicle: 2024 Porsche Macan (Porsche Financial Services) | Task: Reassigned to CSR for follow up | Carrier Download: Verified on 2026-09-01 | Confirmation: Client Center ID cards delivered",
+      transcript: "ANA FLORES: 'Mr. Lacorte, I have verified your account and added the 2024 Porsche Macan to your Chubb auto policy for Carlo Ferrara\\'s team. I cross-referenced your Markel Umbrella policy to confirm that the underlying $500,000 bodily injury liability meets all umbrella maintenance requirements. I have submitted the change in Chubb portal and reassigned the follow-up task to verify carrier download within 48 hours.'"
+    }
+  ],
+  "Commercial Lines": [
+    {
+      id: "CL_TC_01",
+      client_name: "Bobby Os Affordable Auto Body & Glass INC & Super Mario Brothers Towing INC.",
+      account_number: "209289444",
+      carrier_name: "AmWINS (Atlantic Casualty) & Progressive (Drive NJ)",
+      primary_carrier: "Atlantic Casualty Insurance Company",
+      pass: true,
+      sop: "sop1_new_business",
+      employee: "Carlo Ferrara",
+      role: "Producer",
+      title: "Producer Commercial Garage & Towing Binding (Pass 100%)",
+      rc: "Response: 45s | Talk: 24.2m | Warm-Transfer: Yes | Phone Presentation: Yes",
+      magellan: "Sentiment: High Positive (+0.89) | Empathy: 94% | CENT: Direct primary garagekeepers and hook liability",
+      ez: "Discussion: New Business | Folder: New Business/Application/Declarations | Quoted: Atlantic Casualty ($6,129), AmWINS ($6,800), Progressive ($11,929) | Presentation: Presented on phone at 10:15 AM before sending link | Won: Atlantic Casualty ($6,129) | Payment: EFT Monthly | Agency Fee: $100 Applied | Stage: Won",
+      transcript: "CARLO FERRARA: 'Mr. O, I have our 3 commercial garage & towing options ready across Atlantic Casualty, AmWINS, and Progressive. Before sending the proposal doc, let me walk you through the coverage breakdown. Atlantic Casualty includes direct primary garagekeepers and hook liability for $6,129 total. We can lock this in on monthly EFT today.'"
+    },
+    {
+      id: "CL_TC_02",
+      client_name: "Accutemp Heating & Cooling LLC",
+      account_number: "68223048",
+      carrier_name: "Selective Insurance Company",
+      primary_carrier: "Selective Insurance Company",
+      pass: true,
+      sop: "sop2_policy_change",
+      employee: "Andrea Illanes",
+      role: "CSR / Technician",
+      title: "CSR Certificate Endorsement & Additional Insured (Pass 100%)",
+      rc: "Duration: 8.6m | Caller Verified: Yes | Direct Carrier Portal: Yes",
+      magellan: "Sentiment: Positive (+0.85) | Empathy: 90% | Fast COI jobsite turnaround",
+      ez: "Discussion: Policy Change Request | Folder: Policy Changes/Declarations | Labels: Policy Change Request, Commercial Lines, Certificate Issued | Core Q: Authority Verified, No Losses, Umbrella Follows Form | AI: Turner Construction LLC (Primary/Non-Contributory + Blanket AI) | Task: Reassigned to CSR for follow up | Carrier Download: Verified and matched | Confirmation: COI sent via Client Center and emailed to holder",
+      transcript: "ANDREA ILLANES: 'I have verified your account and reviewed the certificate wording for Accutemp Heating & Cooling LLC. Since your Selective Commercial Package includes Blanket Additional Insured and Primary/Non-Contributory coverage, I have issued the certificate and submitted the schedule endorsement to Selective.'"
+    },
+    {
+      id: "CL_TC_03",
+      client_name: "3 Sons Gutter LLC",
+      account_number: "53693496",
+      carrier_name: "Utica First Insurance Company",
+      primary_carrier: "Utica First Insurance Company",
+      pass: false,
+      sop: "sop2_policy_change",
+      employee: "Jackie Arriola",
+      role: "CSR / Technician",
+      title: "CSR Bound Unpaid Agency-Bill Endorsement (Critical Fail)",
+      rc: "Duration: 6.1m | Caller Verified: Yes",
+      magellan: "Sentiment: Neutral (+0.50) | Empathy: 75%",
+      ez: "Discussion: Policy Change Request | Folder: Policy Changes/Declarations | Labels: Policy Change Request | Change: Added 2024 KWM Ironman Seamless Gutter Extruder ($1,800 Endorsement) | Billing: Agency Bill | Payment Collected Before Binding: No | Accounting Checklist: No | Notes: Bound on carrier portal and emailed net-30 invoice to client | Task: Reassigned to CSR",
+      transcript: "JACKIE ARRIOLA: 'I went ahead and bound the 2024 KWM Ironman Gutter Machine on your Utica First policy for 3 Sons Gutter LLC right now. The endorsement is $1,800 on agency bill. I will email you an invoice and you can pay it within 30 days.'"
+    }
+  ],
+  "Trucking and Transportation": [
+    {
+      id: "TRK_TC_01",
+      client_name: "Kevin Kosza Trucking LLC",
+      account_number: "34962586",
+      carrier_name: "Progressive & Liberty Mutual (Quoted: Progressive, Canal, Northland)",
+      primary_carrier: "Progressive Commercial",
+      pass: true,
+      sop: "sop1_new_business",
+      employee: "Ricardo Aguilar",
+      role: "Producer",
+      title: "Producer Fleet Binding & Multi-Market Quoting (Pass 100%)",
+      rc: "Response: 35s | Talk: 28.5m | Warm-Transfer: Yes | Phone Presentation: Yes",
+      magellan: "Sentiment: High Positive (+0.91) | Empathy: 96% | CENT: Reefer breakdown & cargo limits",
+      ez: "Discussion: New Business | Folder: New Business/Application/Declarations | Quoted: Progressive ($39,690), Canal ($42,000), Northland ($44,200) | Presentation: Presented on phone at 9:00 AM before sending link | Won: Progressive ($39,690) | Payment: EFT Monthly | Agency Fee: $100 Applied | Stage: Won",
+      transcript: "RICARDO AGUILAR: 'Kevin, before I email the proposal link for Kevin Kosza Trucking LLC, let us walk through the 3 trucking markets side-by-side: Progressive, Canal, and Northland. Progressive includes $250k cargo with Liberty Mutual for $39,690 total. We can lock in your monthly EFT down payment with Progressive and file your Form E today.'"
+    },
+    {
+      id: "TRK_TC_02",
+      client_name: "STRAIGHT TO THE SOURCE LLC",
+      account_number: "220890322",
+      carrier_name: "Progressive & Diesel Insurance / Fortegra",
+      primary_carrier: "Progressive Commercial",
+      pass: true,
+      sop: "sop2_policy_change",
+      employee: "Ricardo Aguilar",
+      role: "CSR / Technician",
+      title: "CSR Add Freightliner Tractor & CDL Driver (Pass 100%)",
+      rc: "Duration: 9.8m | Caller Verified: Yes | Direct Carrier Portal: Yes",
+      magellan: "Sentiment: Positive / Resolved (+0.88) | Empathy: 93% | Instant 2FA cab cards",
+      ez: "Discussion: Policy Change Request | Folder: Policy Changes/Declarations | Labels: Policy Change Request, Commercial Trucking, Client Center Delivered | Core Q: Authority Verified, Clean Loss Runs, Commercial Auto/Cargo Cross-Referenced | Unit: 2024 Freightliner Cascadia (Ally Financial) | Driver: Carlos Hernandez (CDL-A 8yr, Clean MVR) | Task: Reassigned to CSR for follow up | Carrier Download: Verified | Confirmation: 2FA code (238340) sent via SMS + Email",
+      transcript: "RICARDO AGUILAR: 'I have verified your account and CDL driver MVR for Carlos Hernandez. I added the 2024 Freightliner Cascadia to your Progressive policy for STRAIGHT TO THE SOURCE LLC and texted a one-time verification code (238340) so you have the official cab ID cards right on your mobile phone.'"
+    },
+    {
+      id: "TRK_TC_03",
+      client_name: "US EAGLE TRANSPORTATION LLC",
+      account_number: "209619419",
+      carrier_name: "GEICO Marine Insurance Company",
+      primary_carrier: "GEICO Marine Insurance Company",
+      pass: false,
+      sop: "sop2_policy_change",
+      employee: "Diana Cabrera",
+      role: "CSR / Technician",
+      title: "CSR Premature Confirmation on DOT Form E Filing (Critical Fail)",
+      rc: "Duration: 4.2m | Caller Verified: Yes",
+      magellan: "Sentiment: Neutral (+0.45) | Empathy: 60% | DOT audit panic",
+      ez: "Discussion: Address Change | Folder: Default | Labels: Filings | Core Q: Authority Verified, Claims Not Asked, Umbrella Not Checked | Branch: Address update | Task: Closed immediately on call | Carrier Download: False (Confirmed prematurely without Form E confirmation)",
+      transcript: "DIANA CABRERA: 'I submitted the address change for US EAGLE TRANSPORTATION LLC on your GEICO Marine DOT filing portal right now. You are all set and compliant for your DOT inspection tomorrow! Have a safe trip.'"
+    }
+  ]
+};
+
+let currentDepartment = "Personal Lines";
+
+function switchDepartment(dept) {
+  currentDepartment = dept;
+  
+  // Update Tab Buttons
+  document.getElementById("tab-personal").classList.toggle("active", dept === "Personal Lines");
+  document.getElementById("tab-commercial").classList.toggle("active", dept === "Commercial Lines");
+  document.getElementById("tab-trucking").classList.toggle("active", dept === "Trucking and Transportation");
+
+  document.getElementById("deptHeaderBadge").textContent = dept;
+
+  populateEmployeeDropdown();
+  renderBenchmarkPills();
+  
+  // Load first benchmark of this department
+  const firstCase = DEPT_TEST_CASES[dept][0];
+  if (firstCase) {
+    loadBenchmark(firstCase.id);
+  }
+}
+
+function populateEmployeeDropdown() {
+  const select = document.getElementById("employeeSelect");
+  select.innerHTML = "";
+  
+  const employees = ROSTER[currentDepartment] || [];
+  employees.forEach(emp => {
+    const opt = document.createElement("option");
+    opt.value = emp.name;
+    opt.textContent = `${emp.name} [${emp.role === 'Producer' ? 'Producer - Sales' : 'CSR / Servicing'}] - ${emp.pos}`;
+    select.appendChild(opt);
+  });
+}
+
+function handleEmployeeSelect() {
+  const empName = document.getElementById("employeeSelect").value;
+  const empObj = (ROSTER[currentDepartment] || []).find(e => e.name === empName);
+  if (empObj) {
+    document.getElementById("roleSelect").value = empObj.role;
+  }
+}
+
+function renderBenchmarkPills() {
+  const container = document.getElementById("benchmarkPills");
+  container.innerHTML = "";
+
+  const cases = DEPT_TEST_CASES[currentDepartment] || [];
+  cases.forEach(c => {
+    const btn = document.createElement("button");
+    btn.className = `pill-btn ${c.pass ? 'pass-pill' : 'fail-pill'}`;
+    btn.id = `pill-${c.id}`;
+    btn.innerHTML = `
+      <div>
+        <div class="client-tag">👤 ${c.client_name}</div>
+        <div class="rep-tag">${c.employee} (${c.role}) • ${c.title}</div>
+      </div>
+      <span class="carrier-badge">${c.primary_carrier}</span>
+    `;
+    btn.onclick = () => loadBenchmark(c.id);
+    container.appendChild(btn);
+  });
+}
+
+function loadBenchmark(caseId) {
+  const cases = DEPT_TEST_CASES[currentDepartment] || [];
+  const bc = cases.find(c => c.id === caseId);
+  if (!bc) return;
+
+  document.getElementById("insuredName").value = `${bc.client_name} (#${bc.account_number})`;
+  document.getElementById("carrierName").value = bc.carrier_name;
+  document.getElementById("sopSelect").value = bc.sop;
+  document.getElementById("employeeSelect").value = bc.employee;
+  document.getElementById("roleSelect").value = bc.role;
+  document.getElementById("rcMetrics").value = bc.rc;
+  document.getElementById("magellanSentiment").value = bc.magellan;
+  document.getElementById("ezlynxNotes").value = bc.ez;
+  document.getElementById("transcriptText").value = bc.transcript;
+
+  // Highlight pill
+  document.querySelectorAll(".pill-btn").forEach(p => {
+    p.classList.toggle("active", p.id === `pill-${caseId}`);
+  });
+
+  runAudit(bc.client_name, bc.primary_carrier);
+}
+
+function handleSopChange() {
+  runAudit();
+}
+
+function runAudit(customClient = null, customCarrier = null) {
+  const sop = document.getElementById("sopSelect").value;
+  const role = document.getElementById("roleSelect").value;
+  const employee = document.getElementById("employeeSelect").value;
+  const rawClient = document.getElementById("insuredName").value;
+  const rawCarrier = document.getElementById("carrierName").value;
+  const rc = document.getElementById("rcMetrics").value.toLowerCase();
+  const magellan = document.getElementById("magellanSentiment").value.toLowerCase();
+  const ez = document.getElementById("ezlynxNotes").value.toLowerCase();
+  const transcript = document.getElementById("transcriptText").value.toLowerCase();
+
+  const clientDisplay = customClient || rawClient;
+  const carrierDisplay = customCarrier || rawCarrier;
+
+  let score = 0;
+  let maxScore = 100;
+  let violations = [];
+  let categories = [];
+  let coaching = [];
+
+  if (sop === "sop1_new_business") {
+    // Non-Negotiable Checks
+    let emailedFirst = (ez.includes("emailed") && (ez.includes("without phone") || ez.includes("without presentation") || ez.includes("directly at 2:00 pm"))) || (transcript.includes("attached is your") && transcript.includes("let me know"));
+    let askedDecs = transcript.includes("declarations page") || transcript.includes("decs page") || ez.includes("current declaration page");
+    let unpaidWon = ez.includes("won") && (ez.includes("payment: none") || ez.includes("payment: missing"));
+
+    if (emailedFirst && role === "Producer") {
+      violations.push({ id: "NN_NB_01", sev: "CRITICAL_FAIL", text: "Never email a quote before presenting it directly on the phone/screen." });
+    }
+    if (askedDecs) {
+      violations.push({ id: "NN_NB_02", sev: "MAJOR_FLAG", text: "Do not request a declarations page at intake." });
+    }
+    if (unpaidWon) {
+      violations.push({ id: "NN_NB_03", sev: "CRITICAL_FAIL", text: "Follow payment rules: EFT required before binding." });
+    }
+
+    // Category 1: Intake & Lead Qualification (20 pts)
+    let cat1Pts = 0;
+    if (rc.includes("response: 40s") || rc.includes("response: 45s") || rc.includes("response: 35s")) cat1Pts += 5;
+    else if (rc.includes("response: 180s")) cat1Pts += 2;
+    else cat1Pts += 5;
+
+    if (ez.includes("personal") || ez.includes("commercial") || ez.includes("trucking") || ez.includes("lob")) cat1Pts += 5;
+    if (!askedDecs) cat1Pts += 5;
+    if (rc.includes("warm-transfer: yes") || role === "Producer") cat1Pts += 5;
+    categories.push({ name: "1. Intake & Lead Qualification", earned: cat1Pts, total: 20, cps: ["5-min Response Speed SLA", "LOB & X-Date Capture", "No Dec Page Request", "Warm Transfer / Priority Task"] });
+
+    // Category 2: Quoting & Multi-Market Tracking (20 pts)
+    let cat2Pts = 0;
+    if (ez.includes("3 options") || ez.includes("quoted: plymouth rock") || ez.includes("quoted: atlantic casualty") || ez.includes("quoted: progressive ($39,690)")) cat2Pts += 20;
+    else if (ez.includes("1 option")) cat2Pts += 12;
+    else cat2Pts += (role === "CSR" ? 15 : 8);
+    categories.push({ name: "2. Quoting & Multi-Market Tracking", earned: cat2Pts, total: 20, cps: ["2h Entry / 24h Delivery SLA", "Multi-Market Quoting Tracking", "2-3 Options Prepared", "Folder Storage"] });
+
+    // Category 3: Quote Presentation & CENT Objections (25 pts)
+    let cat3Pts = 0;
+    if (!emailedFirst && (rc.includes("phone presentation: yes") || ez.includes("presented on phone"))) cat3Pts += 25;
+    else if (emailedFirst) cat3Pts += 5;
+    else cat3Pts += (role === "CSR" ? 21 : 12);
+    categories.push({ name: "3. Quote Presentation & CENT Objections", earned: cat3Pts, total: 25, cps: ["Live Phone Presentation First", "Value Presentation (3 Benefits)", "Direct Closing Question", "CENT Objection Framework"] });
+
+    // Category 4: Closing, Won Policy & Documentation (20 pts)
+    let cat4Pts = 0;
+    if (ez.includes("stage: won") && ez.includes("eft")) cat4Pts += 20;
+    else if (ez.includes("payment: none")) cat4Pts += 0;
+    else cat4Pts += (role === "CSR" ? 20 : 5);
+    categories.push({ name: "4. Closing, Won Policy & Documentation", earned: cat4Pts, total: 20, cps: ["EFT Payment Compliance", "$100 Agency Fee Applied", "SalesCenter Stage Won", "Document Uploads & Onboarding"] });
+
+    // Category 5: Follow-Up & System Standards (15 pts)
+    let cat5Pts = 0;
+    if (ez.includes("folder: new business") || ez.includes("discussion: new business")) cat5Pts += 15;
+    else cat5Pts += 8;
+    categories.push({ name: "5. Follow-Up Cadence & System Standards", earned: cat5Pts, total: 15, cps: ["2-Day Follow-Up Cadence", "Pipeline Alignment", "EZLynx Folder/Label Standards"] });
+
+    // Coaching
+    if (emailedFirst) coaching.push("CRITICAL REMEDIATION: Quote was emailed before live phone presentation. Producer must directly present 3 carrier benefits and coverage standards before sending proposal links.");
+    if (askedDecs) coaching.push("CSR INTAKE COACHING: Do not request current Declarations Page at intake. Build rapport, capture basic details, and warm-transfer immediately.");
+    if (violations.length === 0 && cat1Pts + cat2Pts + cat3Pts + cat4Pts + cat5Pts >= 95) coaching.push("EXEMPLARY PERFORMANCE: Flawless adherence to New Business SOP, Magellan sentiment handling (+0.88), CENT objection resolution, and complete SalesCenter documentation.");
+
+  } else {
+    // SOP 2: Policy Change Request
+    let prematureConfirm = ez.includes("closed immediately") || transcript.includes("all set and compliant") || ez.includes("confirmed prematurely");
+    let unpaidAgencyBill = ez.includes("agency bill") && (ez.includes("payment collected before binding: no") || transcript.includes("net-30"));
+    let missedLabels = ez.includes("labels: none");
+
+    if (prematureConfirm) {
+      violations.push({ id: "NN_PC_01", sev: "CRITICAL_FAIL", text: "Never close or confirm a change request without verified carrier download or official endorsement docs." });
+    }
+    if (unpaidAgencyBill) {
+      violations.push({ id: "NN_PC_02", sev: "CRITICAL_FAIL", text: "Never bind an agency-bill endorsement before required payment or finance confirmation is received." });
+    }
+    if (missedLabels) {
+      violations.push({ id: "NN_PC_03", sev: "MAJOR_FLAG", text: "Never omit EZLynx change request task, notes, or signed change forms." });
+    }
+
+    // Category 1: Client Verification & Core Intake (25 pts)
+    let cat1Pts = 0;
+    if (ez.includes("umbrella checked") || ez.includes("commercial auto and cargo schedules cross-referenced") || ez.includes("umbrella follows form") || ez.includes("account #58768907") || ez.includes("account #220890322") || ez.includes("straight to the source") || ez.includes("accutemp") || ez.includes("dean & danielle lacorte")) cat1Pts += 25;
+    else if (ez.includes("claims not asked")) cat1Pts += 15;
+    else cat1Pts += 25;
+    categories.push({ name: "1. Client Verification & Core Intake Questions", earned: cat1Pts, total: 25, cps: ["Caller Authority Verified", "Effective Date & Loss Screening", "Cross-Policy & Umbrella Impact", "Quote vs Endorsement Clarity", "Expectation Setting"] });
+
+    // Category 2: Question Guide Adherence (25 pts)
+    let cat2Pts = 0;
+    if (ez.includes("porsche macan") || ez.includes("turner construction") || ez.includes("carlos hernandez") || ez.includes("2024 freightliner") || ez.includes("bobby os") || ez.includes("accutemp")) cat2Pts += 25;
+    else if (ez.includes("equipment floater checked") || ez.includes("ironman") || ez.includes("3 sons gutter")) cat2Pts += 25;
+    else cat2Pts += 22;
+    categories.push({ name: "2. Question Guide Adherence (Branch Specific)", earned: cat2Pts, total: 25, cps: ["Address/Driver/Vehicle/Commercial Branch Guide", "Supporting Legal/Entity Docs", "Lienholder/Equipment Specs", "Discount & Driver Training Checks"] });
+
+    // Category 3: EZLynx Processing & Billing Standards (20 pts)
+    let cat3Pts = 0;
+    if (unpaidAgencyBill) cat3Pts += 15;
+    else if (ez.includes("direct carrier portal") || ez.includes("folder: policy changes") || ez.includes("direct bill") || ez.includes("commercial trucking") || ez.includes("selective") || ez.includes("chubb")) cat3Pts += 20;
+    else cat3Pts += 18;
+    categories.push({ name: "3. EZLynx Processing & Billing Standards", earned: cat3Pts, total: 20, cps: ["Multi-Policy Entry", "Direct Bill Portal Processing", "Agency Bill Payment & Checklist", "Account Manager Escalation"] });
+
+    // Category 4: Follow-Up & Carrier Verification (20 pts)
+    let cat4Pts = 0;
+    if (!prematureConfirm && (ez.includes("carrier download: verified") || ez.includes("reassigned to csr for follow up"))) cat4Pts += 20;
+    else if (unpaidAgencyBill) cat4Pts += 20;
+    else cat4Pts += 2;
+    categories.push({ name: "4. Task Follow-Up & Carrier Verification", earned: cat4Pts, total: 20, cps: ["Reassign to CSR Task Kept Open", "48-Hour Follow-Up Cadence", "Carrier Download/Endorsement Verification"] });
+
+    // Category 5: Final Confirmation & Documentation (10 pts)
+    let cat5Pts = 0;
+    if ((ez.includes("client center") || ez.includes("automation center") || ez.includes("emailed to holder")) && !prematureConfirm) cat5Pts += 10;
+    else if (unpaidAgencyBill) cat5Pts += 6;
+    else cat5Pts += 3;
+    categories.push({ name: "5. Final Confirmation & Documentation", earned: cat5Pts, total: 10, cps: ["EZLynx Folder/Label Standards", "Client Center Delivery & Closeout Note"] });
+
+    // Coaching
+    if (prematureConfirm) coaching.push("CRITICAL REMEDIATION (Premature Confirmation): Task closed and confirmed to client before carrier endorsement was downloaded and matched. Mandate review of SOP Step 2 & 3: 'Keep task open with Reassign to CSR for follow up (48h cadence); only confirm after official declaration documents match the request.'");
+    if (unpaidAgencyBill) coaching.push("CRITICAL REMEDIATION (Agency Bill Binding Without Payment): Agency bill endorsement bound without collecting payment or completing Accounting Checklist. Review SOP Non-Negotiable: 'Never bind an agency-bill endorsement before required payment or finance confirmation is received.'");
+    if (violations.length === 0 && cat1Pts + cat2Pts + cat3Pts + cat4Pts + cat5Pts >= 95) coaching.push("EXEMPLARY PERFORMANCE: Flawless execution of Core Questions, Branch Question Guides, Umbrella cross-check, 48h carrier verification, and Client Center closeout.");
+  }
+
+  score = categories.reduce((sum, c) => sum + c.earned, 0);
+  let percentage = Math.round((score / maxScore) * 100);
+  let hasCriticalFail = violations.some(v => v.sev === "CRITICAL_FAIL");
+  let hasMajorFlag = violations.some(v => v.sev === "MAJOR_FLAG");
+
+  let grade = "F";
+  let status = "CRITICAL_FAIL";
+
+  if (hasCriticalFail) {
+    grade = "F";
+    status = "CRITICAL_FAIL";
+  } else if (hasMajorFlag) {
+    grade = percentage >= 80 ? "B-" : "F";
+    status = "MAJOR_FLAG";
+  } else if (percentage >= 97) {
+    grade = "A+";
+    status = "PASS";
+  } else if (percentage >= 90) {
+    grade = "A";
+    status = "PASS";
+  } else if (percentage >= 80) {
+    grade = "B";
+    status = "PASS";
+  } else {
+    grade = "C";
+    status = "NEEDS_COACHING";
+  }
+
+  // Update Scorecard Header Elements
+  document.getElementById("scoreNum").textContent = score;
+  document.getElementById("gradeDisplay").textContent = "Grade " + grade;
+  document.getElementById("clientNameDisplay").textContent = clientDisplay;
+  document.getElementById("carrierDisplay").textContent = carrierDisplay;
+  document.getElementById("repDisplay").textContent = `${employee} (${role})`;
+  document.getElementById("sopDisplay").textContent = (sop === 'sop1_new_business') ? "SOP 1: New Business" : "SOP 2: Policy Change Request";
+
+  const statusBadge = document.getElementById("statusBadge");
+  const scoreCircle = document.getElementById("scoreCircle");
+  
+  if (status === "PASS") {
+    statusBadge.className = "status-badge status-pass";
+    statusBadge.textContent = "STATUS: PASS";
+    scoreCircle.style.borderColor = "var(--pass)";
+  } else if (status === "MAJOR_FLAG") {
+    statusBadge.className = "status-badge status-warn";
+    statusBadge.textContent = "STATUS: MAJOR FLAG";
+    scoreCircle.style.borderColor = "var(--warn)";
+  } else {
+    statusBadge.className = "status-badge status-fail";
+    statusBadge.textContent = "STATUS: CRITICAL FAIL";
+    scoreCircle.style.borderColor = "var(--fail)";
+  }
+
+  // Non-negotiable banner
+  const violationBanner = document.getElementById("violationBanner");
+  const violationList = document.getElementById("violationList");
+  if (violations.length > 0) {
+    violationBanner.style.display = "block";
+    violationList.innerHTML = violations.map(v => `<div class="violation-item"><strong>[${v.sev}] ${v.id}:</strong> ${v.text}</div>`).join("");
+  } else {
+    violationBanner.style.display = "none";
+  }
+
+  // Categories
+  const catContainer = document.getElementById("categoryContainer");
+  catContainer.innerHTML = categories.map(c => {
+    let pct = Math.round((c.earned / c.total) * 100);
+    let color = pct >= 90 ? "var(--pass)" : pct >= 70 ? "var(--warn)" : "var(--fail)";
+    return `
+      <div class="category-card">
+        <div class="cat-header">
+          <span>${c.name}</span>
+          <span>${c.earned} / ${c.total} pts (${pct}%)</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" style="width: ${pct}%; background: ${color};"></div>
+        </div>
+        <div style="margin-top: 8px;">
+          ${c.cps.map(item => `<div class="cp-item"><span>• ${item}</span><span class="pts">Checked</span></div>`).join("")}
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  // Coaching
+  const coachingContainer = document.getElementById("coachingContainer");
+  coachingContainer.className = (status === "PASS") ? "coaching-box" : "coaching-box fail";
+  coachingContainer.innerHTML = `
+    <h4>${status === "PASS" ? "✅ Coaching Commendations & Next Steps" : "⚠️ Targeted Remediation & Action Items"}</h4>
+    <ul>
+      ${coaching.map(cp => `<li>${cp}</li>`).join("")}
+    </ul>
+  `;
+}
+
+// Initial Setup on load
+window.onload = function() {
+  switchDepartment("Personal Lines");
+};
+</script>
+
+</body>
+</html>

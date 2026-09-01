@@ -1,0 +1,188 @@
+{
+  "sop_id": "sop2_policy_change",
+  "sop_title": "StreetSmart SOP - Policy Change Request",
+  "version": "1.1",
+  "target_roles": ["CSR / Technician", "Producer / Account Manager"],
+  "data_sources": ["EZLynx Activity/Tasks", "RingCentral Recordings", "Magellan Sentiment Intelligence", "Carrier Downloads & Endorsements"],
+  "non_negotiables": [
+    {
+      "id": "NN_PC_01",
+      "rule": "Never close or confirm a change request without verified carrier download or official endorsement docs.",
+      "severity": "CRITICAL_FAIL",
+      "applies_to": "CSR / Technician",
+      "description": "Never confirm a change to the client or close the task before the carrier download or official endorsement document is verified against the original request."
+    },
+    {
+      "id": "NN_PC_02",
+      "rule": "Never bind an agency-bill endorsement before required payment or finance confirmation is received.",
+      "severity": "CRITICAL_FAIL",
+      "applies_to": "CSR / Technician",
+      "description": "Payment must be collected and the Accounting Policy Change checklist completed before binding any agency-bill change."
+    },
+    {
+      "id": "NN_PC_03",
+      "rule": "Never omit EZLynx change request task, notes, signed form, or required coverage selection form.",
+      "severity": "MAJOR_FLAG",
+      "applies_to": "CSR / Technician",
+      "description": "All policy change requests must have an EZLynx task, complete notes, signed change forms, and signed coverage selections when coverages/limits change."
+    },
+    {
+      "id": "NN_PC_04",
+      "rule": "Quote-only requests must NOT be bound or submitted as endorsements.",
+      "severity": "CRITICAL_FAIL",
+      "applies_to": "CSR / Technician",
+      "description": "If client only requests a quote, label as 'Policy Change Request Quote' and do not process endorsement until approved and paid."
+    }
+  ],
+  "categories": [
+    {
+      "id": "intake_core_questions",
+      "name": "1. Client Verification & Core Intake Questions",
+      "weight": 25,
+      "checkpoints": [
+        {
+          "id": "PC_CK_01",
+          "item": "Caller Authority & Account Verification",
+          "points": 5,
+          "criteria": "Verified caller identity, insured authority, and all affected policy numbers."
+        },
+        {
+          "id": "PC_CK_02",
+          "item": "Requested Effective Date & Loss Screening",
+          "points": 5,
+          "criteria": "Clarified exact requested effective date and explicitly screened for known claims, losses, or accidents."
+        },
+        {
+          "id": "PC_CK_03",
+          "item": "Cross-Policy & Umbrella Impact Check",
+          "points": 5,
+          "criteria": "Evaluated whether change impacts other active policies, pending renewals, or underlying umbrella liability requirements."
+        },
+        {
+          "id": "PC_CK_04",
+          "item": "Quote vs. Endorsement Clarity",
+          "points": 5,
+          "criteria": "Distinguished quote-only from live change request; applied 'Policy Change Request Quote' workflow if applicable."
+        },
+        {
+          "id": "PC_CK_05",
+          "item": "Expectation Setting & Timeline Communication",
+          "points": 5,
+          "criteria": "Explained that coverage is pending carrier processing and set a clear timeline/follow-up expectation."
+        }
+      ]
+    },
+    {
+      "id": "branch_question_guide",
+      "name": "2. Question Guide Adherence (Category Specific)",
+      "weight": 25,
+      "checkpoints": [
+        {
+          "id": "PC_CK_06",
+          "item": "Address Change Branch Compliance",
+          "points": 5,
+          "criteria": "Universal: Mailing vs garaging. Personal: Reason, all household residents (Name, DOB, DL), own vs rent, registration match state, territory rate explanation. Commercial: Business location & filings."
+        },
+        {
+          "id": "PC_CK_07",
+          "item": "Add Driver Branch Compliance",
+          "points": 5,
+          "criteria": "Full name, DOB, DL/CDL#, state, residential address, relationship, student discounts (3.0+ GPA), distant student (100+ mi), driver training, commercial job duties/MVR."
+        },
+        {
+          "id": "PC_CK_08",
+          "item": "Remove Driver Branch Compliance",
+          "points": 5,
+          "criteria": "Removal reason (moved, divorced, left employment), proof of other insurance or signed exclusion if still resident in household."
+        },
+        {
+          "id": "PC_CK_09",
+          "item": "Add Vehicle / Equipment Branch Compliance",
+          "points": 5,
+          "criteria": "VIN, year/make/model, purchase date, garaging, lienholder, rideshare/Turo usage check, commercial radius/photos/weight."
+        },
+        {
+          "id": "PC_CK_10",
+          "item": "Remove Vehicle / Legal / Interest Changes",
+          "points": 5,
+          "criteria": "Vehicle removal proof (Bill of Sale / Plate Surrender); Legal changes supported by official legal docs (Trust/LLC docs, divorce decree, death cert/executor docs, lienholder info)."
+        }
+      ]
+    },
+    {
+      "id": "processing_billing_standards",
+      "name": "3. EZLynx Processing & Billing Standards",
+      "weight": 20,
+      "checkpoints": [
+        {
+          "id": "PC_CK_11",
+          "item": "Multi-Policy Entry in EZLynx",
+          "points": 5,
+          "criteria": "Entered change on every applicable policy in EZLynx with detailed, structured memo."
+        },
+        {
+          "id": "PC_CK_12",
+          "item": "Direct Bill Processing",
+          "points": 5,
+          "criteria": "Direct-bill changes submitted directly via carrier portal or official submission channel."
+        },
+        {
+          "id": "PC_CK_13",
+          "item": "Agency Bill Compliance & Payment Collection",
+          "points": 5,
+          "criteria": "Endorsement quote obtained, Accounting Checklist completed, and payment collected prior to binding agency bill changes."
+        },
+        {
+          "id": "PC_CK_14",
+          "item": "Account Manager Escalation Criteria",
+          "points": 5,
+          "criteria": "Escalated to Producer/Account Manager for commercial changes > $15k, disputed dates, coverage advice, or underwriting exceptions."
+        }
+      ]
+    },
+    {
+      "id": "follow_up_carrier_verification",
+      "name": "4. Task Follow-Up & Carrier Verification",
+      "weight": 20,
+      "checkpoints": [
+        {
+          "id": "PC_CK_15",
+          "item": "Reassign to CSR for Follow Up Task",
+          "points": 5,
+          "criteria": "Kept generated task open and reassigned to CSR for follow up with submission date and promised turnaround."
+        },
+        {
+          "id": "PC_CK_16",
+          "item": "48-Hour Follow-Up Cadence",
+          "points": 5,
+          "criteria": "Routine carrier requests followed up twice at 48h intervals; time-sensitive requests (Certificates, AI, Waivers) called within 48h."
+        },
+        {
+          "id": "PC_CK_17",
+          "item": "Carrier Download / Endorsement Match Verification",
+          "points": 10,
+          "criteria": "Matched carrier download/endorsement against original request (effective dates, drivers, VINs, deductibles, premiums, additional interests)."
+        }
+      ]
+    },
+    {
+      "id": "confirmation_file_standards",
+      "name": "5. Final Confirmation & Documentation",
+      "weight": 10,
+      "checkpoints": [
+        {
+          "id": "PC_CK_18",
+          "item": "EZLynx File, Folder & Label Standards",
+          "points": 5,
+          "criteria": "Discussion title 'Policy Change Request', Folder 'Policy Changes/Declarations', Labels 'Policy Change Request', 'Signed Change Form', 'Additional Policy' when applicable."
+        },
+        {
+          "id": "PC_CK_19",
+          "item": "Client Center Delivery & Policy Change Processed Note",
+          "points": 5,
+          "criteria": "Confirmation docs shared via Client Center, EZLynx Details page updated, task closed with complete note, and closeout sent to client."
+        }
+      ]
+    }
+  ]
+}

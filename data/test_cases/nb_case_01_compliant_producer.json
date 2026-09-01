@@ -1,0 +1,58 @@
+{
+  "test_id": "NB_TC_01",
+  "sop_id": "sop1_new_business",
+  "title": "New Business - Flawless Producer Sales Cycle (Auto & Home Bundle)",
+  "employee_name": "John Miller",
+  "role": "Producer",
+  "csr_intake_by": "Sarah Jenkins (CSR)",
+  "date": "2026-08-28",
+  "lead_source": "Website Referral",
+  "line_of_business": "Personal Auto & Homeowners Bundle",
+  "data_sources": {
+    "ringcentral": {
+      "call_id": "RC-9928172",
+      "initial_response_time_seconds": 45,
+      "warm_transfer_completed": true,
+      "total_talk_time_minutes": 19.4,
+      "phone_presentation_completed": true,
+      "call_recording_url": "https://ringcentral.example.com/recording/9928172"
+    },
+    "magellan": {
+      "overall_sentiment": "High Positive",
+      "sentiment_score": 0.88,
+      "empathy_score": 95,
+      "talk_to_listen_ratio": "46% Agent / 54% Client",
+      "objection_detected": "Client asked why auto premium was $15/mo higher than State Farm quote",
+      "objection_handling_detected": "CENT Framework: Clarified $500k CSL vs 50k limits, empathized with price sensitivity, neutralized by highlighting bundled home discount savings of $340/yr, transitioned to EFT authorization."
+    },
+    "ezlynx": {
+      "lead_created": "2026-08-28 09:05 AM",
+      "line_of_business_logged": "Personal Lines - Auto & Home",
+      "x_date_logged": "2026-09-15",
+      "sales_center_pipeline_stage": "Won",
+      "discussion_title": "New Business",
+      "folder": "New Business/Application/Declarations",
+      "labels": ["New Business Follow Up"],
+      "markets_quoted": ["Travelers", "Safeco", "Progressive", "Hartford"],
+      "coverage_options_prepared": 3,
+      "agency_coverage_standards_met": true,
+      "quote_presentation_order": "Presented on phone at 11:30 AM before sending EZLynx Proposal link at 11:45 AM",
+      "payment_method_collected": "EFT Monthly (Voided check / Routing & Account captured)",
+      "agency_fee_collected": "$100 Agency Fee applied on manual endorsement",
+      "won_premium_recorded": "$2,840.00 Annual Written Premium",
+      "won_carrier_recorded": "Travelers Insurance",
+      "uploaded_documents": [
+        "Signed Travelers Auto Application.pdf",
+        "Signed Travelers Home Application.pdf",
+        "EFT Authorization Form.pdf",
+        "Coverage Selection Checklist.pdf"
+      ],
+      "onboarding_explained": true
+    }
+  },
+  "transcript_snippet": "PRODUCER: 'Mr. Davis, before I email the official proposal link over, I want to walk you through the three coverage options we put together across Travelers, Safeco, and Progressive. For your home and two vehicles, Travelers came out on top with three huge advantages: first, full replacement cost on your roof; second, $500k liability to protect your assets; and third, the multi-policy bundle saves you $340 annually. Compared to your current state minimums, this gives you ten times the coverage for only $12 more per month. If this looks good to you, we can lock this in on monthly EFT and get your binder generated today.'",
+  "expected_score": 98,
+  "expected_grade": "A+",
+  "expected_status": "PASS",
+  "expected_non_negotiables_breached": []
+}

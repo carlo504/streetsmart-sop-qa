@@ -1,0 +1,58 @@
+{
+  "test_id": "NB_TC_02",
+  "sop_id": "sop1_new_business",
+  "title": "New Business - Producer Emailed Quote Before Presenting (Non-Negotiable Breach)",
+  "employee_name": "Dave Sparks",
+  "role": "Producer",
+  "csr_intake_by": "Ashley Davis (CSR)",
+  "date": "2026-08-27",
+  "lead_source": "Google Ads",
+  "line_of_business": "Personal Auto",
+  "data_sources": {
+    "ringcentral": {
+      "call_id": "RC-9918231",
+      "initial_response_time_seconds": 180,
+      "warm_transfer_completed": false,
+      "total_talk_time_minutes": 2.1,
+      "phone_presentation_completed": false,
+      "call_recording_url": "https://ringcentral.example.com/recording/9918231"
+    },
+    "magellan": {
+      "overall_sentiment": "Neutral / Cold",
+      "sentiment_score": 0.05,
+      "empathy_score": 42,
+      "talk_to_listen_ratio": "78% Agent / 22% Client",
+      "objection_detected": "Client emailed back: 'Rate is too high, thanks anyway'",
+      "objection_handling_detected": "No phone CENT handling. Agent emailed: 'Let me know if you change your mind.'"
+    },
+    "ezlynx": {
+      "lead_created": "2026-08-27 02:00 PM",
+      "line_of_business_logged": "Personal Auto",
+      "x_date_logged": "Unknown",
+      "sales_center_pipeline_stage": "Quoted",
+      "discussion_title": "Auto Quote",
+      "folder": "Default",
+      "labels": [],
+      "markets_quoted": ["Progressive"],
+      "coverage_options_prepared": 1,
+      "agency_coverage_standards_met": false,
+      "quote_presentation_order": "Emailed PDF quote directly at 2:30 PM with note 'Here is the Progressive quote you requested' without scheduling or conducting a phone presentation.",
+      "payment_method_collected": "None",
+      "agency_fee_collected": "None",
+      "won_premium_recorded": "None",
+      "won_carrier_recorded": "None",
+      "uploaded_documents": ["Progressive_Quote_Sheet.pdf"],
+      "onboarding_explained": false
+    }
+  },
+  "transcript_snippet": "EMAIL FROM PRODUCER TO PROSPECT: 'Hi Mark, attached is your Progressive auto quote for $185/month. Take a look and let me know if you want to move forward.'",
+  "expected_score": 42,
+  "expected_grade": "F",
+  "expected_status": "CRITICAL_FAIL",
+  "expected_non_negotiables_breached": [
+    {
+      "id": "NN_NB_01",
+      "rule": "Never email a quote before presenting it directly on the phone or screen."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "test_id": "NB_TC_03",
+  "sop_id": "sop1_new_business",
+  "title": "New Business - CSR Requested Decs Page at Intake & Missed SLA",
+  "employee_name": "Ashley Davis",
+  "role": "CSR",
+  "csr_intake_by": "Ashley Davis",
+  "date": "2026-08-29",
+  "lead_source": "Phone Inbound",
+  "line_of_business": "Home & Auto",
+  "data_sources": {
+    "ringcentral": {
+      "call_id": "RC-9934110",
+      "initial_response_time_seconds": 720,
+      "warm_transfer_completed": false,
+      "total_talk_time_minutes": 3.5,
+      "phone_presentation_completed": false,
+      "call_recording_url": "https://ringcentral.example.com/recording/9934110"
+    },
+    "magellan": {
+      "overall_sentiment": "Negative",
+      "sentiment_score": -0.35,
+      "empathy_score": 38,
+      "talk_to_listen_ratio": "60% Agent / 40% Client",
+      "objection_detected": "Customer asked why they need to find their old insurance paperwork before getting help",
+      "objection_handling_detected": "None. CSR repeated that agency policy requires decs page before quoting."
+    },
+    "ezlynx": {
+      "lead_created": "2026-08-29 10:15 AM",
+      "line_of_business_logged": "Personal Lines",
+      "x_date_logged": "Missing",
+      "sales_center_pipeline_stage": "New",
+      "discussion_title": "New Lead",
+      "folder": "Default",
+      "labels": [],
+      "task_note": "Caller Robert Smith shopping for home & auto. Asked him to email his current declaration page so we can match his coverages. Will assign to producer once received.",
+      "priority_mark_present": false,
+      "calendly_booked": false
+    }
+  },
+  "transcript_snippet": "CSR: 'Thanks for calling StreetSmart. To give you an accurate quote, can you email over your current declarations page so we can see what you have now?' CLIENT: 'I don't have that handy right now, can't you just ask me what I drive and look up my house?' CSR: 'We really need your decs page first to compare apples to apples. Email it to us whenever you find it.'",
+  "expected_score": 48,
+  "expected_grade": "F",
+  "expected_status": "MAJOR_FLAG",
+  "expected_non_negotiables_breached": [
+    {
+      "id": "NN_NB_02",
+      "rule": "Do not request a declarations page at intake."
+    }
+  ]
+}

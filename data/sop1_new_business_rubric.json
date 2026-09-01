@@ -1,0 +1,188 @@
+{
+  "sop_id": "sop1_new_business",
+  "sop_title": "StreetSmart SOP - New Business",
+  "version": "1.1",
+  "target_roles": ["CSR", "Producer"],
+  "data_sources": ["EZLynx SalesCenter", "RingCentral Telephony", "Magellan Sentiment Intelligence", "Carrier Portals"],
+  "non_negotiables": [
+    {
+      "id": "NN_NB_01",
+      "rule": "Never email a quote before presenting it directly on the phone or screen.",
+      "severity": "CRITICAL_FAIL",
+      "applies_to": "Producer",
+      "description": "Quotes must be presented directly to explain carrier value, coverage limits, and differences prior to emailing any PDF or proposal link."
+    },
+    {
+      "id": "NN_NB_02",
+      "rule": "Do not request a declarations page at intake.",
+      "severity": "MAJOR_FLAG",
+      "applies_to": "CSR",
+      "description": "CSR must capture initial details and build value rather than asking prospect for their current decs page."
+    },
+    {
+      "id": "NN_NB_03",
+      "rule": "Follow payment rules: Prioritize monthly/annual EFT; payment must be confirmed before binding.",
+      "severity": "CRITICAL_FAIL",
+      "applies_to": "Producer",
+      "description": "Do not proceed as if coverage is bound when payment is missing or declined. EFT required (non-EFT only allowed if premium > $1,000)."
+    },
+    {
+      "id": "NN_NB_04",
+      "rule": "Charge $100 agency fee on manual policies (except one-day events).",
+      "severity": "MAJOR_FLAG",
+      "applies_to": "Producer",
+      "description": "Required $100 agency fee must be applied on manual policies."
+    }
+  ],
+  "categories": [
+    {
+      "id": "intake_qualification",
+      "name": "1. Intake & Lead Qualification",
+      "weight": 20,
+      "checkpoints": [
+        {
+          "id": "NB_CK_01",
+          "item": "Response Time & RingCentral Call Speed",
+          "points": 5,
+          "criteria": "Response within 5 minutes of lead creation. RingCentral response/pickup logged promptly."
+        },
+        {
+          "id": "NB_CK_02",
+          "item": "Lead Source, LOB & X-Date Capture",
+          "points": 5,
+          "criteria": "Captured prospect name, phone, verified lead source, line of business, and expiration date (X-date) in EZLynx."
+        },
+        {
+          "id": "NB_CK_03",
+          "item": "No Dec Page Request at Intake",
+          "points": 5,
+          "criteria": "CSR did NOT ask the prospect to send or email their existing declarations page."
+        },
+        {
+          "id": "NB_CK_04",
+          "item": "Warm Transfer / Calendly with Priority '!' Task",
+          "points": 5,
+          "criteria": "Warm-transferred to Producer or scheduled Calendly meeting with high-priority EZLynx task marked '!'."
+        }
+      ]
+    },
+    {
+      "id": "quoting_market_tracking",
+      "name": "2. Quoting & Multi-Market Tracking",
+      "weight": 20,
+      "checkpoints": [
+        {
+          "id": "NB_CK_05",
+          "item": "Quoting Timelines (2h Entry / 24h Delivery)",
+          "points": 5,
+          "criteria": "Data entered into system within 2 hours; standard quote delivered within 24 hours (complex within 4 days)."
+        },
+        {
+          "id": "NB_CK_06",
+          "item": "Digital Quoting & Market Tracking",
+          "points": 5,
+          "criteria": "Entered digitally into EZLynx/Tarmika/Carrier portal; tracked all viable market options."
+        },
+        {
+          "id": "NB_CK_07",
+          "item": "Coverage Standards & 2-3 Options Prepared",
+          "points": 5,
+          "criteria": "Prepared 2-3 coverage options matching agency department standards (not just state minimums)."
+        },
+        {
+          "id": "NB_CK_08",
+          "item": "Saved in Quotes / Submission Center Tab",
+          "points": 5,
+          "criteria": "Saved every generated quote in the correct Quotes or Submission Center tab in EZLynx."
+        }
+      ]
+    },
+    {
+      "id": "presentation_objections",
+      "name": "3. Quote Presentation & CENT Objections",
+      "weight": 25,
+      "checkpoints": [
+        {
+          "id": "NB_CK_09",
+          "item": "Direct Phone Presentation Before Emailing",
+          "points": 10,
+          "criteria": "Quote presented live over phone/screen before sending quote proposal/email."
+        },
+        {
+          "id": "NB_CK_10",
+          "item": "Value Presentation (3 Carrier Benefits & Diffs)",
+          "points": 5,
+          "criteria": "Explained carrier selection, at least 3 distinct benefits, coverage differences, discounts, and monthly premiums."
+        },
+        {
+          "id": "NB_CK_11",
+          "item": "Direct Closing Question & Next Steps",
+          "points": 5,
+          "criteria": "Confirmed decision timing, booked follow-up before presenting, asked directly for business (option choice, signature email, payment)."
+        },
+        {
+          "id": "NB_CK_12",
+          "item": "CENT Framework & Magellan Sentiment Handling",
+          "points": 5,
+          "criteria": "Applied CENT objection framework (Clarify, Empathize, Neutralize, Transition). Magellan sentiment remains constructive/positive."
+        }
+      ]
+    },
+    {
+      "id": "closing_won_documentation",
+      "name": "4. Closing, Won Policy & Subjectivity Documentation",
+      "weight": 20,
+      "checkpoints": [
+        {
+          "id": "NB_CK_13",
+          "item": "Payment Method & EFT Compliance",
+          "points": 5,
+          "criteria": "EFT monthly or annual secured; non-EFT only if premium > $1,000."
+        },
+        {
+          "id": "NB_CK_14",
+          "item": "Agency Fee Compliance ($100 on Manual Policies)",
+          "points": 5,
+          "criteria": "$100 agency fee collected/applied on manual policy lines."
+        },
+        {
+          "id": "NB_CK_15",
+          "item": "Sales Center Won Stage & Premium Entry",
+          "points": 5,
+          "criteria": "Opportunity moved to 'Won' with finalized carrier name and written premium recorded in Sales Center."
+        },
+        {
+          "id": "NB_CK_16",
+          "item": "Document Uploads & Onboarding Walkthrough",
+          "points": 5,
+          "criteria": "Uploaded signed docs, checklists, subjectivities; explained Client Center, welcome email/text, and carrier onboarding."
+        }
+      ]
+    },
+    {
+      "id": "follow_up_system_standards",
+      "name": "5. Follow-Up Cadence & System Standards",
+      "weight": 15,
+      "checkpoints": [
+        {
+          "id": "NB_CK_17",
+          "item": "Two-Day Follow-Up Cadence (Up to 14 Days)",
+          "points": 5,
+          "criteria": "Followed up every 2 days for up to 14 days (up to 8 touches before closing unsold quotes)."
+        },
+        {
+          "id": "NB_CK_18",
+          "item": "Sales Center Stage Alignment",
+          "points": 5,
+          "criteria": "Pipeline stage moved to Contacted, Quoted, Reviewed, or Won to maintain proper automation triggers."
+        },
+        {
+          "id": "NB_CK_19",
+          "item": "EZLynx Naming, Labels & Folder Standards",
+          "points": 5,
+          "criteria": "Discussion title 'New Business', Folder 'New Business/Application/Declarations', Labels 'New Business Follow Up' (or Spanish)."
+        }
+      ]
+    }
+  ]
+}

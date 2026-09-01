@@ -1,0 +1,68 @@
+{
+  "test_id": "PC_TC_01",
+  "sop_id": "sop2_policy_change",
+  "title": "Policy Change - Flawless CSR Add Driver & Add Vehicle Request",
+  "employee_name": "Maria Santos",
+  "role": "CSR / Technician",
+  "date": "2026-08-30",
+  "policy_numbers": ["PA-90182736", "PUM-1029384"],
+  "line_of_business": "Personal Auto & Personal Umbrella",
+  "change_type": "Add Driver (16-yr-old son) + Add Vehicle (2024 Honda CR-V)",
+  "data_sources": {
+    "ringcentral": {
+      "call_id": "RC-9941829",
+      "call_duration_minutes": 11.2,
+      "caller_verified": true,
+      "call_recording_url": "https://ringcentral.example.com/recording/9941829"
+    },
+    "magellan": {
+      "overall_sentiment": "High Positive",
+      "sentiment_score": 0.91,
+      "empathy_score": 98,
+      "talk_to_listen_ratio": "52% Agent / 48% Client",
+      "positive_moments": ["Agent congratulated customer on son passing driver's test and explained good student discount savings"]
+    },
+    "ezlynx": {
+      "discussion_title": "Policy Change Request",
+      "folder": "Policy Changes/Declarations",
+      "labels": ["Policy Change Request", "Signed Change Form"],
+      "core_questions_completed": {
+        "caller_authority_verified": true,
+        "effective_date_confirmed": "2026-08-30",
+        "claims_losses_screened": "No prior losses in last 30 days confirmed",
+        "cross_policy_umbrella_impact_checked": "Checked underlying auto limits on Umbrella PUM-1029384; confirmed 250/500/100 meets umbrella minimums",
+        "expectations_set": "Advised changes submitted to Travelers portal; final endorsement and proof cards in 2 business days"
+      },
+      "branch_questions_completed": {
+        "add_driver": {
+          "full_name": "Lucas Davis",
+          "dob": "2010-04-12",
+          "dl_number": "D98172634 (FL)",
+          "residential_address_verified": true,
+          "relationship": "Son",
+          "good_student_verified": "3.8 GPA transcript collected (Good Student Discount applied)",
+          "driver_training_collected": true
+        },
+        "add_vehicle": {
+          "vin": "7FARW2H82RE019283",
+          "year_make_model": "2024 Honda CR-V EX",
+          "purchase_date": "2026-08-30",
+          "garaging_address": "Matches policy address",
+          "lienholder_captured": "American Honda Finance Corp, PO Box 997509, Sacramento CA 95899",
+          "rideshare_turo_screened": "Confirmed personal use only, no Turo/Uber"
+        }
+      },
+      "ezlynx_task_status": "Reassigned to CSR for follow up (48-hr due date)",
+      "carrier_portal_submitted": true,
+      "billing_type": "Direct Bill",
+      "carrier_download_verified": true,
+      "download_verification_details": "Matched VIN, driver name, 500 comp/coll deductibles, and good student credit on Travelers Dec Page received 2026-09-01",
+      "confirmation_sent_to_client": "Sent Policy Change Processed email + ID cards via Client Center"
+    }
+  },
+  "transcript_snippet": "CSR: 'Congratulations on Lucas getting his license, Mrs. Davis! Before we submit this to Travelers, I verified that your auto liability limits stay at 250/500/100 so your Umbrella policy remains fully compliant. We got Lucas added with his 3.8 GPA Good Student discount, and your new 2024 Honda CR-V is added with American Honda Finance listed as lienholder. I have entered this in Travelers and will verify the official carrier declaration within 48 hours before sending the finalized ID cards to your Client Center.'",
+  "expected_score": 100,
+  "expected_grade": "A+",
+  "expected_status": "PASS",
+  "expected_non_negotiables_breached": []
+}

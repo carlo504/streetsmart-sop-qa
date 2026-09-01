@@ -1,0 +1,62 @@
+{
+  "test_id": "PC_TC_02",
+  "sop_id": "sop2_policy_change",
+  "title": "Policy Change - CSR Address Change with Missed Household Check & Premature Confirmation",
+  "employee_name": "Brandon Reed",
+  "role": "CSR / Technician",
+  "date": "2026-08-26",
+  "policy_numbers": ["PA-77182910"],
+  "line_of_business": "Personal Auto",
+  "change_type": "Address Change (Move to new apartment)",
+  "data_sources": {
+    "ringcentral": {
+      "call_id": "RC-9901827",
+      "call_duration_minutes": 3.2,
+      "caller_verified": true,
+      "call_recording_url": "https://ringcentral.example.com/recording/9901827"
+    },
+    "magellan": {
+      "overall_sentiment": "Neutral",
+      "sentiment_score": 0.12,
+      "empathy_score": 55,
+      "talk_to_listen_ratio": "68% Agent / 32% Client"
+    },
+    "ezlynx": {
+      "discussion_title": "Address Change",
+      "folder": "Default",
+      "labels": [],
+      "core_questions_completed": {
+        "caller_authority_verified": true,
+        "effective_date_confirmed": "2026-08-26",
+        "claims_losses_screened": "Not asked",
+        "cross_policy_umbrella_impact_checked": "Not checked (client also has Renters policy with another carrier)",
+        "expectations_set": "Told customer 'You are all set!'"
+      },
+      "branch_questions_completed": {
+        "address_change": {
+          "new_address": "742 Evergreen Terrace, Springfield",
+          "mailing_vs_garaging_asked": "Assumed same",
+          "household_residents_verified": "Not asked (missed new roommate driver)",
+          "own_vs_rent_asked": "Not asked",
+          "territory_rate_impact_explained": false
+        }
+      },
+      "ezlynx_task_status": "Closed immediately on call",
+      "carrier_portal_submitted": true,
+      "billing_type": "Direct Bill",
+      "carrier_download_verified": false,
+      "download_verification_details": "Task closed and confirmed before carrier processed endorsement or sent download",
+      "confirmation_sent_to_client": "Confirmed change on the phone before carrier confirmation"
+    }
+  },
+  "transcript_snippet": "CLIENT: 'I moved to a new apartment at 742 Evergreen Terrace.' CSR: 'Got it, I updated your address in the system. You're all good to go!'",
+  "expected_score": 55,
+  "expected_grade": "F",
+  "expected_status": "CRITICAL_FAIL",
+  "expected_non_negotiables_breached": [
+    {
+      "id": "NN_PC_01",
+      "rule": "Never close or confirm a change request without verified carrier download or official endorsement docs."
+    }
+  ]
+}
