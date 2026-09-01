@@ -1,0 +1,68 @@
+{
+  "test_id": "COI_TC_01",
+  "title": "Flawless Commercial General Contractor COI Issuance",
+  "sop_id": "sop3_coi_request",
+  "sop_title": "StreetSmart SOP - Certificate of Insurance (COI) Request",
+  "department": "Commercial Lines",
+  "employee_name": "Andrea Illanes",
+  "role": "CSR / Technician",
+  "insured_name": "Apex Premier Contracting LLC",
+  "account_number": "104882910",
+  "primary_carrier": "Selective Insurance & Utica First",
+  "line_of_business": "Commercial General Liability & Inland Marine",
+  "date": "2026-08-28",
+  "turnaround_time_minutes": 28,
+  "transcript_snippet": "Received written request from Turner Construction via email. Verified Apex Premier active GL policy with Selective. Confirmed blanket CG 2010 04 13 (ongoing operations) and CG 2037 04 13 (completed operations) endorsements on file. Screened contract: job is in NJ (no NY Action-Over exposure). Issued COI via EZLynx on-behalf-of, copied owner marco@apexcontracting.com, attached ACORD 101 and endorsement copies. Updated COI Forms Tracker and sent Client Center self-service onboarding email.",
+  "data_sources": {
+    "intake": {
+      "request_in_writing": true,
+      "written_source": "Email with project spec sheet",
+      "contact_info_verified": true,
+      "authorized_requester": true,
+      "turnaround_minutes": 28,
+      "sla_met": true
+    },
+    "coverage_verification": {
+      "policy_active_in_ezlynx": true,
+      "additional_insured_verified": true,
+      "waiver_of_subrogation_verified": true,
+      "primary_noncontributory_verified": true,
+      "completed_operations_cg2037_verified": true,
+      "commercial_red_flags_screened": true,
+      "ny_work_action_over_checked": true,
+      "roofing_tree_removal_checked": true,
+      "written_contract_requirement_verified": true
+    },
+    "master_preparation": {
+      "full_legal_holder_name_used": true,
+      "holder_name": "Turner Construction Company, Inc.",
+      "holder_deduped_in_ezlynx": true,
+      "reinstatement_or_renewal_status": "Active Policy in force",
+      "finance_company_only_reinstatement": false,
+      "ai_wos_endorsements_attached": true,
+      "form_numbers_cited_in_description": true,
+      "acord_101_attached": true,
+      "policy_change_entered_prior": true
+    },
+    "digital_delivery": {
+      "issued_via_ezlynx_on_behalf_of": true,
+      "insured_copied_on_delivery": true,
+      "client_center_delivered": true,
+      "client_center_self_service_educated": true,
+      "folder": "Certificate Masters/Turner Construction",
+      "document_labels": [
+        "Certificate of Insurance"
+      ],
+      "ezlynx_labels": [
+        "Certificate"
+      ]
+    },
+    "tracking_and_escalation": {
+      "coi_forms_tracker_updated": true,
+      "pending_tracker_updated": true,
+      "days_pending": 0,
+      "carlo_escalation_required": false,
+      "subcontractor_matching_verified": true
+    }
+  }
+}

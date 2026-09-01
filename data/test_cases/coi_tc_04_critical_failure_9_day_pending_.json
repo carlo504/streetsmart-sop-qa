@@ -1,0 +1,64 @@
+{
+  "test_id": "COI_TC_04",
+  "title": "Critical Failure: 9-Day Pending COI Without Carlo Escalation",
+  "sop_id": "sop3_coi_request",
+  "sop_title": "StreetSmart SOP - Certificate of Insurance (COI) Request",
+  "department": "Personal Lines",
+  "employee_name": "Amber Voigt",
+  "role": "CSR / Technician",
+  "insured_name": "Robert & Maria Higgins",
+  "account_number": "88129034",
+  "primary_carrier": "Chubb Group",
+  "line_of_business": "High-Value Homeowners & Yacht Liability",
+  "date": "2026-08-25",
+  "turnaround_time_minutes": 12960,
+  "transcript_snippet": "Marina requested loss payee certificate for yacht slip rental. Carrier required underwriter approval for navigation territory expansion. Certificate remained in pending state for 9 calendar days. CSR failed to log in Pending COIs Tracker, did not send pending dropdown update to client, and failed to notify Carlo despite exceeding the mandatory 7-day rule.",
+  "data_sources": {
+    "intake": {
+      "request_in_writing": true,
+      "written_source": "Marina slip lease email",
+      "contact_info_verified": true,
+      "authorized_requester": true,
+      "turnaround_minutes": 12960,
+      "sla_met": false
+    },
+    "coverage_verification": {
+      "policy_active_in_ezlynx": true,
+      "additional_insured_verified": false,
+      "waiver_of_subrogation_verified": false,
+      "primary_noncontributory_verified": false,
+      "commercial_red_flags_screened": true,
+      "written_contract_requirement_verified": true
+    },
+    "master_preparation": {
+      "full_legal_holder_name_used": true,
+      "holder_name": "Liberty Landing Marina LLC",
+      "holder_deduped_in_ezlynx": true,
+      "reinstatement_or_renewal_status": "Pending carrier UW approval",
+      "ai_wos_endorsements_attached": false,
+      "form_numbers_cited_in_description": false,
+      "acord_101_attached": false
+    },
+    "digital_delivery": {
+      "issued_via_ezlynx_on_behalf_of": false,
+      "insured_copied_on_delivery": false,
+      "client_center_delivered": false,
+      "client_center_self_service_educated": false,
+      "folder": "Default",
+      "document_labels": [
+
+      ],
+      "ezlynx_labels": [
+
+      ]
+    },
+    "tracking_and_escalation": {
+      "coi_forms_tracker_updated": false,
+      "pending_tracker_updated": false,
+      "days_pending": 9,
+      "carlo_escalation_completed": false,
+      "carlo_escalation_required": true,
+      "subcontractor_matching_verified": false
+    }
+  }
+}

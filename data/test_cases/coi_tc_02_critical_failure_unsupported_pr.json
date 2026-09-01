@@ -1,0 +1,68 @@
+{
+  "test_id": "COI_TC_02",
+  "title": "Critical Failure: Unsupported Proof & NY Action-Over Exclusion Breach",
+  "sop_id": "sop3_coi_request",
+  "sop_title": "StreetSmart SOP - Certificate of Insurance (COI) Request",
+  "department": "Commercial Lines",
+  "employee_name": "Jason Davis",
+  "role": "CSR / Technician",
+  "insured_name": "Empire Masonry & Scaffolding Corp",
+  "account_number": "198234711",
+  "primary_carrier": "Atlantic Casualty Insurance Company",
+  "line_of_business": "Commercial General Liability",
+  "date": "2026-08-27",
+  "turnaround_time_minutes": 45,
+  "transcript_snippet": "Insured called requesting rush certificate for high-rise masonry project in Manhattan NY. CSR typed CG 2010 (11/85 edition) and full completed operations in Description of Operations box, but did not check carrier policy decs. Atlantic Casualty policy specifically contains Action-Over exclusion CG 21 39 and excludes NY scaffold law work. No written contract was on file. CSR issued certificate without attaching actual endorsement forms and without AM review.",
+  "data_sources": {
+    "intake": {
+      "request_in_writing": false,
+      "written_source": "Oral phone request only",
+      "contact_info_verified": true,
+      "authorized_requester": true,
+      "turnaround_minutes": 45,
+      "sla_met": true
+    },
+    "coverage_verification": {
+      "policy_active_in_ezlynx": true,
+      "additional_insured_verified": false,
+      "waiver_of_subrogation_verified": false,
+      "primary_noncontributory_verified": false,
+      "completed_operations_cg2037_verified": false,
+      "commercial_red_flags_screened": false,
+      "ny_work_action_over_checked": false,
+      "roofing_tree_removal_checked": true,
+      "written_contract_requirement_verified": false
+    },
+    "master_preparation": {
+      "full_legal_holder_name_used": false,
+      "holder_name": "Manhattan Dev Group",
+      "holder_deduped_in_ezlynx": false,
+      "reinstatement_or_renewal_status": "Active with NY Action-Over Exclusion",
+      "finance_company_only_reinstatement": false,
+      "ai_wos_endorsements_attached": false,
+      "form_numbers_cited_in_description": false,
+      "acord_101_attached": false,
+      "policy_change_entered_prior": false
+    },
+    "digital_delivery": {
+      "issued_via_ezlynx_on_behalf_of": true,
+      "insured_copied_on_delivery": false,
+      "client_center_delivered": false,
+      "client_center_self_service_educated": false,
+      "folder": "Default",
+      "document_labels": [
+
+      ],
+      "ezlynx_labels": [
+
+      ]
+    },
+    "tracking_and_escalation": {
+      "coi_forms_tracker_updated": false,
+      "pending_tracker_updated": false,
+      "days_pending": 0,
+      "carlo_escalation_required": false,
+      "subcontractor_matching_verified": false
+    }
+  }
+}

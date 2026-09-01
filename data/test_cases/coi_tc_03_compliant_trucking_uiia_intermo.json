@@ -1,0 +1,71 @@
+{
+  "test_id": "COI_TC_03",
+  "title": "Compliant Trucking & UIIA Intermodal Certificate Verification",
+  "sop_id": "sop3_coi_request",
+  "sop_title": "StreetSmart SOP - Certificate of Insurance (COI) Request",
+  "department": "Trucking & Transportation",
+  "employee_name": "Ricardo Aguilar",
+  "role": "CSR / Technician",
+  "insured_name": "RoadStar Logistics LLC",
+  "account_number": "34962586",
+  "primary_carrier": "Progressive Commercial & Liberty Mutual",
+  "line_of_business": "Commercial Auto & Motor Truck Cargo",
+  "date": "2026-08-29",
+  "turnaround_time_minutes": 50,
+  "transcript_snippet": "Received written COI request from CSX Intermodal Terminals. Audited Progressive policy: separated Auto Liability ($1M CSL), Trailer Interchange ($50k), and Motor Truck Cargo ($150k). Checked UIIA compliance with Mike Sosa. Verified radius (500 miles, no unlimited radius violation). Confirmed no excluded cargo (steel coils/alcohol). Master created with ACORD 101 schedule of vehicles, issued on-behalf-of, copied owner, COI Forms tracker updated.",
+  "data_sources": {
+    "intake": {
+      "request_in_writing": true,
+      "written_source": "Carrier intermodal portal dispatch",
+      "contact_info_verified": true,
+      "authorized_requester": true,
+      "turnaround_minutes": 50,
+      "sla_met": true
+    },
+    "coverage_verification": {
+      "policy_active_in_ezlynx": true,
+      "additional_insured_verified": true,
+      "waiver_of_subrogation_verified": true,
+      "primary_noncontributory_verified": true,
+      "completed_operations_cg2037_verified": true,
+      "commercial_red_flags_screened": true,
+      "ny_work_action_over_checked": true,
+      "trucking_red_flags_screened": true,
+      "uiia_verified_with_mike_sosa": true,
+      "radius_verified": "500 miles",
+      "special_cargo_screened": true,
+      "written_contract_requirement_verified": true
+    },
+    "master_preparation": {
+      "full_legal_holder_name_used": true,
+      "holder_name": "CSX Intermodal Terminals, Inc.",
+      "holder_deduped_in_ezlynx": true,
+      "reinstatement_or_renewal_status": "Active in-force",
+      "progressive_trucking_lob_breakout": true,
+      "ai_wos_endorsements_attached": true,
+      "form_numbers_cited_in_description": true,
+      "acord_101_attached": true,
+      "vehicle_schedule_attached": true
+    },
+    "digital_delivery": {
+      "issued_via_ezlynx_on_behalf_of": true,
+      "insured_copied_on_delivery": true,
+      "client_center_delivered": true,
+      "client_center_self_service_educated": true,
+      "folder": "Certificate Masters/CSX Intermodal",
+      "document_labels": [
+        "Certificate of Insurance"
+      ],
+      "ezlynx_labels": [
+        "Certificate"
+      ]
+    },
+    "tracking_and_escalation": {
+      "coi_forms_tracker_updated": true,
+      "pending_tracker_updated": true,
+      "days_pending": 0,
+      "carlo_escalation_required": false,
+      "subcontractor_matching_verified": true
+    }
+  }
+}

@@ -8,7 +8,7 @@ evaluator = StreetSmartQAEvaluator.new
 departments = cases.group_by { |c| c['department'] }
 
 puts "=" * 115
-puts "      STREETSMART SOP QA AUDIT SUITE — DEPARTMENT BENCHMARK EVALUATIONS WITH CLIENT NAMES (9 CASES)"
+puts "      STREETSMART SOP QA AUDIT SUITE — DEPARTMENT BENCHMARK EVALUATIONS WITH CLIENT NAMES (#{cases.length} CASES)"
 puts "      Departments: Personal Lines • Commercial Lines • Trucking and Transportation"
 puts "=" * 115
 puts ""

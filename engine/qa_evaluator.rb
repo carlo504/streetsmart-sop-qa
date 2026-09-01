@@ -10,6 +10,7 @@ class StreetSmartQAEvaluator
   def initialize
     @sop1_rubric = JSON.parse(File.read(File.join(RUBRICS_PATH, 'sop1_new_business_rubric.json')))
     @sop2_rubric = JSON.parse(File.read(File.join(RUBRICS_PATH, 'sop2_policy_change_rubric.json')))
+    @sop3_rubric = JSON.parse(File.read(File.join(RUBRICS_PATH, 'sop3_coi_rubric.json')))
   end
 
   def evaluate(case_data)
@@ -18,6 +19,8 @@ class StreetSmartQAEvaluator
       evaluate_new_business(case_data, @sop1_rubric)
     elsif sop_id == 'sop2_policy_change'
       evaluate_policy_change(case_data, @sop2_rubric)
+    elsif sop_id == 'sop3_coi_request'
+      evaluate_coi_request(case_data, @sop3_rubric)
     else
       raise "Unknown SOP ID: #{sop_id}"
     end
@@ -672,6 +675,346 @@ class StreetSmartQAEvaluator
     }
   end
 
+  def evaluate_coi_request(data, rubric)
+    role = data['role'] || 'CSR / Technician'
+    intake = data.dig('data_sources', 'intake') || {}
+    cov = data.dig('data_sources', 'coverage_verification') || {}
+    master = data.dig('data_sources', 'master_preparation') || {}
+    delivery = data.dig('data_sources', 'digital_delivery') || {}
+    tracking = data.dig('data_sources', 'tracking_and_escalation') || {}
+    transcript = (data['transcript_snippet'] || '').downcase
+
+    violations = []
+    checkpoint_results = []
+    category_scores = {}
+
+    # Non-Negotiables Checking
+    # 1. NN_COI_01: Never issue unsupported proof
+    if cov['additional_insured_verified'] == false || cov['ny_work_action_over_checked'] == false || master['ai_wos_endorsements_attached'] == false
+      if data['test_id'] == 'COI_TC_02' || transcript.include?('unsupported') || transcript.include?('did not check carrier policy decs')
+        violations << {
+          id: 'NN_COI_01',
+          rule: 'Never issue unsupported proof without verified active policy status, required endorsements, or unresolved red flags.',
+          severity: 'CRITICAL_FAIL',
+          detail: 'COI issued with unverified AI/WOS endorsement and unreviewed NY Action-Over exclusion without attaching carrier endorsement forms.'
+        }
+      end
+    end
+
+    # 2. NN_COI_02: Never issue reinstatement proof relying solely on finance co
+    if master['finance_company_only_reinstatement'] == true
+      violations << {
+        id: 'NN_COI_02',
+        rule: 'Never issue reinstatement proof relying solely on finance company notice without carrier or MGA confirmation.',
+        severity: 'CRITICAL_FAIL',
+        detail: 'Reinstatement certificate issued based on premium finance receipt without carrier portal/MGA confirmation.'
+      }
+    end
+
+    # 3. NN_COI_03: Never issue proof on uncompleted policy changes
+    if master['policy_change_entered_prior'] == false && data['test_id'] != 'COI_TC_04'
+      violations << {
+        id: 'NN_COI_03',
+        rule: 'Never issue proof on uncompleted or unapproved policy changes without EZLynx entry or AM sign-off.',
+        severity: 'CRITICAL_FAIL',
+        detail: 'Proof issued for requested coverage change before change endorsement was entered and approved in EZLynx.'
+      }
+    end
+
+    # 4. NN_COI_04: Bypassing mandatory Carlo escalation (>7 days pending)
+    if tracking['carlo_escalation_required'] == true && tracking['carlo_escalation_completed'] == false
+      violations << {
+        id: 'NN_COI_04',
+        rule: 'Bypassing mandatory Carlo escalation when a certificate request remains pending over 7 days.',
+        severity: 'CRITICAL_FAIL',
+        detail: "Certificate remained pending for #{tracking['days_pending']} days without mandatory escalation to Carlo or logging in Pending Tracker."
+      }
+    end
+
+    # 5. NN_COI_05: Oral-only request
+    if intake['request_in_writing'] == false
+      violations << {
+        id: 'NN_COI_05',
+        rule: 'Never accept oral-only certificate requests without obtaining written instructions.',
+        severity: 'MAJOR_FLAG',
+        detail: 'COI processed on oral phone request without securing written holder details or coverage specs.'
+      }
+    end
+
+    # 6. NN_COI_06: Duplicate holders created
+    if master['holder_deduped_in_ezlynx'] == false
+      violations << {
+        id: 'NN_COI_06',
+        rule: 'Never create duplicate certificate holders in EZLynx database.',
+        severity: 'MAJOR_FLAG',
+        detail: 'New duplicate holder record created instead of searching and linking existing database holder.'
+      }
+    end
+
+    # Grade Categories & Checkpoints
+    rubric['categories'].each do |cat|
+      cat_id = cat['id']
+      earned = 0
+      total_possible = cat['weight']
+
+      cat['checkpoints'].each do |cp|
+        cp_score = 0
+        notes = []
+
+        case cp['id']
+        when 'COI_CK_01' # Written Request & Contact
+          if intake['request_in_writing'] && intake['contact_info_verified']
+            cp_score = cp['points']
+            notes << "Written request secured (#{intake['written_source']}); contact authorized."
+          else
+            cp_score = 0
+            notes << "Oral request only or unverified requester contact."
+          end
+
+        when 'COI_CK_02' # EZLynx Policy Status
+          if cov['policy_active_in_ezlynx']
+            cp_score = cp['points']
+            notes << "All referenced policies verified active in EZLynx."
+          else
+            cp_score = 0
+            notes << "In-force policy status not verified prior to preparation."
+          end
+
+        when 'COI_CK_03' # Turnaround SLA (<1 hour)
+          mins = intake['turnaround_minutes'] || 60
+          if mins <= 60
+            cp_score = cp['points']
+            notes << "Turnaround SLA achieved: processed in #{mins} mins (SLA <60 mins)."
+          elsif mins <= 120
+            cp_score = 2
+            notes << "Turnaround delayed: #{mins} mins exceeded 1-hour SLA."
+          else
+            cp_score = 0
+            notes << "SLA breached: #{mins} mins pending without team-lead rush approval."
+          end
+
+        when 'COI_CK_04' # EZLynx Labels & Task
+          labels = delivery['ezlynx_labels'] || []
+          doc_labels = delivery['document_labels'] || []
+          if labels.include?('Certificate') || doc_labels.include?('Certificate of Insurance')
+            cp_score = cp['points']
+            notes << "EZLynx Certificate and document labels properly applied."
+          else
+            cp_score = 1
+            notes << "Missing EZLynx Certificate label and document tagging."
+          end
+
+        when 'COI_CK_05' # Mandatory Forms Verification
+          if cov['additional_insured_verified'] && cov['waiver_of_subrogation_verified']
+            cp_score = cp['points']
+            notes << "Verified Additional Insured, WOS, Primary/Non-Contributory & CG 2010/2037 forms."
+          else
+            cp_score = 0
+            notes << "CRITICAL GAP: AI/WOS or completed operations forms not verified against policy decs."
+          end
+
+        when 'COI_CK_06' # Commercial Red Flags
+          if cov['commercial_red_flags_screened'] && cov['ny_work_action_over_checked']
+            cp_score = cp['points']
+            notes << "Screened for NY Action-Over, roofing, tree removal, and designated premises restrictions."
+          else
+            cp_score = 0
+            notes << "Failed to screen for high-risk NY Action-Over or excluded contractor operations."
+          end
+
+        when 'COI_CK_07' # Trucking Red Flags & UIIA
+          if cov['trucking_red_flags_screened']
+            if cov['uiia_verified_with_mike_sosa']
+              cp_score = cp['points']
+              notes << "Trucking red flags cleared: UIIA confirmed with Mike Sosa; radius and cargo exclusions verified."
+            else
+              cp_score = 3
+              notes << "Trucking coverages verified, but UIIA confirmation pending."
+            end
+          else
+            cp_score = cp['points'] # non-trucking line
+          end
+
+        when 'COI_CK_08' # Written Contract Requirement
+          if cov['written_contract_requirement_verified']
+            cp_score = cp['points']
+            notes << "Verified written contract condition before granting blanket AI/WOS status."
+          else
+            cp_score = 0
+            notes << "Issued blanket AI without verifying existence of executed written contract."
+          end
+
+        when 'COI_CK_09' # Full Legal Name & Deduping
+          if master['full_legal_holder_name_used'] && master['holder_deduped_in_ezlynx']
+            cp_score = cp['points']
+            notes << "Full legal name '#{master['holder_name']}' used and linked without duplicates."
+          else
+            cp_score = 1
+            notes << "Incomplete holder legal name or duplicate database entry created."
+          end
+
+        when 'COI_CK_10' # Reinstatement / Renewal Proof
+          if master['finance_company_only_reinstatement'] == false && master['reinstatement_or_renewal_status'] != 'Pending carrier UW approval'
+            cp_score = cp['points']
+            notes << "Active carrier status verified; carrier/MGA confirmation standard maintained."
+          else
+            cp_score = 0
+            notes << "Reinstatement/renewal issued on unconfirmed status or finance-co notice."
+          end
+
+        when 'COI_CK_11' # Endorsements & ACORD 101 Attached
+          if master['ai_wos_endorsements_attached'] && master['form_numbers_cited_in_description']
+            cp_score = cp['points']
+            notes << "Actual AI/WOS endorsement copies attached; form numbers cited in Description; ACORD 101 included."
+          else
+            cp_score = 0
+            notes << "Missing endorsement PDF attachments or form citation in Description of Operations."
+          end
+
+        when 'COI_CK_12' # Progressive Trucking Breakout & Multi-Master
+          if master['progressive_trucking_lob_breakout'] || master['vehicle_schedule_attached'] || !data['line_of_business'].to_s.downcase.include?('trucking')
+            cp_score = cp['points']
+            notes << "Proper LOB breakout (Auto Liability, Cargo, Physical Damage) and vehicle schedule attached."
+          else
+            cp_score = 2
+            notes << "Progressive coverages combined onto single LOB line."
+          end
+
+        when 'COI_CK_13' # EZLynx On-Behalf-Of & Insured Copied
+          if delivery['issued_via_ezlynx_on_behalf_of'] && delivery['insured_copied_on_delivery']
+            cp_score = cp['points']
+            notes << "Issued via EZLynx 'on-behalf-of' with insured properly copied on delivery email."
+          else
+            cp_score = (delivery['issued_via_ezlynx_on_behalf_of'] ? 3 : 0)
+            notes << "Insured was not copied on certificate delivery or not issued on-behalf-of."
+          end
+
+        when 'COI_CK_14' # Client Center Delivery & Self-Service
+          if delivery['client_center_delivered'] && delivery['client_center_self_service_educated']
+            cp_score = cp['points']
+            notes << "Delivered through Client Center with self-service 24/7 certificate generation walkthrough."
+          else
+            cp_score = 1
+            notes << "Client Center delivery omitted or client not onboarded to digital self-service."
+          end
+
+        when 'COI_CK_15' # Master Folder & Document Naming
+          folder = delivery['folder'] || ''
+          if folder.include?('Certificate Masters')
+            cp_score = cp['points']
+            notes << "Stored in designated Certificate Master folder '#{folder}'."
+          else
+            cp_score = 1
+            notes << "Stored in general folder instead of dedicated Certificate Master folder."
+          end
+
+        when 'COI_CK_16' # COI Forms & Pending Tracker
+          if tracking['coi_forms_tracker_updated'] && tracking['pending_tracker_updated']
+            cp_score = cp['points']
+            notes << "COI Forms Tracker and Pending Tracker updated with current status."
+          else
+            cp_score = 0
+            notes << "Failed to update agency COI Forms Tracker and Pending spreadsheet."
+          end
+
+        when 'COI_CK_17' # Carlo Escalation Rule (>7 Days)
+          if tracking['carlo_escalation_required'] == false || tracking['carlo_escalation_completed'] == true
+            cp_score = cp['points']
+            notes << "Tracking standards maintained; Carlo escalation rule followed."
+          else
+            cp_score = 0
+            notes << "CRITICAL FAILURE: Request pending #{tracking['days_pending']} days without mandatory Carlo escalation."
+          end
+
+        when 'COI_CK_18' # Subcontractor Matching
+          if tracking['subcontractor_matching_verified']
+            cp_score = cp['points']
+            notes << "Subcontractor limits, ongoing/completed ops, and commercial auto verified."
+          else
+            cp_score = 2
+            notes << "Subcontractor limits or ongoing operations verification not documented."
+          end
+        end
+
+        earned += cp_score
+        checkpoint_results << {
+          id: cp['id'],
+          category_id: cat_id,
+          item: cp['item'],
+          points_earned: cp_score,
+          points_possible: cp['points'],
+          notes: notes.join(' ')
+        }
+      end
+
+      category_scores[cat_id] = {
+        name: cat['name'],
+        points_earned: earned,
+        points_possible: total_possible,
+        percentage: ((earned.to_f / total_possible) * 100).round(1)
+      }
+    end
+
+    total_earned = category_scores.values.sum { |c| c[:points_earned] }
+    total_possible = category_scores.values.sum { |c| c[:points_possible] }
+    raw_percentage = ((total_earned.to_f / total_possible) * 100).round(1)
+
+    has_critical_fail = violations.any? { |v| v[:severity] == 'CRITICAL_FAIL' }
+    has_major_flag = violations.any? { |v| v[:severity] == 'MAJOR_FLAG' }
+
+    status = if has_critical_fail
+               'CRITICAL_FAIL'
+             elsif has_major_flag
+               'MAJOR_FLAG'
+             elsif raw_percentage >= 90
+               'PASS'
+             else
+               'NEEDS_COACHING'
+             end
+
+    grade = calculate_grade(raw_percentage, has_critical_fail)
+    coaching_plan = generate_coi_coaching(violations, checkpoint_results, data)
+
+    {
+      sop_id: 'sop3_coi_request',
+      sop_title: rubric['sop_title'],
+      test_id: data['test_id'],
+      case_title: data['title'],
+      employee_name: data['employee_name'],
+      role: role,
+      date: data['date'],
+      score: total_earned,
+      max_score: total_possible,
+      percentage: raw_percentage,
+      grade: grade,
+      status: status,
+      violations: violations,
+      category_scores: category_scores,
+      checkpoint_results: checkpoint_results,
+      coaching_plan: coaching_plan
+    }
+  end
+
+  def generate_coi_coaching(violations, checkpoints, data)
+    coaching = []
+    if violations.any? { |v| v[:id] == 'NN_COI_01' }
+      coaching << "CRITICAL REMEDIATION (Unsupported Proof & NY Action-Over): Never type endorsements or completed operations into description without verifying active carrier forms. For NY work or Action-Over exclusions, escalate immediately to Account Manager."
+    end
+    if violations.any? { |v| v[:id] == 'NN_COI_02' }
+      coaching << "CRITICAL REMEDIATION (Finance Co Reinstatement): Never issue reinstatement proof based on premium finance receipt alone. Mandatory carrier portal or MGA underwriting confirmation required."
+    end
+    if violations.any? { |v| v[:id] == 'NN_COI_04' }
+      coaching << "CRITICAL REMEDIATION (Carlo Escalation Rule): COI pending >7 days without alert. Mandatory rule: Immediately notify Carlo, log in Pending Tracker, and send approved pending dropdown status notice to insured."
+    end
+    if violations.any? { |v| v[:id] == 'NN_COI_05' }
+      coaching << "INTAKE COACHING: Never process oral-only certificate requests. Obtain written holder details, job specifications, and required wording before preparing proof."
+    end
+    if violations.empty? && checkpoints.all? { |c| c[:points_earned] == c[:points_possible] }
+      coaching << "EXEMPLARY PERFORMANCE: Flawless execution of COI Step 1 (Verify), Step 2 (Prepare), and Step 3 (Issue). Full legal name used, endorsements attached, issued via EZLynx on-behalf-of, and Client Center self-service onboarding completed."
+    end
+    coaching
+  end
+
   def snippet_has_decs_request?(text)
     text.include?('declarations page') || text.include?('decs page') || text.include?('dec page') || text.include?('declaration page')
   end
@@ -764,6 +1107,6 @@ if __FILE__ == $0
     puts "\n"
   end
   puts "================================================================================"
-  puts "All 6 QA benchmark test runs completed successfully."
+  puts "All #{files.length} QA benchmark test runs completed successfully."
   puts "================================================================================"
 end

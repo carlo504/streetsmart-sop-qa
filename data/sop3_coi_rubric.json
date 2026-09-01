@@ -1,0 +1,200 @@
+{
+  "sop_id": "sop3_coi_request",
+  "sop_title": "StreetSmart SOP - Certificate of Insurance (COI) Request",
+  "version": "1.0",
+  "target_roles": [
+    "CSR",
+    "Technician",
+    "Account Manager",
+    "Producer"
+  ],
+  "non_negotiables": [
+    {
+      "id": "NN_COI_01",
+      "rule": "Never issue unsupported proof without verified active policy status, required endorsements, or unresolved red flags.",
+      "severity": "CRITICAL_FAIL",
+      "applies_to": "CSR / Technician",
+      "description": "Do not issue proof when coverage, policy status, written-contract conditions, forms, or red-flag requirements are deficient or unverified; route to Account Manager."
+    },
+    {
+      "id": "NN_COI_02",
+      "rule": "Never issue reinstatement proof relying solely on finance company notice without carrier or MGA confirmation.",
+      "severity": "CRITICAL_FAIL",
+      "applies_to": "CSR / Technician",
+      "description": "Reinstatement proof requires verified confirmation from the carrier portal or MGA underwriting; finance company payment receipt alone is strictly insufficient."
+    },
+    {
+      "id": "NN_COI_03",
+      "rule": "Never issue proof on uncompleted or unapproved policy changes without EZLynx entry or AM sign-off.",
+      "severity": "CRITICAL_FAIL",
+      "applies_to": "CSR / Technician",
+      "description": "Policy changes (e.g. adding vehicle/driver/coverage) must be entered and confirmed in EZLynx before certificate issuance."
+    },
+    {
+      "id": "NN_COI_04",
+      "rule": "Bypassing mandatory Carlo escalation when a certificate request remains pending over 7 days.",
+      "severity": "CRITICAL_FAIL",
+      "applies_to": "CSR / Technician",
+      "description": "Any certificate request pending over 7 days must be immediately escalated to Carlo with approved pending dropdown notices logged."
+    },
+    {
+      "id": "NN_COI_05",
+      "rule": "Never accept oral-only certificate requests without obtaining written instructions.",
+      "severity": "MAJOR_FLAG",
+      "applies_to": "CSR / Technician",
+      "description": "Obtain written request confirming certificate holder name, address, job description, and specific required wording before issuance."
+    },
+    {
+      "id": "NN_COI_06",
+      "rule": "Never create duplicate certificate holders in EZLynx database.",
+      "severity": "MAJOR_FLAG",
+      "applies_to": "CSR / Technician",
+      "description": "Search existing holder records, use full legal name, and update master remarks rather than creating duplicate holder entries."
+    }
+  ],
+  "categories": [
+    {
+      "id": "intake_written_verification",
+      "name": "1. Intake & Written Verification",
+      "weight": 20,
+      "checkpoints": [
+        {
+          "id": "COI_CK_01",
+          "item": "Written Request & Contact Verification",
+          "points": 5,
+          "criteria": "Obtained request in writing (email/portal/text); verified client contact info and authorized third-party requester if applicable."
+        },
+        {
+          "id": "COI_CK_02",
+          "item": "EZLynx Policy Status Verification",
+          "points": 5,
+          "criteria": "Verified all referenced policies are active/in-force with matching effective dates in EZLynx before preparing master."
+        },
+        {
+          "id": "COI_CK_03",
+          "item": "Turnaround Time Standard (<1 Hour)",
+          "points": 5,
+          "criteria": "Standard certificate processed and issued within 1 hour SLA; rush requests approved by team lead."
+        },
+        {
+          "id": "COI_CK_04",
+          "item": "EZLynx Labels & Task Setup",
+          "points": 5,
+          "criteria": "Applied Certificate EZLynx label, set document label Certificate of Insurance, and followed EZLynx task checklist."
+        }
+      ]
+    },
+    {
+      "id": "coverage_red_flag_screening",
+      "name": "2. Coverage & Red Flag Screening",
+      "weight": 25,
+      "checkpoints": [
+        {
+          "id": "COI_CK_05",
+          "item": "Mandatory Forms & Endorsement Check",
+          "points": 7,
+          "criteria": "Verified requested forms: Additional Insured (AI), Waiver of Subrogation (WOS), Primary/Non-Contributory, CG 2010 / CG 2037, 30-Day Cancellation Notice."
+        },
+        {
+          "id": "COI_CK_06",
+          "item": "Commercial & Contractor Red Flags",
+          "points": 6,
+          "criteria": "Screened for NY work, Action-Over exclusions, roofing/tree removal/excavation, and designated premises restrictions."
+        },
+        {
+          "id": "COI_CK_07",
+          "item": "Trucking Red Flags & UIIA Compliance",
+          "points": 6,
+          "criteria": "Screened for unlimited radius, physical damage, pollution cleanup, cargo exclusions (alcohol/steel/seafood), and verified UIIA with Mike Sosa."
+        },
+        {
+          "id": "COI_CK_08",
+          "item": "Written Contract Requirement Screening",
+          "points": 6,
+          "criteria": "Verified whether blanket AI/WOS endorsement requires an executed written contract before granting status on the certificate."
+        }
+      ]
+    },
+    {
+      "id": "master_preparation_standards",
+      "name": "3. Master Certificate Preparation",
+      "weight": 20,
+      "checkpoints": [
+        {
+          "id": "COI_CK_09",
+          "item": "Full Legal Holder Name & Deduping",
+          "points": 5,
+          "criteria": "Used full legal certificate holder name; searched and reused existing database holder without creating duplicates."
+        },
+        {
+          "id": "COI_CK_10",
+          "item": "Reinstatement / Renewal Payment Proof",
+          "points": 5,
+          "criteria": "Verified reinstatement on carrier site/MGA (never finance co alone); confirmed renewal payment/EFT before issuing renewal COI."
+        },
+        {
+          "id": "COI_CK_11",
+          "item": "Endorsement Form Attachments & ACORD 101",
+          "points": 5,
+          "criteria": "Attached actual AI/WOS endorsement forms, cited form numbers in Description of Operations, and attached ACORD 101 when creating new master."
+        },
+        {
+          "id": "COI_CK_12",
+          "item": "Progressive Trucking Breakout & Multi-Master",
+          "points": 5,
+          "criteria": "Separated GL, On-Hook Cargo, and Physical Damage for Progressive trucking; maintained separate masters for distinct operations."
+        }
+      ]
+    },
+    {
+      "id": "digital_delivery_client_center",
+      "name": "4. Digital Delivery & Client Center",
+      "weight": 20,
+      "checkpoints": [
+        {
+          "id": "COI_CK_13",
+          "item": "EZLynx On-Behalf-Of & Insured Copy",
+          "points": 7,
+          "criteria": "Issued via EZLynx Certificates using on-behalf-of function; verified insured is copied on all delivery emails."
+        },
+        {
+          "id": "COI_CK_14",
+          "item": "Client Center Delivery & Self-Service Education",
+          "points": 7,
+          "criteria": "Shared certificate through Client Center and educated client on 24/7 self-service certificate generation."
+        },
+        {
+          "id": "COI_CK_15",
+          "item": "Master Folder & Document Naming",
+          "points": 6,
+          "criteria": "Created designated folder for each Certificate Master and adhered to standard naming convention."
+        }
+      ]
+    },
+    {
+      "id": "tracking_escalation_rules",
+      "name": "5. Tracking & Carlo Escalation Rules",
+      "weight": 15,
+      "checkpoints": [
+        {
+          "id": "COI_CK_16",
+          "item": "COI Forms & Pending Tracker Updates",
+          "points": 5,
+          "criteria": "Updated COI Forms Tracker and Pending COIs/Endorsements spreadsheet for open/in-progress items."
+        },
+        {
+          "id": "COI_CK_17",
+          "item": "Carlo Escalation Rule (>7 Days Pending)",
+          "points": 5,
+          "criteria": "Immediately escalated to Carlo for any certificate pending >7 days; sent approved pending dropdown template."
+        },
+        {
+          "id": "COI_CK_18",
+          "item": "Subcontractor COI Matching",
+          "points": 5,
+          "criteria": "Verified incoming subcontractor COIs match required limits, ongoing/completed ops, WOS, and commercial auto."
+        }
+      ]
+    }
+  ]
+}
