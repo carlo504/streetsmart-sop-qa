@@ -174,13 +174,24 @@ Let's review where we left off in HANDOFF_DOC.md and continue building!
 * **Tenure & Financials**: 10 years in business under current ownership, $3,499,983 annual revenue.
 * **Loss History**: 0 Losses across prior 3–5 years (Loss Free / $0 Paid).
 * **Commercial Auto Policy**:
-  * Effective Date: 12/29/2026 – 12/29/2027
-  * Limits: $1,000,000 Combined Single Limit (CSL), $1,000,000 UM/UIM, Standard NJ PIP.
-  * Vehicles: 9 Scheduled Units (Pickups: 2024 Ford F-350, 2024 Chevy Silverado 2500HD, 2022 GMC Sierra 3500; SUV: 2020 Nissan Rogue; Trailers: 2024 PJ Utility Trailer, 2017 Maurer Utility Trailer, 2014/2023/2004 Trailstar Commercial Dump Trailers).
-  * Drivers: 6 Scheduled NJ Drivers (Luis Apale Roman, Victor Lemus Pena, Matthew Pellicano, Henry Gutierrez Perez, Nicholas D Miscia, Michael A Andrino-Melendez).
+  * Merchants Mutual Quote Reference: **`CAPW326937`** (Account `WA00342845`, Agency Code `84409`)
+  * Effective Date: 09/08/2026 – 09/08/2027 (Proposed Effective Date in Portal)
+  * Garaging & Rating Territory: 206 Route 537, Unit 215, Colts Neck, NJ (Rating Territory `117`)
+  * Limits: $1,000,000 Combined Single Limit (CSL), Broad Form Included, $1,000,000 UM/UIM CSL, Standard NJ PIP.
+  * Vehicles: 9 Scheduled Units
+    1. 2024 PJ Utility Trailer (VIN: `4P52D1927R4004128`) - Service Utility Trailer, 0-50 mi, Class 069183, $1k Comp / $1k Coll, Cost New $20,000 [SAVED]
+    2. 2022 GMC Sierra 3500 (VIN: `1GT59SEY3NF312131`) - Trucks / Service, 0-50 mi, Contractors (Electrical, Plumbing, Masonry), $1k Comp / $1k Coll, Cost New $65,000 [SAVED]
+    3. 2020 Nissan Rogue (VIN: `JN8AT2MT6LW017029`) - Trucks / Service, 0-50 mi, Contractors [IN PROGRESS]
+    4. 2017 Maurer Mfg Inc Grain/Utility Trailer (VIN: `575GB2022HP333910`, $18,000)
+    5. 2024 Chevrolet Silverado 2500HD (VIN: `1GC4YLE77RF313753`, $62,000)
+    6. 2014 Trailstar Intl Dump Trailer (VIN: `4T9T2FH29EJ141000`, $15,000)
+    7. 2023 Trailstar Intl Dump Trailer (VIN: `4T9T1EH20PJ141113`, $22,000)
+    8. 2004 Trailstar Intl Dump Trailer (VIN: `4T9T1E8H24LJ14105`, $8,000)
+    9. 2024 Ford F-350 Super Duty (VIN: `1FT8W3BT8REF81614`, $75,000)
+  * Drivers: 6 Scheduled NJ Drivers (Luis Apale Roman, Victor Lemus Pena, Matthew Pellicano, Henry Gutierrez Perez, Nicholas D Miscia, Michael A Andrino-Melendez). All verified clean NJ licenses.
 * **Guides & AMS Artifacts**:
   * Carrier Quoting Guide: `TOP_TO_BOTTOM_COMMERCIAL_AUTO_GUIDE.md`
-  * EZLynx Activity Note: `EZLYNX_ACCOUNT_NOTE_TOP_TO_BOTTOM.md`
+  * EZLynx Activity Note: `EZLYNX_ACCOUNT_NOTE_TOP_TO_BOTTOM.md` (Posted & verified in Account `219608909`)
   * Structured Submission Data: `data/top_to_bottom_commercial_auto_submission.json`
 
 ---
@@ -189,8 +200,13 @@ Let's review where we left off in HANDOFF_DOC.md and continue building!
 
 1. **Merchants Mutual Insurance Group (`secure1.merchantsgroup.com`)**:
    * Agency Account: STREETSMART RISK MANAGERS INC (`84409`).
+   * **Active Quoting Workflow**: Commercial Auto quote **`CAPW326937`** created and saved in portal under Account `WA00342845`.
    * **LANSA Web Architecture & SSO Handoff**: Direct URL navigation to `https://secure1.merchantsgroup.com/quotes/commercial-auto` triggers an unauthenticated `HTTP 500` error if accessed without the LANSA SSO token handoff. Navigation MUST occur via the Commercial Gateway link (`javascript:HandleEvent('MIGMNUPROC ','MNUBSNS');`) on `secure.merchantsgroup.com`.
-   * **Custom UI Dropdowns**: Dropdowns use custom ARIA listboxes (`button[aria-haspopup="listbox"]`), requiring a click to open or script evaluation to select `li[role="option"]`.
+   * **Form Validation Rules**:
+     * `FEDEID` field has a strict `maxLength=9`. Hyphens must be stripped (e.g. `823228998`) or the 9th digit will be truncated.
+     * Custom PrimeNG switches (`.ui-inputswitch`) control Yes/No toggles.
+     * Dropdowns use custom ARIA listboxes (`button[aria-haspopup="listbox"]`), requiring a click or script evaluation to select `li[role="option"]`.
+     * VIN lookup automatically decodes Year, Make, Model, and Curb Weight into header.
    * **Persistence**: Quotes persist in the database under their reference number (format `CAPW...`), retaining rated premiums, scheduled vehicles, and driver entries.
 2. **Applied Tarmika Commercial Lines Rater (`bridge.tarmika.com`)**:
    * **Address Geocoding Workflow**: When quoting multi-tenant Lessor's Risk Only (LRO) or multi-building parcels (e.g. Sonny Abagnale, 33 Roosevelt Ave, Belleville NJ), Tarmika's Google Places autocomplete requires exact building parcel selection to populate building age, construction class (MNC vs Masonry), and square footage.

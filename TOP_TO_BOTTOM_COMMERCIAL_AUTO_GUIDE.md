@@ -72,8 +72,11 @@ Fleet comprised of heavy-duty service pickups and specialized commercial equipme
 ### 🏢 5. Carrier Submission & Appetite Strategy
 * **Merchants Mutual Insurance**:
   * Program: Commercial Auto - Artisan & Trade Contractors
-  * Rating Portal: Merchants Commercial Gateway (`https://secure.merchantsgroup.com/`) -> Commercial Auto Quoter
+  * Rating Portal: Merchants Commercial Gateway (`https://secure.merchantsgroup.com/`) -> Commercial Auto Quoter (`https://secure1.merchantsgroup.com/quotes/commercial-auto`)
   * Agency Code: `84409` (Streetsmart Risk Managers Inc)
+  * Account Number: `WA00342845`
+  * Active Quote Reference: **`CAPW326937`**
+  * Rating Territory: Territory `117` (Colts Neck, NJ)
   * Target Class: Insulation Contractor (SIC 1742 / NAICS 238310)
   * Key Underwriting Positives: 10 years continuous operations, flawless loss runs (0 losses), clean MVRs on all drivers, vehicles primarily operated within local service radius (0–50 miles), no hazardous materials transport (materials shipped direct to site).
 * **Backup Multi-Market Routing**:
