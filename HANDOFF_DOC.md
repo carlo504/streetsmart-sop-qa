@@ -45,6 +45,8 @@ Let's review where we left off in HANDOFF_DOC.md and continue building!
 | **Personal Lines** | `#58768907` | **Dean & Danielle Lacorte** | Chubb Group & Markel | **Ana Flores** (CSR) / **Carlo Ferrara** (Producer) | High-Net-Worth vehicle addition & $5M Umbrella cross-check (Pass 100%) |
 | **Commercial Lines** | `#209289444` | **Bobby Os Affordable Auto Body & Super Mario Towing** | Atlantic Casualty & Progressive | **Carlo Ferrara** (Producer) / Andrea Illanes (CSR) | Garage & towing multi-option presentation & binding (Pass 100%) |
 | **Commercial Lines** | `#221774967` | **Emio "Sonny" Abagnale** | Selective / Atlantic Casualty / State Farm Exp. | **Carlo Ferrara** (Producer) | Multi-tenant LRO commercial package submission ($7M TIV, 4 tenants) (Pass 100%) |
+| **Commercial Lines** | `#221765309` | **Par-Troy Sheet Metal & Air Conditioning LLC** | The Hartford, Selective & Travelers | **Carlo Ferrara** (Producer) | BOP ($500k building, $100k BPP) & WC ($1.45M payroll) quoting |
+| **Commercial Lines** | `#219608909` | **Top to Bottom Insulation LLC** | Merchants Mutual & Selective | **Carlo Ferrara** (Producer) | Spray foam insulation commercial auto ($1M CSL, 9 vehicles, 6 drivers) |
 | **Commercial Lines** | `#68223048` | **Accutemp Heating & Cooling LLC** | Selective Insurance Company | **Andrea Illanes** (CSR) / Taylor Cimei | Additional insured endorsement & fast COI issuance (Pass 100%) |
 | **Commercial Lines** | `#53693496` | **3 Sons Gutter LLC** | Utica First Insurance Company | **Jackie Arriola** (CSR) / **Taylor Cimei** (Producer) | Bound unpaid agency-bill endorsement without payment (Critical Fail 91%) |
 | **Trucking & Trans.** | `#34962586` | **Kevin Kosza Trucking LLC** | Progressive Commercial & Liberty | **Ricardo Aguilar** (Producer / CSR) | Fleet binding, cargo limits, Form E filing (Pass 100%) |
@@ -161,15 +163,44 @@ Let's review where we left off in HANDOFF_DOC.md and continue building!
 
 ---
 
-## 🛠️ 11. Carrier Quoting Portals & Engineering Learnings
+## 📁 12. Active Commercial Submission Case File: Top to Bottom Insulation LLC
+
+* **Applicant**: Top to Bottom Insulation LLC | LLC Entity | FEIN: `82-3228998`
+* **Contact**: Olivia Brown (`billing@toptobottominsulation.com`) / Matthew Pellicano (`captain.pellicanobldrs@gmail.com`) | (732) 462-7230
+* **Locations**:
+  * HQ / Mailing: 206 County Road 537, Unit #215, Colts Neck, NJ 07722-2233 (Monmouth County)
+  * Operations / Shop: 4150 Dunroamin Rd, Unit 15, Wall Township, NJ 07727
+* **Operations**: Spray polyurethane foam (open & closed cell SPF) and fiberglass batt/blown-in insulation contractor (SIC `1742` / NAICS `238310`).
+* **Tenure & Financials**: 10 years in business under current ownership, $3,499,983 annual revenue.
+* **Loss History**: 0 Losses across prior 3–5 years (Loss Free / $0 Paid).
+* **Commercial Auto Policy**:
+  * Effective Date: 12/29/2026 – 12/29/2027
+  * Limits: $1,000,000 Combined Single Limit (CSL), $1,000,000 UM/UIM, Standard NJ PIP.
+  * Vehicles: 9 Scheduled Units (Pickups: 2024 Ford F-350, 2024 Chevy Silverado 2500HD, 2022 GMC Sierra 3500; SUV: 2020 Nissan Rogue; Trailers: 2024 PJ Utility Trailer, 2017 Maurer Utility Trailer, 2014/2023/2004 Trailstar Commercial Dump Trailers).
+  * Drivers: 6 Scheduled NJ Drivers (Luis Apale Roman, Victor Lemus Pena, Matthew Pellicano, Henry Gutierrez Perez, Nicholas D Miscia, Michael A Andrino-Melendez).
+* **Guides & AMS Artifacts**:
+  * Carrier Quoting Guide: `TOP_TO_BOTTOM_COMMERCIAL_AUTO_GUIDE.md`
+  * EZLynx Activity Note: `EZLYNX_ACCOUNT_NOTE_TOP_TO_BOTTOM.md`
+  * Structured Submission Data: `data/top_to_bottom_commercial_auto_submission.json`
+
+---
+
+## 🛠️ 13. Carrier Quoting Portals & Engineering Learnings
 
 1. **Merchants Mutual Insurance Group (`secure1.merchantsgroup.com`)**:
    * Agency Account: STREETSMART RISK MANAGERS INC (`84409`).
-   * When navigating from the "Premium Summary" screen into subsequent tabs ("Underwriting Questions" / "Referrals"), the carrier's application gateway can trigger an internal session redirect back to the logon page (`secure.merchantsgroup.com`).
-   * **Persistence**: Quotes persist in the database under their reference number (e.g. `CAPW326867`), retaining rated premiums, scheduled vehicles, and driver entries.
-2. **Plymouth Rock Assurance Portal (`agentweb1.plymouthrock.com`)**:
+   * **LANSA Web Architecture & SSO Handoff**: Direct URL navigation to `https://secure1.merchantsgroup.com/quotes/commercial-auto` triggers an unauthenticated `HTTP 500` error if accessed without the LANSA SSO token handoff. Navigation MUST occur via the Commercial Gateway link (`javascript:HandleEvent('MIGMNUPROC ','MNUBSNS');`) on `secure.merchantsgroup.com`.
+   * **Custom UI Dropdowns**: Dropdowns use custom ARIA listboxes (`button[aria-haspopup="listbox"]`), requiring a click to open or script evaluation to select `li[role="option"]`.
+   * **Persistence**: Quotes persist in the database under their reference number (format `CAPW...`), retaining rated premiums, scheduled vehicles, and driver entries.
+2. **Applied Tarmika Commercial Lines Rater (`bridge.tarmika.com`)**:
+   * **Address Geocoding Workflow**: When quoting multi-tenant Lessor's Risk Only (LRO) or multi-building parcels (e.g. Sonny Abagnale, 33 Roosevelt Ave, Belleville NJ), Tarmika's Google Places autocomplete requires exact building parcel selection to populate building age, construction class (MNC vs Masonry), and square footage.
+   * Supplementary underwriting fields dynamically appear for Hanover, Selective, Travelers, and Nationwide based on ISO class code.
+3. **The Hartford EBC Commercial Portal**:
+   * Quoted BOP for Par-Troy Sheet Metal ($500,000 Building, $100,000 BPP, $1M/$2M GL, $10,000 Inland Marine tools floater) under Quote Reference `08 SBA AC9EAF`.
+4. **Plymouth Rock Assurance Portal (`agentweb1.plymouthrock.com`)**:
    * **XML Schema Bug**: The rating submission schema enforces a strict 15-character length limit on the `<PRIOR_CARR>` element. Entering full legal carrier names such as `"Selective Insurance"` (19 chars) causes an unhandled schema exception that triggers an underwriter referral. Use abbreviations (e.g. `"Selective Ins"` or `"Selective"`) to pass schema validation.
-3. **GEICO Gateway Commercial (`gateway.geico.com`)**:
+5. **GEICO Gateway Commercial (`gateway.geico.com`)**:
    * Authentication requires Azure AD B2C Single Sign-On and multi-factor SMS code verification.
    * Commercial lines appetite checks reside under **"B and C" (Business and Commercial)** -> **"Check Appetite"**.
    * Not integrated into comparative raters (Tarmika / EZLynx) for independent agencies. Alternative agency access for Berkshire Hathaway commercial lines is available via **Berkshire Hathaway GUARD** (`gigezrate.guard.com`).
+
