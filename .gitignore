@@ -1,0 +1,8 @@
+chrome-temp/
+*.tmp
+test.pdf
+test.ps
+test.rtf
+test_gen.pdf
+test_ps.pdf
+.DS_Store

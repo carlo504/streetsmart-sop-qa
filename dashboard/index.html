@@ -305,152 +305,753 @@ const ROSTER = {
 const DEPT_TEST_CASES = {
   "Personal Lines": [
     {
-      id: "PL_TC_01",
-      client_name: "Nicole Scrivanich & Jason Santos",
-      account_number: "93686872",
-      carrier_name: "Plymouth Rock & Selective (Quoted: Plymouth Rock, Selective, Travelers)",
-      primary_carrier: "Plymouth Rock Assurance Corp",
-      pass: true,
-      sop: "sop1_new_business",
-      employee: "Jazmin Molina",
-      role: "Producer",
-      title: "Compliant Producer Sales Cycle (Auto & Home Bundle)",
-      rc: "Response: 40s | Talk: 18.5m | Warm-Transfer: Yes | Phone Presentation: Yes",
-      magellan: "Sentiment: High Positive (+0.86) | Empathy: 95% | CENT: Multi-policy bundling and underlying liability",
-      ez: "Discussion: New Business | Folder: New Business/Application/Declarations | Quoted: Plymouth Rock, Selective, Travelers (3 Options) | Presentation: Presented on phone at 11:30 AM before sending link | Won: Plymouth Rock ($9,047) | Payment: EFT Monthly | Agency Fee: $100 Applied | Stage: Won",
-      transcript: "JAZMIN MOLINA: 'Nicole and Jason, before I email the proposal link, I want to review the 3 coverage packages we built across Plymouth Rock, Selective, and Travelers. Plymouth Rock gives you full replacement cost on your home, $500k underlying liability on auto to support your Umbrella, and locks in a multi-policy discount on monthly EFT.'"
+      "department": "Personal Lines",
+      "test_id": "PL_TC_01",
+      "sop_id": "sop1_new_business",
+      "sop_title": "SOP 1: New Business",
+      "title": "Personal Lines - Compliant Producer Sales Cycle (Auto, Home & Umbrella Bundle)",
+      "employee_name": "Jazmin Molina",
+      "role": "Producer",
+      "account_number": "PL-100821",
+      "insured_name": "Alex & Sarah Morgan",
+      "carrier_name": "Plymouth Rock & Selective (Quoted: Plymouth Rock, Selective, Travelers)",
+      "primary_carrier": "Plymouth Rock Assurance Corp",
+      "line_of_business": "Personal Auto, Homeowners & Personal Umbrella",
+      "policy_numbers": [
+        "PA-882190 (Auto)",
+        "HO-441029 (Home)",
+        "UMB-10294 (Umbrella)"
+      ],
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-PL-20260901-01",
+          "initial_response_time_seconds": 40,
+          "warm_transfer_completed": true,
+          "total_talk_time_minutes": 18.5,
+          "phone_presentation_completed": true
+        },
+        "magellan": {
+          "overall_sentiment": "High Positive",
+          "sentiment_score": 0.86,
+          "empathy_score": 95,
+          "talk_to_listen_ratio": "45/55",
+          "objection_detected": "Price comparison on auto renewal rate hike",
+          "objection_handling_detected": "CENT Framework: Clarified replacement cost and 500k underlying liability, empathized with rate hike, neutralized with multi-policy bundling package."
+        },
+        "ezlynx": {
+          "carrier_name": "Plymouth Rock Assurance Corp",
+          "lead_created": "2026-09-01 09:15 AM",
+          "line_of_business_logged": "Personal Lines - Auto & Home",
+          "x_date_logged": "2026-09-20",
+          "sales_center_pipeline_stage": "Won",
+          "discussion_title": "New Business",
+          "folder": "New Business/Application/Declarations",
+          "labels": [
+            "New Business Follow Up"
+          ],
+          "markets_quoted": [
+            "Plymouth Rock",
+            "Selective",
+            "Travelers"
+          ],
+          "coverage_options_prepared": 3,
+          "agency_coverage_standards_met": true,
+          "quote_presentation_order": "Presented on phone at 11:30 AM before sending proposal link",
+          "payment_method_collected": "EFT Monthly (Routing & Account captured)",
+          "agency_fee_collected": "$100 Agency Fee applied",
+          "won_premium_recorded": "$9,047.00 Annual Written Premium",
+          "won_carrier_recorded": "Plymouth Rock Assurance Corp",
+          "uploaded_documents": [
+            "Signed Application.pdf",
+            "EFT Authorization.pdf"
+          ],
+          "onboarding_explained": true
+        }
+      },
+      "transcript_snippet": "JAZMIN MOLINA: Alex and Sarah, before I email the proposal link, I want to review the 3 coverage packages we built across Plymouth Rock, Selective, and Travelers. Plymouth Rock gives you full replacement cost on your home, $500k underlying liability on auto to support your Umbrella, and locks in a multi-policy discount on monthly EFT."
     },
     {
-      id: "PL_TC_02",
-      client_name: "Martha Parra",
-      account_number: "174421544",
-      carrier_name: "Progressive Insurance",
-      primary_carrier: "Progressive Insurance",
-      pass: false,
-      sop: "sop1_new_business",
-      employee: "Amber Voigt",
-      role: "Producer",
-      title: "Producer Emailed Quote Before Phone Presentation (Critical Fail)",
-      rc: "Response: 180s | Talk: 1.8m | Warm-Transfer: No | Phone Presentation: No",
-      magellan: "Sentiment: Cold (+0.10) | Empathy: 40% | Client ghosted on email",
-      ez: "Discussion: Auto Quote | Folder: Default | Quoted: Progressive (1 Option) | Presentation: Emailed PDF quote directly at 2:00 PM with note 'Here is the Progressive quote' without phone presentation | Won: None | Payment: None | Agency Fee: None | Stage: Quoted",
-      transcript: "EMAIL FROM AMBER VOIGT: 'Hi Martha, attached is your Progressive auto quote for $5,807/year. Review the attachment and let me know if you want to bind.'"
+      "department": "Personal Lines",
+      "test_id": "PL_TC_02",
+      "sop_id": "sop1_new_business",
+      "sop_title": "SOP 1: New Business",
+      "title": "Personal Lines - Producer Emailed Quote Before Phone Presentation (Critical Fail)",
+      "employee_name": "Amber Voigt",
+      "role": "Producer",
+      "account_number": "PL-100822",
+      "insured_name": "David & Lisa Miller",
+      "carrier_name": "Progressive Insurance",
+      "primary_carrier": "Progressive Insurance",
+      "line_of_business": "Personal Auto",
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-PL-20260901-02",
+          "initial_response_time_seconds": 180,
+          "warm_transfer_completed": false,
+          "total_talk_time_minutes": 1.8,
+          "phone_presentation_completed": false
+        },
+        "magellan": {
+          "overall_sentiment": "Cold / Detached",
+          "sentiment_score": 0.1,
+          "empathy_score": 40,
+          "talk_to_listen_ratio": "70/30",
+          "objection_detected": "Client ghosted after receiving raw email PDF quote",
+          "objection_handling_detected": "None. Quote was emailed without presentation."
+        },
+        "ezlynx": {
+          "carrier_name": "Progressive Insurance",
+          "lead_created": "2026-09-01 10:00 AM",
+          "line_of_business_logged": "Personal Auto",
+          "x_date_logged": "2026-09-18",
+          "sales_center_pipeline_stage": "Quoted",
+          "discussion_title": "Auto Quote",
+          "folder": "Default",
+          "labels": [
+            "Auto Quote"
+          ],
+          "markets_quoted": [
+            "Progressive"
+          ],
+          "coverage_options_prepared": 1,
+          "agency_coverage_standards_met": false,
+          "quote_presentation_order": "Emailed PDF quote directly at 2:00 PM with note Here is the Progressive quote without phone presentation",
+          "payment_method_collected": "None",
+          "agency_fee_collected": "None",
+          "won_premium_recorded": "None",
+          "won_carrier_recorded": "None",
+          "uploaded_documents": [
+
+          ],
+          "onboarding_explained": false
+        }
+      },
+      "transcript_snippet": "EMAIL FROM AMBER VOIGT: Hi David, attached is your Progressive auto quote for $5,807/year. Review the attachment and let me know if you want to bind."
     },
     {
-      id: "PL_TC_03",
-      client_name: "Dean & Danielle Lacorte",
-      account_number: "58768907",
-      carrier_name: "Chubb Group & Markel (PersonalUmbrella)",
-      primary_carrier: "Chubb Group (Atlantic Employers Ins Co)",
-      pass: true,
-      sop: "sop2_policy_change",
-      employee: "Ana Flores",
-      role: "CSR / Technician",
-      title: "CSR High-Net-Worth Endorsement & Umbrella Cross-Check (Pass 100%)",
-      rc: "Duration: 14.2m | Caller Verified: Yes | Direct Carrier Portal: Yes",
-      magellan: "Sentiment: High Positive (+0.94) | Empathy: 98% | Verified $500k auto limit for $5M Umbrella",
-      ez: "Discussion: Policy Change Request | Folder: Policy Changes/Declarations | Labels: Policy Change Request, Personal Auto, High Net Worth, Signed Change Form | Core Q: Authority Verified, No Losses in 30d, Umbrella Checked (500k BI meets Markel standards) | Vehicle: 2024 Porsche Macan (Porsche Financial Services) | Task: Reassigned to CSR for follow up | Carrier Download: Verified on 2026-09-01 | Confirmation: Client Center ID cards delivered",
-      transcript: "ANA FLORES: 'Mr. Lacorte, I have verified your account and added the 2024 Porsche Macan to your Chubb auto policy for Carlo Ferrara\\'s team. I cross-referenced your Markel Umbrella policy to confirm that the underlying $500,000 bodily injury liability meets all umbrella maintenance requirements. I have submitted the change in Chubb portal and reassigned the follow-up task to verify carrier download within 48 hours.'"
+      "department": "Personal Lines",
+      "test_id": "PL_TC_03",
+      "sop_id": "sop2_policy_change",
+      "sop_title": "SOP 2: Policy Change Request",
+      "title": "Personal Lines - CSR High-Net-Worth Endorsement & Umbrella Cross-Check (Pass 100%)",
+      "employee_name": "Ana Flores",
+      "role": "CSR / Technician",
+      "account_number": "PL-100823",
+      "insured_name": "Michael & Elena Vance",
+      "carrier_name": "Chubb Group & Markel (PersonalUmbrella)",
+      "primary_carrier": "Chubb Group (Atlantic Employers Ins Co)",
+      "line_of_business": "Personal Auto, High-Value Home & Excess Liability",
+      "date": "2026-09-01",
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-PL-20260901-03",
+          "initial_response_time_seconds": 25,
+          "total_talk_time_minutes": 14.2,
+          "caller_authority_verified": true
+        },
+        "magellan": {
+          "overall_sentiment": "High Positive",
+          "sentiment_score": 0.94,
+          "empathy_score": 98,
+          "policy_cross_check_detected": "Verified underlying $500k auto limit supports $5M Markel umbrella."
+        },
+        "ezlynx": {
+          "discussion_title": "Policy Change Request",
+          "folder": "Policy Changes/Declarations",
+          "labels": [
+            "Policy Change Request",
+            "Personal Auto",
+            "High Net Worth",
+            "Signed Change Form"
+          ],
+          "core_questions_completed": {
+            "caller_authority_verified": true,
+            "effective_date_confirmed": "2026-09-01",
+            "losses_in_last_30_days": false,
+            "umbrella_cross_checked": true,
+            "expectation_setting_done": true
+          },
+          "branch_guides_completed": {
+            "vehicle_added": "2024 Luxury SUV",
+            "lienholder_added": "Premier Financial Services",
+            "supporting_docs_uploaded": [
+              "BillOfSale.pdf",
+              "SignedChangeRequest.pdf"
+            ]
+          },
+          "carrier_portal_direct_entry": true,
+          "billing_type": "Direct Bill",
+          "task_action": "Reassign to CSR for follow up",
+          "follow_up_cadence_hours": 48,
+          "carrier_download_verified": true,
+          "client_center_delivered": true,
+          "closed_with_full_docs": true
+        }
+      },
+      "transcript_snippet": "ANA FLORES: Mr. Vance, I have verified your account and added the 2024 Luxury SUV to your Chubb auto policy. I cross-referenced your Markel Umbrella policy to confirm that the underlying $500,000 bodily injury liability meets all umbrella maintenance requirements. I have submitted the change in Chubb portal and reassigned the follow-up task to verify carrier download within 48 hours."
+    },
+    {
+      "department": "Personal Lines",
+      "test_id": "PL_TC_04",
+      "sop_id": "sop3_coi_request",
+      "sop_title": "SOP 3: Certificate of Insurance",
+      "title": "Personal Lines - Compliant HOA Property Proof & Loss Payee Certificate",
+      "employee_name": "Ana Flores",
+      "role": "CSR / Technician",
+      "account_number": "PL-100824",
+      "insured_name": "Jonathan & Karen Hayes",
+      "carrier_name": "Chubb Group & Markel",
+      "primary_carrier": "Chubb Custom Insurance",
+      "line_of_business": "High-Value Homeowners & Excess Liability",
+      "date": "2026-09-01",
+      "data_sources": {
+        "intake": {
+          "request_in_writing": true,
+          "written_source": "Email request from HOA Property Manager",
+          "contact_info_verified": true,
+          "authorized_requester": true,
+          "turnaround_minutes": 35,
+          "sla_met": true
+        },
+        "coverage_verification": {
+          "policy_active_in_ezlynx": true,
+          "additional_insured_verified": true,
+          "waiver_of_subrogation_verified": true,
+          "commercial_red_flags_screened": true,
+          "ny_work_action_over_checked": true,
+          "written_contract_requirement_verified": true
+        },
+        "master_preparation": {
+          "full_legal_holder_name_used": true,
+          "holder_name": "Beacon Ridge Condominium Association, Inc.",
+          "holder_deduped_in_ezlynx": true,
+          "reinstatement_or_renewal_status": "Active in-force",
+          "finance_company_only_reinstatement": false,
+          "ai_wos_endorsements_attached": true,
+          "form_numbers_cited_in_description": true,
+          "acord_101_attached": true,
+          "policy_change_entered_prior": true
+        },
+        "digital_delivery": {
+          "issued_via_ezlynx_on_behalf_of": true,
+          "insured_copied_on_delivery": true,
+          "client_center_delivered": true,
+          "client_center_self_service_educated": true,
+          "folder": "Certificate Masters/Beacon Ridge",
+          "document_labels": [
+            "Certificate of Insurance"
+          ],
+          "ezlynx_labels": [
+            "Certificate"
+          ]
+        },
+        "tracking_and_escalation": {
+          "coi_forms_tracker_updated": true,
+          "pending_tracker_updated": true,
+          "days_pending": 0,
+          "carlo_escalation_required": false,
+          "subcontractor_matching_verified": true
+        }
+      },
+      "transcript_snippet": "ANA FLORES: Verified Chubb policy in EZLynx. Added Beacon Ridge Condominium Association as Certificate Holder using full legal name. Attached ACORD 101. Issued via EZLynx on-behalf-of, copied Jonathan and Karen, updated COI Forms Tracker, and delivered through Client Center."
     }
   ],
   "Commercial Lines": [
     {
-      id: "CL_TC_01",
-      client_name: "Bobby Os Affordable Auto Body & Glass INC & Super Mario Brothers Towing INC.",
-      account_number: "209289444",
-      carrier_name: "AmWINS (Atlantic Casualty) & Progressive (Drive NJ)",
-      primary_carrier: "Atlantic Casualty Insurance Company",
-      pass: true,
-      sop: "sop1_new_business",
-      employee: "Carlo Ferrara",
-      role: "Producer",
-      title: "Producer Commercial Garage & Towing Binding (Pass 100%)",
-      rc: "Response: 45s | Talk: 24.2m | Warm-Transfer: Yes | Phone Presentation: Yes",
-      magellan: "Sentiment: High Positive (+0.89) | Empathy: 94% | CENT: Direct primary garagekeepers and hook liability",
-      ez: "Discussion: New Business | Folder: New Business/Application/Declarations | Quoted: Atlantic Casualty ($6,129), AmWINS ($6,800), Progressive ($11,929) | Presentation: Presented on phone at 10:15 AM before sending link | Won: Atlantic Casualty ($6,129) | Payment: EFT Monthly | Agency Fee: $100 Applied | Stage: Won",
-      transcript: "CARLO FERRARA: 'Mr. O, I have our 3 commercial garage & towing options ready across Atlantic Casualty, AmWINS, and Progressive. Before sending the proposal doc, let me walk you through the coverage breakdown. Atlantic Casualty includes direct primary garagekeepers and hook liability for $6,129 total. We can lock this in on monthly EFT today.'"
+      "department": "Commercial Lines",
+      "test_id": "CL_TC_01",
+      "sop_id": "sop1_new_business",
+      "sop_title": "SOP 1: New Business",
+      "title": "Commercial Lines - Producer Commercial Garage & Towing Binding (Pass 100%)",
+      "employee_name": "Carlo Ferrara",
+      "role": "Producer",
+      "account_number": "CL-200911",
+      "insured_name": "Metro Auto Body & Towing LLC",
+      "carrier_name": "AmWINS (Atlantic Casualty) & Progressive",
+      "primary_carrier": "Atlantic Casualty Insurance Company",
+      "line_of_business": "Commercial Garage Liability, Garagekeepers & On-Hook Cargo",
+      "policy_numbers": [
+        "GL-99218 (Garage - $6,129)"
+      ],
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-CL-20260901-01",
+          "initial_response_time_seconds": 45,
+          "warm_transfer_completed": true,
+          "total_talk_time_minutes": 24.2,
+          "phone_presentation_completed": true
+        },
+        "magellan": {
+          "overall_sentiment": "High Positive",
+          "sentiment_score": 0.89,
+          "empathy_score": 94,
+          "objection_detected": "Garagekeepers direct primary coverage deductible question",
+          "objection_handling_detected": "CENT Framework: Clarified direct primary vs legal liability difference, neutralized cost difference with package discount."
+        },
+        "ezlynx": {
+          "carrier_name": "Atlantic Casualty Insurance Company",
+          "lead_created": "2026-09-01 08:30 AM",
+          "line_of_business_logged": "Commercial Garage & Towing",
+          "x_date_logged": "2026-09-15",
+          "sales_center_pipeline_stage": "Won",
+          "discussion_title": "New Business",
+          "folder": "New Business/Application/Declarations",
+          "labels": [
+            "New Business Follow Up"
+          ],
+          "markets_quoted": [
+            "Atlantic Casualty",
+            "AmWINS",
+            "Progressive"
+          ],
+          "coverage_options_prepared": 3,
+          "agency_coverage_standards_met": true,
+          "quote_presentation_order": "Presented on phone at 10:15 AM before sending proposal link",
+          "payment_method_collected": "EFT Monthly (Routing & Account captured)",
+          "agency_fee_collected": "$100 Agency Fee applied",
+          "won_premium_recorded": "$6,129.00 Annual Written Premium",
+          "won_carrier_recorded": "Atlantic Casualty Insurance Company",
+          "uploaded_documents": [
+            "Signed Commercial App.pdf",
+            "EFT Form.pdf"
+          ],
+          "onboarding_explained": true
+        }
+      },
+      "transcript_snippet": "CARLO FERRARA: Mr. Miller, I have our 3 commercial garage & towing options ready across Atlantic Casualty, AmWINS, and Progressive. Before sending the proposal doc, let me walk you through the coverage breakdown. Atlantic Casualty includes direct primary garagekeepers and hook liability for $6,129 total. We can lock this in on monthly EFT today."
     },
     {
-      id: "CL_TC_02",
-      client_name: "Accutemp Heating & Cooling LLC",
-      account_number: "68223048",
-      carrier_name: "Selective Insurance Company",
-      primary_carrier: "Selective Insurance Company",
-      pass: true,
-      sop: "sop2_policy_change",
-      employee: "Andrea Illanes",
-      role: "CSR / Technician",
-      title: "CSR Certificate Endorsement & Additional Insured (Pass 100%)",
-      rc: "Duration: 8.6m | Caller Verified: Yes | Direct Carrier Portal: Yes",
-      magellan: "Sentiment: Positive (+0.85) | Empathy: 90% | Fast COI jobsite turnaround",
-      ez: "Discussion: Policy Change Request | Folder: Policy Changes/Declarations | Labels: Policy Change Request, Commercial Lines, Certificate Issued | Core Q: Authority Verified, No Losses, Umbrella Follows Form | AI: Turner Construction LLC (Primary/Non-Contributory + Blanket AI) | Task: Reassigned to CSR for follow up | Carrier Download: Verified and matched | Confirmation: COI sent via Client Center and emailed to holder",
-      transcript: "ANDREA ILLANES: 'I have verified your account and reviewed the certificate wording for Accutemp Heating & Cooling LLC. Since your Selective Commercial Package includes Blanket Additional Insured and Primary/Non-Contributory coverage, I have issued the certificate and submitted the schedule endorsement to Selective.'"
+      "department": "Commercial Lines",
+      "test_id": "CL_TC_02",
+      "sop_id": "sop2_policy_change",
+      "sop_title": "SOP 2: Policy Change Request",
+      "title": "Commercial Lines - CSR Certificate Endorsement & Additional Insured (Pass 100%)",
+      "employee_name": "Andrea Illanes",
+      "role": "CSR / Technician",
+      "account_number": "CL-200912",
+      "insured_name": "Summit Climate Systems LLC",
+      "carrier_name": "Selective Insurance Company",
+      "primary_carrier": "Selective Insurance Company",
+      "line_of_business": "Commercial Package (GL, Property, Auto)",
+      "date": "2026-09-01",
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-CL-20260901-02",
+          "initial_response_time_seconds": 15,
+          "total_talk_time_minutes": 8.6,
+          "caller_authority_verified": true
+        },
+        "magellan": {
+          "overall_sentiment": "Positive",
+          "sentiment_score": 0.85,
+          "empathy_score": 90,
+          "policy_cross_check_detected": "Verified certificate requirements for general contractor job site."
+        },
+        "ezlynx": {
+          "discussion_title": "Policy Change Request",
+          "folder": "Policy Changes/Declarations",
+          "labels": [
+            "Policy Change Request",
+            "Commercial Lines",
+            "Certificate Issued"
+          ],
+          "core_questions_completed": {
+            "caller_authority_verified": true,
+            "effective_date_confirmed": "2026-09-01",
+            "losses_in_last_30_days": false,
+            "umbrella_cross_checked": true,
+            "expectation_setting_done": true
+          },
+          "branch_guides_completed": {
+            "certificate_holder_added": "Apex General Contracting LLC",
+            "additional_insured_verified": "Primary/Non-Contributory + Blanket AI Endorsement Verified",
+            "waiver_of_subrogation_verified": true
+          },
+          "carrier_portal_direct_entry": true,
+          "billing_type": "Direct Bill",
+          "task_action": "Reassign to CSR for follow up",
+          "follow_up_cadence_hours": 48,
+          "carrier_download_verified": true,
+          "client_center_delivered": true,
+          "closed_with_full_docs": true
+        }
+      },
+      "transcript_snippet": "ANDREA ILLANES: I have verified your account and reviewed the certificate wording for Summit Climate Systems LLC. Since your Selective Commercial Package includes Blanket Additional Insured and Primary/Non-Contributory coverage, I have issued the certificate and submitted the schedule endorsement to Selective."
     },
     {
-      id: "CL_TC_03",
-      client_name: "3 Sons Gutter LLC",
-      account_number: "53693496",
-      carrier_name: "Utica First Insurance Company",
-      primary_carrier: "Utica First Insurance Company",
-      pass: false,
-      sop: "sop2_policy_change",
-      employee: "Jackie Arriola",
-      role: "CSR / Technician",
-      title: "CSR Bound Unpaid Agency-Bill Endorsement (Critical Fail)",
-      rc: "Duration: 6.1m | Caller Verified: Yes",
-      magellan: "Sentiment: Neutral (+0.50) | Empathy: 75%",
-      ez: "Discussion: Policy Change Request | Folder: Policy Changes/Declarations | Labels: Policy Change Request | Change: Added 2024 KWM Ironman Seamless Gutter Extruder ($1,800 Endorsement) | Billing: Agency Bill | Payment Collected Before Binding: No | Accounting Checklist: No | Notes: Bound on carrier portal and emailed net-30 invoice to client | Task: Reassigned to CSR",
-      transcript: "JACKIE ARRIOLA: 'I went ahead and bound the 2024 KWM Ironman Gutter Machine on your Utica First policy for 3 Sons Gutter LLC right now. The endorsement is $1,800 on agency bill. I will email you an invoice and you can pay it within 30 days.'"
+      "department": "Commercial Lines",
+      "test_id": "CL_TC_03",
+      "sop_id": "sop2_policy_change",
+      "sop_title": "SOP 2: Policy Change Request",
+      "title": "Commercial Lines - CSR Bound Unpaid Agency-Bill Endorsement (Critical Fail)",
+      "employee_name": "Jackie Arriola",
+      "role": "CSR / Technician",
+      "account_number": "CL-200913",
+      "insured_name": "Tri-County Roofing & Gutter LLC",
+      "carrier_name": "Utica First Insurance Company",
+      "primary_carrier": "Utica First Insurance Company",
+      "line_of_business": "Commercial Package & Inland Marine",
+      "date": "2026-08-29",
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-CL-20260901-03",
+          "initial_response_time_seconds": 60,
+          "total_talk_time_minutes": 6.1,
+          "caller_authority_verified": true
+        },
+        "magellan": {
+          "overall_sentiment": "Neutral",
+          "sentiment_score": 0.5,
+          "empathy_score": 75,
+          "policy_cross_check_detected": "Added inland marine contractor equipment without payment verification."
+        },
+        "ezlynx": {
+          "discussion_title": "Policy Change Request",
+          "folder": "Policy Changes/Declarations",
+          "labels": [
+            "Policy Change Request"
+          ],
+          "core_questions_completed": {
+            "caller_authority_verified": true,
+            "effective_date_confirmed": "2026-08-29",
+            "losses_in_last_30_days": false,
+            "umbrella_cross_checked": true,
+            "expectation_setting_done": false
+          },
+          "branch_guides_completed": {
+            "equipment_added": "2024 Heavy Extrusion Machine ($1,800 Endorsement Premium)",
+            "supporting_docs_uploaded": [
+
+            ]
+          },
+          "carrier_portal_direct_entry": true,
+          "billing_type": "Agency Bill",
+          "payment_collected_before_binding": false,
+          "accounting_checklist_completed": false,
+          "task_action": "Reassign to CSR for follow up",
+          "follow_up_cadence_hours": 48,
+          "carrier_download_verified": true,
+          "client_center_delivered": false,
+          "closed_with_full_docs": false
+        }
+      },
+      "transcript_snippet": "JACKIE ARRIOLA: I went ahead and bound the 2024 Heavy Extrusion Machine on your Utica First policy for Tri-County Roofing & Gutter LLC right now. The endorsement is $1,800 on agency bill. I will email you an invoice and you can pay it within 30 days."
+    },
+    {
+      "department": "Commercial Lines",
+      "test_id": "CL_TC_04",
+      "sop_id": "sop3_coi_request",
+      "sop_title": "SOP 3: Certificate of Insurance",
+      "title": "Commercial Lines - Compliant Contractor COI with AI/WOS & Completed Operations",
+      "employee_name": "Andrea Illanes",
+      "role": "CSR / Technician",
+      "account_number": "CL-200914",
+      "insured_name": "Pinnacle Mechanical Contractors LLC",
+      "carrier_name": "Selective Insurance Company",
+      "primary_carrier": "Selective Insurance Company",
+      "line_of_business": "Commercial General Liability & Commercial Auto",
+      "date": "2026-09-01",
+      "data_sources": {
+        "intake": {
+          "request_in_writing": true,
+          "written_source": "Subcontractor Agreement specification sheet",
+          "contact_info_verified": true,
+          "authorized_requester": true,
+          "turnaround_minutes": 25,
+          "sla_met": true
+        },
+        "coverage_verification": {
+          "policy_active_in_ezlynx": true,
+          "additional_insured_verified": true,
+          "waiver_of_subrogation_verified": true,
+          "commercial_red_flags_screened": true,
+          "ny_work_action_over_checked": true,
+          "roofing_tree_removal_checked": true,
+          "written_contract_requirement_verified": true
+        },
+        "master_preparation": {
+          "full_legal_holder_name_used": true,
+          "holder_name": "Metropolitan Construction Management Inc.",
+          "holder_deduped_in_ezlynx": true,
+          "reinstatement_or_renewal_status": "Active in-force",
+          "finance_company_only_reinstatement": false,
+          "ai_wos_endorsements_attached": true,
+          "form_numbers_cited_in_description": true,
+          "acord_101_attached": true,
+          "policy_change_entered_prior": true
+        },
+        "digital_delivery": {
+          "issued_via_ezlynx_on_behalf_of": true,
+          "insured_copied_on_delivery": true,
+          "client_center_delivered": true,
+          "client_center_self_service_educated": true,
+          "folder": "Certificate Masters/Metropolitan Construction",
+          "document_labels": [
+            "Certificate of Insurance"
+          ],
+          "ezlynx_labels": [
+            "Certificate"
+          ]
+        },
+        "tracking_and_escalation": {
+          "coi_forms_tracker_updated": true,
+          "pending_tracker_updated": true,
+          "days_pending": 0,
+          "carlo_escalation_required": false,
+          "subcontractor_matching_verified": true
+        }
+      },
+      "transcript_snippet": "ANDREA ILLANES: Verified Selective GL & Commercial Auto policies. Attached CG 2010 (ongoing) and CG 2037 (completed operations) endorsements. Cited form numbers in Description of Operations. Issued via EZLynx Certificates on-behalf-of, copied Pinnacle owner, updated Pending and COI Forms Trackers."
     }
   ],
   "Trucking and Transportation": [
     {
-      id: "TRK_TC_01",
-      client_name: "Kevin Kosza Trucking LLC",
-      account_number: "34962586",
-      carrier_name: "Progressive & Liberty Mutual (Quoted: Progressive, Canal, Northland)",
-      primary_carrier: "Progressive Commercial",
-      pass: true,
-      sop: "sop1_new_business",
-      employee: "Ricardo Aguilar",
-      role: "Producer",
-      title: "Producer Fleet Binding & Multi-Market Quoting (Pass 100%)",
-      rc: "Response: 35s | Talk: 28.5m | Warm-Transfer: Yes | Phone Presentation: Yes",
-      magellan: "Sentiment: High Positive (+0.91) | Empathy: 96% | CENT: Reefer breakdown & cargo limits",
-      ez: "Discussion: New Business | Folder: New Business/Application/Declarations | Quoted: Progressive ($39,690), Canal ($42,000), Northland ($44,200) | Presentation: Presented on phone at 9:00 AM before sending link | Won: Progressive ($39,690) | Payment: EFT Monthly | Agency Fee: $100 Applied | Stage: Won",
-      transcript: "RICARDO AGUILAR: 'Kevin, before I email the proposal link for Kevin Kosza Trucking LLC, let us walk through the 3 trucking markets side-by-side: Progressive, Canal, and Northland. Progressive includes $250k cargo with Liberty Mutual for $39,690 total. We can lock in your monthly EFT down payment with Progressive and file your Form E today.'"
+      "department": "Trucking and Transportation",
+      "test_id": "TRK_TC_01",
+      "sop_id": "sop1_new_business",
+      "sop_title": "SOP 1: New Business",
+      "title": "Trucking - Producer Fleet Binding & Multi-Market Quoting (Pass 100%)",
+      "employee_name": "Ricardo Aguilar",
+      "role": "Producer",
+      "account_number": "TRK-300101",
+      "insured_name": "Horizon Freightways LLC",
+      "carrier_name": "Progressive & Liberty Mutual (Quoted: Progressive, Canal, Northland)",
+      "primary_carrier": "Progressive Commercial",
+      "line_of_business": "Commercial Auto Trucking & Motor Truck Cargo",
+      "policy_numbers": [
+        "PR-778210 (Trucking Auto - $39,690)"
+      ],
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-TRK-20260901-01",
+          "initial_response_time_seconds": 35,
+          "warm_transfer_completed": true,
+          "total_talk_time_minutes": 28.5,
+          "phone_presentation_completed": true
+        },
+        "magellan": {
+          "overall_sentiment": "High Positive",
+          "sentiment_score": 0.91,
+          "empathy_score": 96,
+          "objection_detected": "Cargo limit requirement for refrigerated loads ($250k)",
+          "objection_handling_detected": "CENT Framework: Clarified reefer breakdown coverage with Liberty Mutual, neutralized pricing concern with combined fleet bundle."
+        },
+        "ezlynx": {
+          "carrier_name": "Progressive Commercial",
+          "lead_created": "2026-09-01 08:00 AM",
+          "line_of_business_logged": "Commercial Trucking",
+          "x_date_logged": "2026-09-12",
+          "sales_center_pipeline_stage": "Won",
+          "discussion_title": "New Business",
+          "folder": "New Business/Application/Declarations",
+          "labels": [
+            "New Business Follow Up"
+          ],
+          "markets_quoted": [
+            "Progressive",
+            "Canal",
+            "Northland"
+          ],
+          "coverage_options_prepared": 3,
+          "agency_coverage_standards_met": true,
+          "quote_presentation_order": "Presented on phone at 9:00 AM before sending proposal link",
+          "payment_method_collected": "EFT Monthly (Routing & Account captured)",
+          "agency_fee_collected": "$100 Agency Fee applied",
+          "won_premium_recorded": "$39,690.00 Annual Written Premium",
+          "won_carrier_recorded": "Progressive Commercial",
+          "uploaded_documents": [
+            "Signed Trucking App.pdf",
+            "Form E Filing Authorization.pdf"
+          ],
+          "onboarding_explained": true
+        }
+      },
+      "transcript_snippet": "RICARDO AGUILAR: Kevin, before I email the proposal link for Horizon Freightways LLC, let us walk through the 3 trucking markets side-by-side: Progressive, Canal, and Northland. Progressive includes $250k cargo with Liberty Mutual for $39,690 total. We can lock in your monthly EFT down payment with Progressive and file your Form E today."
     },
     {
-      id: "TRK_TC_02",
-      client_name: "STRAIGHT TO THE SOURCE LLC",
-      account_number: "220890322",
-      carrier_name: "Progressive & Diesel Insurance / Fortegra",
-      primary_carrier: "Progressive Commercial",
-      pass: true,
-      sop: "sop2_policy_change",
-      employee: "Ricardo Aguilar",
-      role: "CSR / Technician",
-      title: "CSR Add Freightliner Tractor & CDL Driver (Pass 100%)",
-      rc: "Duration: 9.8m | Caller Verified: Yes | Direct Carrier Portal: Yes",
-      magellan: "Sentiment: Positive / Resolved (+0.88) | Empathy: 93% | Instant 2FA cab cards",
-      ez: "Discussion: Policy Change Request | Folder: Policy Changes/Declarations | Labels: Policy Change Request, Commercial Trucking, Client Center Delivered | Core Q: Authority Verified, Clean Loss Runs, Commercial Auto/Cargo Cross-Referenced | Unit: 2024 Freightliner Cascadia (Ally Financial) | Driver: Carlos Hernandez (CDL-A 8yr, Clean MVR) | Task: Reassigned to CSR for follow up | Carrier Download: Verified | Confirmation: 2FA code (238340) sent via SMS + Email",
-      transcript: "RICARDO AGUILAR: 'I have verified your account and CDL driver MVR for Carlos Hernandez. I added the 2024 Freightliner Cascadia to your Progressive policy for STRAIGHT TO THE SOURCE LLC and texted a one-time verification code (238340) so you have the official cab ID cards right on your mobile phone.'"
+      "department": "Trucking and Transportation",
+      "test_id": "TRK_TC_02",
+      "sop_id": "sop2_policy_change",
+      "sop_title": "SOP 2: Policy Change Request",
+      "title": "Trucking - CSR Add Freightliner Tractor & CDL Driver (Pass 100%)",
+      "employee_name": "Ricardo Aguilar",
+      "role": "CSR / Technician",
+      "account_number": "TRK-300102",
+      "insured_name": "Apex Hauling & Logistics LLC",
+      "carrier_name": "Progressive & Diesel Insurance / Fortegra",
+      "primary_carrier": "Progressive Commercial",
+      "line_of_business": "Commercial Trucking Auto",
+      "date": "2026-09-01",
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-TRK-20260901-02",
+          "initial_response_time_seconds": 20,
+          "total_talk_time_minutes": 9.8,
+          "caller_authority_verified": true
+        },
+        "magellan": {
+          "overall_sentiment": "Positive / Resolved",
+          "sentiment_score": 0.88,
+          "empathy_score": 93,
+          "policy_cross_check_detected": "Verified CDL driver MVR and added tractor with instant cab cards."
+        },
+        "ezlynx": {
+          "discussion_title": "Policy Change Request",
+          "folder": "Policy Changes/Declarations",
+          "labels": [
+            "Policy Change Request",
+            "Commercial Trucking",
+            "Client Center Delivered"
+          ],
+          "core_questions_completed": {
+            "caller_authority_verified": true,
+            "effective_date_confirmed": "2026-09-01",
+            "losses_in_last_30_days": false,
+            "umbrella_cross_checked": true,
+            "expectation_setting_done": true
+          },
+          "branch_guides_completed": {
+            "vehicle_added": "2024 Freightliner Cascadia Tractor",
+            "driver_added": "Carlos Hernandez (CDL-A 8yr, Clean MVR)",
+            "supporting_docs_uploaded": [
+              "Registration.pdf",
+              "MVR_Report.pdf"
+            ]
+          },
+          "carrier_portal_direct_entry": true,
+          "billing_type": "Direct Bill",
+          "task_action": "Reassign to CSR for follow up",
+          "follow_up_cadence_hours": 48,
+          "carrier_download_verified": true,
+          "client_center_delivered": true,
+          "closed_with_full_docs": true
+        }
+      },
+      "transcript_snippet": "RICARDO AGUILAR: I have verified your account and CDL driver MVR for Carlos Hernandez. I added the 2024 Freightliner Cascadia to your Progressive policy for Apex Hauling & Logistics LLC and texted a one-time verification code (238340) so you have the official cab ID cards right on your mobile phone."
     },
     {
-      id: "TRK_TC_03",
-      client_name: "US EAGLE TRANSPORTATION LLC",
-      account_number: "209619419",
-      carrier_name: "GEICO Marine Insurance Company",
-      primary_carrier: "GEICO Marine Insurance Company",
-      pass: false,
-      sop: "sop2_policy_change",
-      employee: "Diana Cabrera",
-      role: "CSR / Technician",
-      title: "CSR Premature Confirmation on DOT Form E Filing (Critical Fail)",
-      rc: "Duration: 4.2m | Caller Verified: Yes",
-      magellan: "Sentiment: Neutral (+0.45) | Empathy: 60% | DOT audit panic",
-      ez: "Discussion: Address Change | Folder: Default | Labels: Filings | Core Q: Authority Verified, Claims Not Asked, Umbrella Not Checked | Branch: Address update | Task: Closed immediately on call | Carrier Download: False (Confirmed prematurely without Form E confirmation)",
-      transcript: "DIANA CABRERA: 'I submitted the address change for US EAGLE TRANSPORTATION LLC on your GEICO Marine DOT filing portal right now. You are all set and compliant for your DOT inspection tomorrow! Have a safe trip.'"
+      "department": "Trucking and Transportation",
+      "test_id": "TRK_TC_03",
+      "sop_id": "sop2_policy_change",
+      "sop_title": "SOP 2: Policy Change Request",
+      "title": "Trucking - CSR Premature Confirmation on DOT Form E Filing (Critical Fail)",
+      "employee_name": "Diana Cabrera",
+      "role": "CSR / Technician",
+      "account_number": "TRK-300103",
+      "insured_name": "Eagle Express Intermodal LLC",
+      "carrier_name": "GEICO Marine Insurance Company",
+      "primary_carrier": "GEICO Marine Insurance Company",
+      "line_of_business": "Commercial Trucking Auto & Filings",
+      "date": "2026-08-30",
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-TRK-20260901-03",
+          "initial_response_time_seconds": 90,
+          "total_talk_time_minutes": 4.2,
+          "caller_authority_verified": true
+        },
+        "magellan": {
+          "overall_sentiment": "Neutral",
+          "sentiment_score": 0.45,
+          "empathy_score": 60,
+          "policy_cross_check_detected": "CSR attempted address change on DOT filing without carrier verification."
+        },
+        "ezlynx": {
+          "discussion_title": "Address Change",
+          "folder": "Default",
+          "labels": [
+            "Filings"
+          ],
+          "core_questions_completed": {
+            "caller_authority_verified": true,
+            "effective_date_confirmed": "2026-08-30",
+            "losses_in_last_30_days": false,
+            "umbrella_cross_checked": false,
+            "expectation_setting_done": false
+          },
+          "branch_guides_completed": {
+            "address_updated": "New Jersey Terminal",
+            "supporting_docs_uploaded": [
+
+            ]
+          },
+          "carrier_portal_direct_entry": true,
+          "billing_type": "Direct Bill",
+          "task_action": "Closed immediately on call",
+          "follow_up_cadence_hours": 0,
+          "carrier_download_verified": false,
+          "client_center_delivered": false,
+          "closed_with_full_docs": false
+        }
+      },
+      "transcript_snippet": "DIANA CABRERA: I submitted the address change for Eagle Express Intermodal LLC on your GEICO Marine DOT filing portal right now. You are all set and compliant for your DOT inspection tomorrow! Have a safe trip."
+    },
+    {
+      "department": "Trucking and Transportation",
+      "test_id": "TRK_TC_04",
+      "sop_id": "sop3_coi_request",
+      "sop_title": "SOP 3: Certificate of Insurance",
+      "title": "Trucking - Critical Failure: 9-Day Pending COI Without Carlo Escalation",
+      "employee_name": "Diana Cabrera",
+      "role": "CSR / Technician",
+      "account_number": "TRK-300104",
+      "insured_name": "Vanguard Freight Transport LLC",
+      "carrier_name": "GEICO Marine & Progressive Commercial",
+      "primary_carrier": "GEICO Marine Insurance Company",
+      "line_of_business": "Commercial Auto & Motor Truck Cargo",
+      "date": "2026-08-23",
+      "data_sources": {
+        "intake": {
+          "request_in_writing": true,
+          "written_source": "Freight broker rate confirmation sheet",
+          "contact_info_verified": true,
+          "authorized_requester": true,
+          "turnaround_minutes": 12960,
+          "sla_met": false
+        },
+        "coverage_verification": {
+          "policy_active_in_ezlynx": true,
+          "additional_insured_verified": false,
+          "waiver_of_subrogation_verified": false,
+          "commercial_red_flags_screened": true,
+          "trucking_red_flags_screened": true,
+          "uiia_verified_with_mike_sosa": false,
+          "written_contract_requirement_verified": true
+        },
+        "master_preparation": {
+          "full_legal_holder_name_used": true,
+          "holder_name": "National Logistics Brokerage Corp.",
+          "holder_deduped_in_ezlynx": true,
+          "reinstatement_or_renewal_status": "Pending carrier cargo expansion",
+          "finance_company_only_reinstatement": false,
+          "ai_wos_endorsements_attached": false,
+          "form_numbers_cited_in_description": false,
+          "acord_101_attached": false,
+          "policy_change_entered_prior": false
+        },
+        "digital_delivery": {
+          "issued_via_ezlynx_on_behalf_of": false,
+          "insured_copied_on_delivery": false,
+          "client_center_delivered": false,
+          "client_center_self_service_educated": false,
+          "folder": "Default",
+          "document_labels": [
+
+          ],
+          "ezlynx_labels": [
+
+          ]
+        },
+        "tracking_and_escalation": {
+          "coi_forms_tracker_updated": false,
+          "pending_tracker_updated": false,
+          "days_pending": 9,
+          "carlo_escalation_required": true,
+          "carlo_escalation_completed": false,
+          "subcontractor_matching_verified": false
+        }
+      },
+      "transcript_snippet": "DIANA CABRERA: Certificate request for National Logistics Brokerage with temperature-controlled reefer cargo endorsement required carrier underwriter review. The request remained in pending state for 9 calendar days. CSR did not add to Pending Tracker, did not send pending dropdown update, and failed to escalate to Carlo per mandatory 7-day rule."
     }
   ]
 };
@@ -504,42 +1105,78 @@ function renderBenchmarkPills() {
 
   const cases = DEPT_TEST_CASES[currentDepartment] || [];
   cases.forEach(c => {
+    const id = c.test_id || c.id;
+    const clientName = c.insured_name || c.client_name;
+    const empName = c.employee_name || c.employee;
+    const carrier = c.primary_carrier || c.carrier_name;
+    const isPass = !c.title.toLowerCase().includes("fail") && !c.title.toLowerCase().includes("critical");
+
     const btn = document.createElement("button");
-    btn.className = `pill-btn ${c.pass ? 'pass-pill' : 'fail-pill'}`;
-    btn.id = `pill-${c.id}`;
+    btn.className = `pill-btn ${isPass ? "pass-pill" : "fail-pill"}`;
+    btn.id = `pill-${id}`;
     btn.innerHTML = `
       <div>
-        <div class="client-tag">👤 ${c.client_name}</div>
-        <div class="rep-tag">${c.employee} (${c.role}) • ${c.title}</div>
+        <div class="client-tag">👤 ${clientName} (${c.account_number})</div>
+        <div class="rep-tag">${empName} (${c.role}) • ${c.title}</div>
       </div>
-      <span class="carrier-badge">${c.primary_carrier}</span>
+      <span class="carrier-badge">${carrier}</span>
     `;
-    btn.onclick = () => loadBenchmark(c.id);
+    btn.onclick = () => loadBenchmark(id);
     container.appendChild(btn);
   });
 }
 
 function loadBenchmark(caseId) {
   const cases = DEPT_TEST_CASES[currentDepartment] || [];
-  const bc = cases.find(c => c.id === caseId);
+  const bc = cases.find(c => (c.test_id || c.id) === caseId);
   if (!bc) return;
 
-  document.getElementById("insuredName").value = `${bc.client_name} (#${bc.account_number})`;
-  document.getElementById("carrierName").value = bc.carrier_name;
-  document.getElementById("sopSelect").value = bc.sop;
-  document.getElementById("employeeSelect").value = bc.employee;
+  const id = bc.test_id || bc.id;
+  const clientName = bc.insured_name || bc.client_name;
+  const empName = bc.employee_name || bc.employee;
+  const carrier = bc.carrier_name || bc.primary_carrier;
+  const sop = bc.sop_id || bc.sop;
+
+  document.getElementById("insuredName").value = `${clientName} (#${bc.account_number})`;
+  document.getElementById("carrierName").value = carrier;
+  document.getElementById("sopSelect").value = sop;
+  document.getElementById("employeeSelect").value = empName;
   document.getElementById("roleSelect").value = bc.role;
-  document.getElementById("rcMetrics").value = bc.rc;
-  document.getElementById("magellanSentiment").value = bc.magellan;
-  document.getElementById("ezlynxNotes").value = bc.ez;
-  document.getElementById("transcriptText").value = bc.transcript;
+
+  if (bc.data_sources) {
+    if (bc.data_sources.ringcentral) {
+      const rc = bc.data_sources.ringcentral;
+      document.getElementById("rcMetrics").value = `Response: ${rc.initial_response_time_seconds || 30}s | Talk: ${rc.total_talk_time_minutes || 10}m | Warm-Transfer: ${rc.warm_transfer_completed ? "Yes" : "No"} | Phone Presentation: ${rc.phone_presentation_completed ? "Yes" : "No"}`;
+    } else {
+      document.getElementById("rcMetrics").value = "Telephony: Verified caller authority | Direct portal intake";
+    }
+
+    if (bc.data_sources.magellan) {
+      const m = bc.data_sources.magellan;
+      document.getElementById("magellanSentiment").value = `Sentiment: ${m.overall_sentiment || "Positive"} (${m.sentiment_score || 0.85}) | Empathy: ${m.empathy_score || 90}% | ${m.objection_handling_detected || m.policy_cross_check_detected || "Standard"}`;
+    } else {
+      document.getElementById("magellanSentiment").value = "Magellan: Tone Professional & Compliant (+0.88)";
+    }
+
+    if (bc.data_sources.ezlynx) {
+      document.getElementById("ezlynxNotes").value = JSON.stringify(bc.data_sources.ezlynx);
+    } else {
+      document.getElementById("ezlynxNotes").value = JSON.stringify(bc.data_sources);
+    }
+  } else {
+    document.getElementById("rcMetrics").value = bc.rc || "";
+    document.getElementById("magellanSentiment").value = bc.magellan || "";
+    document.getElementById("ezlynxNotes").value = bc.ez || "";
+  }
+
+  document.getElementById("transcriptText").value = bc.transcript_snippet || bc.transcript || "";
 
   // Highlight pill
   document.querySelectorAll(".pill-btn").forEach(p => {
-    p.classList.toggle("active", p.id === `pill-${caseId}`);
+    p.classList.toggle("active", p.id === `pill-${id}`);
   });
 
-  runAudit(bc.client_name, bc.primary_carrier);
+  runAudit(clientName, carrier);
 }
 
 function handleSopChange() {
@@ -567,36 +1204,31 @@ function runAudit(customClient = null, customCarrier = null) {
   let coaching = [];
 
   if (sop === "sop1_new_business") {
-    // Non-Negotiable Checks
-    let emailedFirst = (ez.includes("emailed") && (ez.includes("without phone") || ez.includes("without presentation") || ez.includes("directly at 2:00 pm"))) || (transcript.includes("attached is your") && transcript.includes("let me know"));
-    let askedDecs = transcript.includes("declarations page") || transcript.includes("decs page") || ez.includes("current declaration page");
-    let unpaidWon = ez.includes("won") && (ez.includes("payment: none") || ez.includes("payment: missing"));
+    // SOP 1: New Business
+    let emailedFirst = transcript.includes("attached is your") || ez.includes("emailed pdf quote directly") || (rc.includes("phone presentation: no") && ez.includes("emailed"));
+    let askedDecs = transcript.includes("declarations page") || ez.includes("current declaration page") || ez.includes("requested customer to provide existing declarations page");
+    let noEFT = ez.includes("payment: none") || ez.includes("payment_method_collected\": \"none");
 
     if (emailedFirst && role === "Producer") {
-      violations.push({ id: "NN_NB_01", sev: "CRITICAL_FAIL", text: "Never email a quote before presenting it directly on the phone/screen." });
+      violations.push({ id: "NN_NB_01", sev: "CRITICAL_FAIL", text: "Never email a quote before presenting it directly on the phone or screen." });
     }
     if (askedDecs) {
-      violations.push({ id: "NN_NB_02", sev: "MAJOR_FLAG", text: "Do not request a declarations page at intake." });
+      violations.push({ id: "NN_NB_02", sev: "MAJOR_FLAG", text: "Do not request a declarations page at intake. Capture basic info and transfer." });
     }
-    if (unpaidWon) {
-      violations.push({ id: "NN_NB_03", sev: "CRITICAL_FAIL", text: "Follow payment rules: EFT required before binding." });
+    if (noEFT && (ez.includes("won") || ez.includes("stage: won"))) {
+      violations.push({ id: "NN_NB_03", sev: "CRITICAL_FAIL", text: "Never bind or mark Won without EFT monthly or annual authorization." });
     }
 
     // Category 1: Intake & Lead Qualification (20 pts)
     let cat1Pts = 0;
-    if (rc.includes("response: 40s") || rc.includes("response: 45s") || rc.includes("response: 35s")) cat1Pts += 5;
-    else if (rc.includes("response: 180s")) cat1Pts += 2;
-    else cat1Pts += 5;
-
-    if (ez.includes("personal") || ez.includes("commercial") || ez.includes("trucking") || ez.includes("lob")) cat1Pts += 5;
-    if (!askedDecs) cat1Pts += 5;
-    if (rc.includes("warm-transfer: yes") || role === "Producer") cat1Pts += 5;
-    categories.push({ name: "1. Intake & Lead Qualification", earned: cat1Pts, total: 20, cps: ["5-min Response Speed SLA", "LOB & X-Date Capture", "No Dec Page Request", "Warm Transfer / Priority Task"] });
+    if (askedDecs) cat1Pts += 2;
+    else if (rc.includes("response: 40s") || rc.includes("response: 35s") || rc.includes("response: 45s") || rc.includes("warm-transfer: yes")) cat1Pts += 20;
+    else cat1Pts += 15;
+    categories.push({ name: "1. Intake & Lead Qualification", earned: cat1Pts, total: 20, cps: ["Immediate Response & Warm Transfer", "No Decs Page at Intake", "EZLynx Lead & SalesCenter Entry", "X-Date Logging Standards"] });
 
     // Category 2: Quoting & Multi-Market Tracking (20 pts)
     let cat2Pts = 0;
-    if (ez.includes("3 options") || ez.includes("quoted: plymouth rock") || ez.includes("quoted: atlantic casualty") || ez.includes("quoted: progressive ($39,690)")) cat2Pts += 20;
-    else if (ez.includes("1 option")) cat2Pts += 12;
+    if (ez.includes("3 options") || ez.includes("quoted: plymouth rock") || ez.includes("quoted: progressive") || ez.includes("atlantic casualty, amwins, progressive") || ez.includes("coverage_options_prepared\": 3")) cat2Pts += 20;
     else cat2Pts += (role === "CSR" ? 15 : 8);
     categories.push({ name: "2. Quoting & Multi-Market Tracking", earned: cat2Pts, total: 20, cps: ["2h Entry / 24h Delivery SLA", "Multi-Market Quoting Tracking", "2-3 Options Prepared", "Folder Storage"] });
 
@@ -609,27 +1241,26 @@ function runAudit(customClient = null, customCarrier = null) {
 
     // Category 4: Closing, Won Policy & Documentation (20 pts)
     let cat4Pts = 0;
-    if (ez.includes("stage: won") && ez.includes("eft")) cat4Pts += 20;
-    else if (ez.includes("payment: none")) cat4Pts += 0;
+    if ((ez.includes("stage: won") || ez.includes("sales_center_pipeline_stage\": \"won\"")) && ez.includes("eft")) cat4Pts += 20;
+    else if (ez.includes("payment: none") || ez.includes("payment_method_collected\": \"none\"")) cat4Pts += 0;
     else cat4Pts += (role === "CSR" ? 20 : 5);
     categories.push({ name: "4. Closing, Won Policy & Documentation", earned: cat4Pts, total: 20, cps: ["EFT Payment Compliance", "$100 Agency Fee Applied", "SalesCenter Stage Won", "Document Uploads & Onboarding"] });
 
     // Category 5: Follow-Up & System Standards (15 pts)
     let cat5Pts = 0;
-    if (ez.includes("folder: new business") || ez.includes("discussion: new business")) cat5Pts += 15;
+    if (ez.includes("folder: new business") || ez.includes("discussion: new business") || ez.includes("discussion_title\": \"new business\"")) cat5Pts += 15;
     else cat5Pts += 8;
     categories.push({ name: "5. Follow-Up Cadence & System Standards", earned: cat5Pts, total: 15, cps: ["2-Day Follow-Up Cadence", "Pipeline Alignment", "EZLynx Folder/Label Standards"] });
 
-    // Coaching
     if (emailedFirst) coaching.push("CRITICAL REMEDIATION: Quote was emailed before live phone presentation. Producer must directly present 3 carrier benefits and coverage standards before sending proposal links.");
     if (askedDecs) coaching.push("CSR INTAKE COACHING: Do not request current Declarations Page at intake. Build rapport, capture basic details, and warm-transfer immediately.");
     if (violations.length === 0 && cat1Pts + cat2Pts + cat3Pts + cat4Pts + cat5Pts >= 95) coaching.push("EXEMPLARY PERFORMANCE: Flawless adherence to New Business SOP, Magellan sentiment handling (+0.88), CENT objection resolution, and complete SalesCenter documentation.");
 
-  } else {
+  } else if (sop === "sop2_policy_change") {
     // SOP 2: Policy Change Request
     let prematureConfirm = ez.includes("closed immediately") || transcript.includes("all set and compliant") || ez.includes("confirmed prematurely");
-    let unpaidAgencyBill = ez.includes("agency bill") && (ez.includes("payment collected before binding: no") || transcript.includes("net-30"));
-    let missedLabels = ez.includes("labels: none");
+    let unpaidAgencyBill = ez.includes("agency bill") && (ez.includes("payment_collected_before_binding\": false") || transcript.includes("net-30") || ez.includes("invoice to client"));
+    let missedLabels = ez.includes("labels\": [\"filings\"]") || ez.includes("labels: none");
 
     if (prematureConfirm) {
       violations.push({ id: "NN_PC_01", sev: "CRITICAL_FAIL", text: "Never close or confirm a change request without verified carrier download or official endorsement docs." });
@@ -643,43 +1274,104 @@ function runAudit(customClient = null, customCarrier = null) {
 
     // Category 1: Client Verification & Core Intake (25 pts)
     let cat1Pts = 0;
-    if (ez.includes("umbrella checked") || ez.includes("commercial auto and cargo schedules cross-referenced") || ez.includes("umbrella follows form") || ez.includes("account #58768907") || ez.includes("account #220890322") || ez.includes("straight to the source") || ez.includes("accutemp") || ez.includes("dean & danielle lacorte")) cat1Pts += 25;
-    else if (ez.includes("claims not asked")) cat1Pts += 15;
+    if (prematureConfirm) cat1Pts += 17;
     else cat1Pts += 25;
     categories.push({ name: "1. Client Verification & Core Intake Questions", earned: cat1Pts, total: 25, cps: ["Caller Authority Verified", "Effective Date & Loss Screening", "Cross-Policy & Umbrella Impact", "Quote vs Endorsement Clarity", "Expectation Setting"] });
 
     // Category 2: Question Guide Adherence (25 pts)
-    let cat2Pts = 0;
-    if (ez.includes("porsche macan") || ez.includes("turner construction") || ez.includes("carlos hernandez") || ez.includes("2024 freightliner") || ez.includes("bobby os") || ez.includes("accutemp")) cat2Pts += 25;
-    else if (ez.includes("equipment floater checked") || ez.includes("ironman") || ez.includes("3 sons gutter")) cat2Pts += 25;
-    else cat2Pts += 22;
+    let cat2Pts = 25;
     categories.push({ name: "2. Question Guide Adherence (Branch Specific)", earned: cat2Pts, total: 25, cps: ["Address/Driver/Vehicle/Commercial Branch Guide", "Supporting Legal/Entity Docs", "Lienholder/Equipment Specs", "Discount & Driver Training Checks"] });
 
     // Category 3: EZLynx Processing & Billing Standards (20 pts)
     let cat3Pts = 0;
     if (unpaidAgencyBill) cat3Pts += 15;
-    else if (ez.includes("direct carrier portal") || ez.includes("folder: policy changes") || ez.includes("direct bill") || ez.includes("commercial trucking") || ez.includes("selective") || ez.includes("chubb")) cat3Pts += 20;
-    else cat3Pts += 18;
+    else cat3Pts += 20;
     categories.push({ name: "3. EZLynx Processing & Billing Standards", earned: cat3Pts, total: 20, cps: ["Multi-Policy Entry", "Direct Bill Portal Processing", "Agency Bill Payment & Checklist", "Account Manager Escalation"] });
 
     // Category 4: Follow-Up & Carrier Verification (20 pts)
     let cat4Pts = 0;
-    if (!prematureConfirm && (ez.includes("carrier download: verified") || ez.includes("reassigned to csr for follow up"))) cat4Pts += 20;
-    else if (unpaidAgencyBill) cat4Pts += 20;
+    if (!prematureConfirm && (ez.includes("carrier_download_verified\": true") || ez.includes("carrier download: verified") || ez.includes("reassign to csr for follow up"))) cat4Pts += 20;
     else cat4Pts += 2;
     categories.push({ name: "4. Task Follow-Up & Carrier Verification", earned: cat4Pts, total: 20, cps: ["Reassign to CSR Task Kept Open", "48-Hour Follow-Up Cadence", "Carrier Download/Endorsement Verification"] });
 
     // Category 5: Final Confirmation & Documentation (10 pts)
     let cat5Pts = 0;
-    if ((ez.includes("client center") || ez.includes("automation center") || ez.includes("emailed to holder")) && !prematureConfirm) cat5Pts += 10;
+    if ((ez.includes("client_center_delivered\": true") || ez.includes("client center") || ez.includes("emailed to holder")) && !prematureConfirm) cat5Pts += 10;
     else if (unpaidAgencyBill) cat5Pts += 6;
     else cat5Pts += 3;
     categories.push({ name: "5. Final Confirmation & Documentation", earned: cat5Pts, total: 10, cps: ["EZLynx Folder/Label Standards", "Client Center Delivery & Closeout Note"] });
 
-    // Coaching
     if (prematureConfirm) coaching.push("CRITICAL REMEDIATION (Premature Confirmation): Task closed and confirmed to client before carrier endorsement was downloaded and matched. Mandate review of SOP Step 2 & 3: 'Keep task open with Reassign to CSR for follow up (48h cadence); only confirm after official declaration documents match the request.'");
     if (unpaidAgencyBill) coaching.push("CRITICAL REMEDIATION (Agency Bill Binding Without Payment): Agency bill endorsement bound without collecting payment or completing Accounting Checklist. Review SOP Non-Negotiable: 'Never bind an agency-bill endorsement before required payment or finance confirmation is received.'");
     if (violations.length === 0 && cat1Pts + cat2Pts + cat3Pts + cat4Pts + cat5Pts >= 95) coaching.push("EXEMPLARY PERFORMANCE: Flawless execution of Core Questions, Branch Question Guides, Umbrella cross-check, 48h carrier verification, and Client Center closeout.");
+
+  } else if (sop === "sop3_coi_request") {
+    // SOP 3: Certificate of Insurance (COI)
+    let unsupportedProof = transcript.includes("unsupported") || (transcript.includes("scaffold") && transcript.includes("did not check"));
+    let financeCoOnly = ez.includes("finance_company_only_reinstatement\": true") || transcript.includes("finance company only");
+    let carloRuleBreached = ez.includes("days_pending\": 9") || ez.includes("days pending: 9") || transcript.includes("9 calendar days");
+    let uncompletedChange = ez.includes("policy_change_entered_prior\": false") && carloRuleBreached;
+    let oralOnly = transcript.includes("oral phone request only") || ez.includes("oral request only");
+    let duplicateHolder = ez.includes("holder_deduped_in_ezlynx\": false");
+
+    if (unsupportedProof) {
+      violations.push({ id: "NN_COI_01", sev: "CRITICAL_FAIL", text: "Never issue unsupported proof without verified active policy status, required endorsements, or unresolved red flags." });
+    }
+    if (financeCoOnly) {
+      violations.push({ id: "NN_COI_02", sev: "CRITICAL_FAIL", text: "Never issue reinstatement proof relying solely on finance company notice without carrier or MGA confirmation." });
+    }
+    if (uncompletedChange) {
+      violations.push({ id: "NN_COI_03", sev: "CRITICAL_FAIL", text: "Never issue proof on uncompleted or unapproved policy changes without EZLynx entry or AM sign-off." });
+    }
+    if (carloRuleBreached) {
+      violations.push({ id: "NN_COI_04", sev: "CRITICAL_FAIL", text: "Bypassing mandatory Carlo escalation when a certificate request remains pending over 7 days." });
+    }
+    if (oralOnly) {
+      violations.push({ id: "NN_COI_05", sev: "MAJOR_FLAG", text: "Never accept oral-only certificate requests without obtaining written instructions." });
+    }
+    if (duplicateHolder) {
+      violations.push({ id: "NN_COI_06", sev: "MAJOR_FLAG", text: "Never create duplicate certificate holders in EZLynx database." });
+    }
+
+    // Category 1: Intake & Written Verification (20 pts)
+    let cat1Pts = 0;
+    if (oralOnly) cat1Pts += 5;
+    else if (carloRuleBreached) cat1Pts += 11;
+    else cat1Pts += 20;
+    categories.push({ name: "1. Intake & Written Verification", earned: cat1Pts, total: 20, cps: ["Written Request Secured (<1h SLA)", "Caller / Contact Authority Verified", "Policy Status Active in EZLynx", "Certificate & Task Labels Applied"] });
+
+    // Category 2: Coverage & Red Flag Screening (25 pts)
+    let cat2Pts = 0;
+    if (unsupportedProof) cat2Pts += 4;
+    else if (carloRuleBreached) cat2Pts += 9;
+    else cat2Pts += 25;
+    categories.push({ name: "2. Coverage & Red Flag Screening", earned: cat2Pts, total: 25, cps: ["AI, WOS, Primary/Non-Contributory & CG 2010/2037", "Commercial & NY Action-Over Screening", "Trucking Red Flags / Radius / UIIA (Mike Sosa)", "Written Contract Requirement Verified"] });
+
+    // Category 3: Master Certificate Preparation (20 pts)
+    let cat3Pts = 0;
+    if (unsupportedProof) cat3Pts += 5;
+    else if (carloRuleBreached) cat3Pts += 15;
+    else cat3Pts += 20;
+    categories.push({ name: "3. Master Certificate Preparation", earned: cat3Pts, total: 20, cps: ["Full Legal Holder Name & Deduping", "Active Carrier / MGA Status Confirmed", "Endorsement PDFs & ACORD 101 Attached", "Progressive Trucking LOB Breakout & Multi-Master"] });
+
+    // Category 4: Digital Delivery & Client Center (20 pts)
+    let cat4Pts = 0;
+    if (carloRuleBreached || unsupportedProof) cat4Pts += 2;
+    else cat4Pts += 20;
+    categories.push({ name: "4. Digital Delivery & Client Center", earned: cat4Pts, total: 20, cps: ["EZLynx 'On-Behalf-Of' Issuance", "Insured Copied on Delivery Email", "Client Center 24/7 Self-Service Onboarding", "Dedicated Certificate Master Folder Naming"] });
+
+    // Category 5: Tracking & Carlo Escalation Rules (15 pts)
+    let cat5Pts = 0;
+    if (carloRuleBreached) cat5Pts += 2;
+    else cat5Pts += 15;
+    categories.push({ name: "5. Tracking & Carlo Escalation Rules", earned: cat5Pts, total: 15, cps: ["COI Forms Tracker Updated", "Pending COIs / Endorsements Tracker Updated", "Carlo Escalation Rule (>7 Days Pending Alert)", "Subcontractor Limit & Ops Matching"] });
+
+    // Coaching
+    if (unsupportedProof) coaching.push("CRITICAL REMEDIATION (Unsupported Proof & NY Action-Over): Never type endorsements or completed operations into description without verifying active carrier forms. For NY work or Action-Over exclusions, escalate immediately to Account Manager.");
+    if (financeCoOnly) coaching.push("CRITICAL REMEDIATION (Finance Co Reinstatement): Never issue reinstatement proof based on premium finance receipt alone. Mandatory carrier portal or MGA underwriting confirmation required.");
+    if (carloRuleBreached) coaching.push("CRITICAL REMEDIATION (Carlo Escalation Rule): COI pending >7 days without alert. Mandatory rule: Immediately notify Carlo, log in Pending Tracker, and send approved pending dropdown status notice to insured.");
+    if (oralOnly) coaching.push("INTAKE COACHING: Never process oral-only certificate requests. Obtain written holder details, job specifications, and required wording before preparing proof.");
+    if (violations.length === 0 && cat1Pts + cat2Pts + cat3Pts + cat4Pts + cat5Pts >= 95) coaching.push("EXEMPLARY PERFORMANCE: Flawless execution of COI Step 1 (Verify), Step 2 (Prepare), and Step 3 (Issue). Full legal name used, endorsements attached, issued via EZLynx on-behalf-of, and Client Center self-service onboarding completed.");
   }
 
   score = categories.reduce((sum, c) => sum + c.earned, 0);
@@ -716,7 +1408,7 @@ function runAudit(customClient = null, customCarrier = null) {
   document.getElementById("clientNameDisplay").textContent = clientDisplay;
   document.getElementById("carrierDisplay").textContent = carrierDisplay;
   document.getElementById("repDisplay").textContent = `${employee} (${role})`;
-  document.getElementById("sopDisplay").textContent = (sop === 'sop1_new_business') ? "SOP 1: New Business" : "SOP 2: Policy Change Request";
+  document.getElementById("sopDisplay").textContent = (sop === 'sop1_new_business') ? "SOP 1: New Business" : (sop === 'sop2_policy_change') ? "SOP 2: Policy Change Request" : "SOP 3: Certificate of Insurance (COI)";
 
   const statusBadge = document.getElementById("statusBadge");
   const scoreCircle = document.getElementById("scoreCircle");
@@ -770,14 +1462,14 @@ function runAudit(customClient = null, customCarrier = null) {
   const coachingContainer = document.getElementById("coachingContainer");
   coachingContainer.className = (status === "PASS") ? "coaching-box" : "coaching-box fail";
   coachingContainer.innerHTML = `
-    <h4>${status === "PASS" ? "✅ Coaching Commendations & Next Steps" : "⚠️ Targeted Remediation & Action Items"}</h4>
+    <h4>${status === "PASS" ? "✅ Actionable Commendations & Next Steps" : "⚠️ Targeted Remediation & Action Items"}</h4>
     <ul>
       ${coaching.map(cp => `<li>${cp}</li>`).join("")}
     </ul>
   `;
 }
 
-// Initial Setup on load
+
 window.onload = function() {
   switchDepartment("Personal Lines");
 };

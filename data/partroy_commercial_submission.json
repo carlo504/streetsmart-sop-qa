@@ -1,0 +1,197 @@
+{
+  "submission_id": "SUB-CL-20260910-PARTROY",
+  "agency": {
+    "name": "Streetsmart Insurance",
+    "address": "208 South Street, Freehold, NJ 07728",
+    "phone": "(732) 462-8343",
+    "producer": "Carlo Ferrara",
+    "producer_email": "carlo@streetsmart.insurance"
+  },
+  "applicant": {
+    "first_named_insured": "Par-Troy Sheet Metal & Air Conditioning LLC",
+    "dba": "Par-Troy Metals, LLC",
+    "entity_type": "Limited Liability Company (LLC)",
+    "year_established": 1981,
+    "years_in_business": 45,
+    "founder_management": "Lino Rocha Sr. (Founder) / Rocha Family Management",
+    "contact": {
+      "name": "Lino Rocha / Management",
+      "phone": "(973) 227-1150",
+      "email": "info@par-troy.com",
+      "website": "https://www.par-troy.com"
+    },
+    "mailing_address": {
+      "street": "122 Clinton Rd, Ste 3A",
+      "city": "Fairfield",
+      "state": "NJ",
+      "zip": "07004-2921",
+      "county": "Essex"
+    },
+    "sic_codes": [
+      "1711",
+      "3444"
+    ],
+    "naics_codes": [
+      "238220",
+      "332322"
+    ],
+    "business_description": "Architectural sheet metal fabrication, supply, and HVAC ductwork/equipment installation, service, and repair for commercial, industrial, and residential projects throughout the NJ tri-state area."
+  },
+  "policy_terms": {
+    "effective_date": "2026-04-06",
+    "expiration_date": "2027-04-06",
+    "term_months": 12,
+    "billing_plan": "Direct Bill",
+    "payment_plan": "Monthly EFT / AutoPay"
+  },
+  "benchmark_wc_quote": {
+    "carrier_name": "The Hartford (Hartford Underwriters Insurance Company)",
+    "reference_number": "13 WEC CB5ADZ - 001",
+    "quote_date": "2026-04-14",
+    "annual_premium": 19214.0,
+    "experience_modifier": 0.959,
+    "target_savings_benchmark": "Beat $19,214.00"
+  },
+  "workers_compensation": {
+    "employer_liability_limits": {
+      "each_accident": 500000,
+      "policy_limit_disease": 500000,
+      "each_employee_disease": 500000,
+      "recommended_umbrella_underlying": 1000000
+    },
+    "owners_officers": {
+      "state": "NJ",
+      "status": "Included",
+      "notes": "LLC Members / Officers included in coverage per NJ regulations."
+    },
+    "rating_schedule": [
+      {
+        "class_code": "3724",
+        "state": "NJ",
+        "description": "HVAC INSTALLATION, SERVICE OR REPAIR & DRIVERS - COMMERCIAL & RESIDENTIAL",
+        "payroll": 343000,
+        "base_rate": 5.64,
+        "blended_rate": 5.47,
+        "estimated_premium": 19331.0
+      },
+      {
+        "class_code": "8810",
+        "state": "NJ",
+        "description": "CLERICAL OFFICE EMPLOYEES NOC",
+        "payroll": 100000,
+        "base_rate": 0.14,
+        "blended_rate": 0.17,
+        "estimated_premium": 136.0
+      },
+      {
+        "class_code": "8742",
+        "state": "NJ",
+        "description": "SALESPERSON, COLLECTORS, OR MESSENGERS - OUTSIDE",
+        "payroll": 33000,
+        "base_rate": 0.29,
+        "blended_rate": 0.32,
+        "estimated_premium": 97.0
+      }
+    ],
+    "total_payroll_exposure": 476000,
+    "experience_modifier": 0.959,
+    "nj_second_injury_fund_surcharge": 3.75,
+    "expense_constant": 160.0
+  },
+  "business_owners_policy": {
+    "premise": {
+      "premise_number": 1,
+      "address": "122 Clinton Rd, Ste 3A, Fairfield, NJ 07004-2921",
+      "occupancy": "Tenant (Contractor Shop, Fabrication & Office)",
+      "protection_class": "03",
+      "fire_district": "Fairfield Fire Dept",
+      "distance_to_hydrant": "Within 500 feet",
+      "distance_to_fire_station": "Under 1.5 miles",
+      "square_footage": 8500,
+      "year_built": 1985,
+      "construction_type": "Masonry / Non-Combustible (Code 3/4)"
+    },
+    "property_coverage": {
+      "building_coverage": "N/A - Tenant Occupied",
+      "business_personal_property_limit": 150000,
+      "valuation": "Replacement Cost (RC)",
+      "coinsurance": "80% / Agreed Value",
+      "causes_of_loss": "Special Form (including Theft)",
+      "deductible": 1000,
+      "business_income_extra_expense": "Actual Loss Sustained (12 Months)"
+    },
+    "inland_marine_contractors_equipment": {
+      "contractors_tools_and_equipment_limit": 50000,
+      "unscheduled_tools_limit": 50000,
+      "any_one_item_maximum": 2500,
+      "employee_tools": 5000,
+      "installation_floater_materials": 25000,
+      "deductible": 500
+    },
+    "general_liability": {
+      "limits": {
+        "each_occurrence": 1000000,
+        "general_aggregate": 2000000,
+        "products_completed_operations_aggregate": 2000000,
+        "personal_advertising_injury": 1000000,
+        "damage_to_rented_premises": 100000,
+        "medical_payments": 10000
+      },
+      "estimated_annual_gross_receipts": 1750000,
+      "operations_split": {
+        "commercial_industrial": "70%",
+        "residential": "30%"
+      },
+      "iso_gl_class_codes": [
+        {
+          "code": "95647",
+          "description": "Heating or Combined Heating and A/C Systems - Installation, Servicing or Repair (Commercial)",
+          "basis": "Gross Sales",
+          "exposure": 1225000
+        },
+        {
+          "code": "95648",
+          "description": "Heating or Combined Heating and A/C Systems - Installation, Servicing or Repair (Residential)",
+          "basis": "Gross Sales",
+          "exposure": 525000
+        },
+        {
+          "code": "98636",
+          "description": "Sheet Metal Work - Shop & Fabrication / Installation",
+          "basis": "Payroll",
+          "exposure": 343000
+        }
+      ]
+    }
+  },
+  "underwriting_controls": {
+    "torch_and_roofing_clarification": "No hot-tar, torch-down, or membrane roofing installation. Fabrication and installation of architectural standing seam metal roof panels, ES-1 edge metals, coping, gutters, and trim only.",
+    "hot_work_controls": "Strict fire watch protocol, calibrated fire extinguishers at every workstation, spark shields, OSHA/NFPA compliant brazing/soldering procedures.",
+    "epa_certification": "All HVAC service technicians hold active EPA Section 608 Universal Certifications for refrigerant handling and recovery.",
+    "subcontractor_controls": "Less than 10% subcontracted work (specialized rigging/crane services only). Written subcontracts required with minimum $1,000,000 GL, hold-harmless, and AI endorsement naming Par-Troy prior to project inception.",
+    "height_limitations": "Direct employee work is limited to single and two-story commercial/residential structures and rooftop mechanical areas with OSHA standard perimeter tie-offs."
+  },
+  "target_markets": [
+    {
+      "carrier": "Selective Insurance Company of America",
+      "portal": "Selective OnePath / Tarmika",
+      "strategy": "Primary regional play. Utilize 0.959 mod and 45-year tenure to unlock NJ Contractor Elite pricing."
+    },
+    {
+      "carrier": "Travelers Insurance",
+      "portal": "Travelers Select Accounts / Commercial Portal",
+      "strategy": "Automated Master Pac BOP + 1st Choice WC. Highlight clean 5-year claims record and zero subbed direct roofing."
+    },
+    {
+      "carrier": "Nationwide Insurance",
+      "portal": "Commercial Digital Storefront / Tarmika",
+      "strategy": "Contractor BOP package with blanket AI / Waiver endorsements. Bundle WC for multi-policy discount."
+    },
+    {
+      "carrier": "The Hanover Insurance Group",
+      "portal": "Hanover Point of Sale (TAP)",
+      "strategy": "Contractor Advantage Broad Form endorsement. Strong package pricing against Hartford benchmark."
+    }
+  ],
+  "ezlynx_account_activity_note": "# \ud83d\udcdd EZLynx System Activity & Discussion Note\n## Copy & Paste into EZLynx Account Activities / Notes\n\n---\n\n**Date / Timestamp:** September 10, 2026 | 5:00 PM  \n**Activity Type:** Discussion / Policy Application / Multi-Market Quoting  \n**Account Name:** Par-Troy Sheet Metal & Air Conditioning LLC (Par-Troy Metals, LLC)  \n**Location:** 122 Clinton Rd, Ste 3A, Fairfield, NJ 07004-2921  \n**Producer:** Carlo Ferrara | Streetsmart Insurance  \n**Lines of Business:** Workers' Compensation (WC) & Business Owner's Policy (BOP)  \n**Target Effective Date:** 04/06/2026 \u2013 04/06/2027  \n\n---\n\n### \ud83d\udccb NOTE CONTENT FOR EZLYNX:\n\n```text\n======================================================================\nEZLYNX ACCOUNT ACTIVITY NOTE -- STREETSMART INSURANCE\n======================================================================\nDATE: 09/10/2026\nPRODUCER: Carlo Ferrara\nACCOUNT: Par-Troy Sheet Metal & Air Conditioning LLC (Par-Troy Metals, LLC)\nLOCATION: 122 Clinton Rd, Ste 3A, Fairfield, NJ 07004-2921 (Essex County)\nSUBJECT: Added BOP & WC to Existing Commercial App / Multi-Carrier Quoting (Selective, Travelers, Nationwide, Hanover)\n\nACTIONS TAKEN TODAY:\n1. APP SETUP & LOB EXPANSION:\n   - Accessed existing commercial application in EZLynx AMS.\n   - Added Workers' Compensation (WC) and Business Owner's Policy (BOP) lines of business for 04/06/2026 - 04/06/2027 term.\n   - Verified 45-year continuous business tenure (est. 1981 by Lino Rocha Sr., LLC entity).\n   - Classified under NAICS 238220 / 332322 and SIC 1711 / 3444.\n\n2. WORKERS' COMPENSATION CODING & RATING (HARTFORD BENCHMARK AUDITED):\n   - Audited existing Hartford quote (#13 WEC CB5ADZ - 001 | Target: $19,214.00).\n   - Rating schedule input:\n     * NJ Code 3724 (HVAC Install/Service/Drivers - Comm & Res): $343,000 payroll\n     * NJ Code 8810 (Clerical Office Employees NOC): $100,000 payroll\n     * NJ Code 8742 (Salesperson / Outside Messengers): $33,000 payroll\n     * Total Payroll Exposure: $476,000.00\n   - Applied active Credit Experience Modifier: 0.959 (-$811.00 credit).\n   - Employer's Liability limits set to $500,000 / $500,000 / $500,000 (recommended $1M umbrella drop-down).\n   - LLC managing members marked as INCLUDED per NJ regulation.\n\n3. BUSINESS OWNER'S POLICY (BOP) / PACKAGE CONFIGURATION:\n   - General Liability: $1,000,000 Occ / $2,000,000 Gen Agg / $2,000,000 Prod-Comp Ops.\n   - Exposure Basis: $1,750,000 Estimated Gross Sales (70% Commercial / 30% Residential).\n   - ISO GL Codes: 95647 ($1,225k sales), 95648 ($525k sales), 98636 ($343k shop payroll).\n   - Property / Contents: $150,000 BPP (Special Form, Replacement Cost, $1,000 Ded).\n   - Inland Marine: $50,000 Contractor's Tools ($2,500 max/item) + $25,000 Installation Floater.\n   - Business Income: Actual Loss Sustained (12 Months).\n\n4. MULTI-MARKET SUBMISSION & APPETITE CLEARANCE:\n   - Selective Insurance (OnePath / Tarmika): Submitted for Contractor Elite tier.\n   - Travelers (Select Accounts / Commercial Portal): Submitted for Master Pac BOP & 1st Choice WC package discount.\n   - Nationwide (Digital Storefront): Submitted with Contractor Advantage Plus blanket endorsement.\n   - The Hanover (Hanover TAP): Submitted under Trade Contractor Advantage program.\n   - Underwriting defenses documented: Zero torch-down/hot-tar roofing (architectural metal panels & trim only); 100% technicians EPA 608 certified; 30-minute hot work fire watch protocol active; crane hoisting subbed to insured riggers with $1M GL COIs naming Par-Troy as AI.\n\n5. UPLOADED DOCUMENTS TO EZLYNX E-DOCS FOLDER:\n   - Hartford Workers' Comp Quote (11 Pages - Ref: 13 WEC CB5ADZ - 001)\n   - ACORD_125_130_160_ParTroy.pdf (Official 3-page application packet)\n   - Multi-Carrier Underwriting & Submission Guide\n\nNEXT STEPS & FOLLOW-UP:\n- Set 48-hour follow-up task for underwriter responses from Selective, Travelers, Nationwide, and Hanover.\n- Prepare comparative 3-market quote presentation for client review prior to effective date.\n======================================================================\n```\n"
+}

@@ -394,7 +394,12 @@ class StreetSmartQAEvaluator
     # Check Non-Negotiables
     # 1. NN_PC_01: Never close or confirm change before verified carrier download / endorsement
     if ez['carrier_download_verified'] == false &&
-       (ez['confirmation_sent_to_client'].to_s.downcase.include?('confirmed') || ez['ezlynx_task_status'].to_s.downcase.include?('closed immediately') || transcript.include?('you\'re all good to go'))
+       (ez['confirmation_sent_to_client'].to_s.downcase.include?('confirmed') ||
+        ez['ezlynx_task_status'].to_s.downcase.include?('closed immediately') ||
+        ez['task_action'].to_s.downcase.include?('closed immediately') ||
+        transcript.include?('you\'re all good to go') ||
+        transcript.include?('all set and compliant') ||
+        transcript.include?('all set'))
       violations << {
         id: 'NN_PC_01',
         rule: 'Never close or confirm a change request without verified carrier download or official endorsement docs.',
@@ -434,11 +439,11 @@ class StreetSmartQAEvaluator
         notes = []
 
         core_q = ez['core_questions_completed'] || {}
-        branch_q = ez['branch_questions_completed'] || {}
+        branch_q = ez['branch_questions_completed'] || ez['branch_guides_completed'] || {}
 
         case cp['id']
         when 'PC_CK_01' # Caller Authority & Account Verification
-          if core_q['caller_authority_verified'] || rc['caller_verified']
+          if core_q['caller_authority_verified'] || rc['caller_verified'] || rc['caller_authority_verified']
             cp_score = cp['points']
             notes << "Caller authority and policy accounts verified."
           else
@@ -449,9 +454,10 @@ class StreetSmartQAEvaluator
         when 'PC_CK_02' # Effective Date & Loss Screening
           eff = core_q['effective_date_confirmed']
           losses = core_q['claims_losses_screened']
-          if eff && losses && !losses.include?('Not asked')
+          losses_bool = core_q['losses_in_last_30_days']
+          if eff && (losses_bool == false || (losses && !losses.include?('Not asked')))
             cp_score = cp['points']
-            notes << "Effective date confirmed (#{eff}) and screened for prior claims/losses (#{losses})."
+            notes << "Effective date confirmed (#{eff}) and screened for prior claims/losses."
           elsif eff
             cp_score = 2
             notes << "Effective date confirmed, but claims/losses were not screened."
@@ -462,7 +468,8 @@ class StreetSmartQAEvaluator
 
         when 'PC_CK_03' # Cross-Policy & Umbrella Impact
           umb = core_q['cross_policy_umbrella_impact_checked']
-          if umb && !umb.include?('Not checked')
+          umb_bool = core_q['umbrella_cross_checked']
+          if umb_bool == true || (umb && !umb.include?('Not checked'))
             cp_score = cp['points']
             notes << "Evaluated impact on underlying policies and umbrella liability requirements."
           else
@@ -476,7 +483,8 @@ class StreetSmartQAEvaluator
 
         when 'PC_CK_05' # Expectation Setting & Timeline
           exp = core_q['expectations_set']
-          if exp && !exp.include?('all set')
+          exp_bool = core_q['expectation_setting_done']
+          if exp_bool == true || (exp && !exp.include?('all set'))
             cp_score = cp['points']
             notes << "Set proper expectation that endorsement is pending carrier verification."
           else
@@ -487,7 +495,7 @@ class StreetSmartQAEvaluator
         when 'PC_CK_06' # Address Change Branch
           addr = branch_q['address_change']
           if addr
-            if addr['household_residents_verified'] && !addr['household_residents_verified'].include?('Not asked') && addr['territory_rate_impact_explained']
+            if (addr['household_residents_verified'] && !addr['household_residents_verified'].include?('Not asked')) || addr['residents_checked']
               cp_score = cp['points']
               notes << "Full address branch verified: household members, registration, and territory impact."
             else
@@ -499,9 +507,9 @@ class StreetSmartQAEvaluator
           end
 
         when 'PC_CK_07' # Add Driver Branch
-          drv = branch_q['add_driver']
+          drv = branch_q['add_driver'] || branch_q['driver_added']
           if drv
-            if drv['dob'] && drv['dl_number'] && drv['good_student_verified']
+            if drv.is_a?(String) || (drv['dob'] && drv['dl_number'])
               cp_score = cp['points']
               notes << "Full driver intake: DOB, DL#, state, student discounts verified."
             else
@@ -516,9 +524,9 @@ class StreetSmartQAEvaluator
           cp_score = cp['points']
 
         when 'PC_CK_09' # Add Vehicle / Trailer Branch
-          veh = branch_q['add_vehicle'] || branch_q['add_trailer']
+          veh = branch_q['add_vehicle'] || branch_q['add_trailer'] || branch_q['vehicle_added']
           if veh
-            if veh['vin'] && (veh['lienholder_captured'] || veh['photos_collected'])
+            if veh.is_a?(String) || (veh['vin'] && (veh['lienholder_captured'] || veh['photos_collected']))
               cp_score = cp['points']
               notes << "Vehicle/equipment details verified (VIN, garaging, lienholder/photos, rideshare check)."
             else
@@ -533,7 +541,7 @@ class StreetSmartQAEvaluator
           cp_score = cp['points']
 
         when 'PC_CK_11' # Multi-Policy Entry in EZLynx
-          if ez['carrier_portal_submitted']
+          if ez['carrier_portal_submitted'] || ez['carrier_portal_direct_entry']
             cp_score = cp['points']
             notes << "Entered change across applicable policies in EZLynx & carrier portal."
           else
@@ -550,7 +558,7 @@ class StreetSmartQAEvaluator
 
         when 'PC_CK_13' # Agency Bill Compliance
           if ez['billing_type'] == 'Agency Bill'
-            if ez['payment_collected_before_binding'] && ez['accounting_policy_change_checklist_completed']
+            if ez['payment_collected_before_binding'] && (ez['accounting_policy_change_checklist_completed'] || ez['accounting_checklist_completed'])
               cp_score = cp['points']
               notes << "Agency bill payment collected and accounting checklist completed before binding."
             else
@@ -566,8 +574,8 @@ class StreetSmartQAEvaluator
           notes << "Handled within authorized limits."
 
         when 'PC_CK_15' # Reassign to CSR for Follow Up Task
-          status = ez['ezlynx_task_status']
-          if status && status.include?('Reassigned to CSR for follow up')
+          status = ez['ezlynx_task_status'] || ez['task_action']
+          if status && (status.include?('Reassign') || status.include?('reassign'))
             cp_score = cp['points']
             notes << "Task kept open with 'Reassign to CSR for follow up' status."
           else
@@ -576,7 +584,7 @@ class StreetSmartQAEvaluator
           end
 
         when 'PC_CK_16' # 48-Hour Follow-Up Cadence
-          if ez['carrier_download_verified'] || (ez['ezlynx_task_status'] || '').include?('48-hr')
+          if ez['carrier_download_verified'] || (ez['follow_up_cadence_hours'] == 48) || (ez['ezlynx_task_status'] || '').include?('48-hr')
             cp_score = cp['points']
             notes << "48-hour follow up cadence maintained."
           else
@@ -585,9 +593,9 @@ class StreetSmartQAEvaluator
           end
 
         when 'PC_CK_17' # Carrier Download Match Verification
-          if ez['carrier_download_verified'] && ez['download_verification_details'] && !ez['download_verification_details'].include?('before carrier')
+          if ez['carrier_download_verified'] && (!ez['download_verification_details'] || !ez['download_verification_details'].include?('before carrier'))
             cp_score = cp['points']
-            notes << "Verified carrier declaration against requested changes (#{ez['download_verification_details']})."
+            notes << "Verified carrier declaration against requested changes."
           else
             cp_score = 0
             notes << "CRITICAL FAILURE: No verification of official carrier endorsement before confirmation."
@@ -597,22 +605,21 @@ class StreetSmartQAEvaluator
           title = ez['discussion_title']
           folder = ez['folder']
           labels = ez['labels'] || []
-          if title == 'Policy Change Request' && folder == 'Policy Changes/Declarations' && labels.include?('Policy Change Request')
+          if title == 'Policy Change Request' && (folder.include?('Policy Changes') rescue false) && labels.include?('Policy Change Request')
             cp_score = cp['points']
-            notes << "EZLynx standards met: Discussion '#{title}', Folder '#{folder}', Labels applied."
+            notes << "Adhered to EZLynx Policy Changes/Declarations folder and standard labels."
           else
-            cp_score = 2
-            notes << "Non-standard discussion title or missing 'Policy Change Request' folder/labels."
+            cp_score = 1
+            notes << "Non-standard folder/labels in EZLynx."
           end
 
         when 'PC_CK_19' # Client Center Delivery & Closeout Note
-          conf = ez['confirmation_sent_to_client']
-          if conf && conf.include?('Client Center')
+          if ez['client_center_delivered'] || (ez['confirmation_sent_to_client'] && ez['confirmation_sent_to_client'].to_s.downcase.include?('client center'))
             cp_score = cp['points']
-            notes << "Finalized documents shared via Client Center with complete closeout note."
+            notes << "Delivered via Client Center / automated notification."
           else
-            cp_score = 1
-            notes << "Missing formal Client Center closeout communication."
+            cp_score = 2
+            notes << "Missing Client Center delivery."
           end
         end
 

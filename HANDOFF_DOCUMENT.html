@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>StreetSmart SOP QA System — Complete Project Handoff Document</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #1f2937;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  h1 { color: #1e3a8a; border-bottom: 3px solid #3b82f6; padding-bottom: 8px; }
+  h2 { color: #1e40af; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; margin-top: 30px; }
+  h3 { color: #2563eb; margin-top: 20px; }
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  th, td { border: 1px solid #d1d5db; padding: 10px 12px; text-align: left; }
+  th { background-color: #f3f4f6; font-weight: 600; color: #111827; }
+  tr:nth-child(even) { background-color: #f9fafb; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-weight: 600; font-size: 12px; }
+  .badge-pass { background-color: #d1fae5; color: #065f46; }
+  .badge-fail { background-color: #fee2e2; color: #991b1b; }
+  .alert-box { background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 12px 16px; margin: 16px 0; border-radius: 0 6px 6px 0; }
+  pre, code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 13px; }
+  pre { background-color: #1f2937; color: #f3f4f6; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  code { background-color: #f3f4f6; color: #b91c1c; padding: 2px 5px; border-radius: 4px; }
+  pre code { background-color: transparent; color: inherit; padding: 0; }
+</style>
+</head>
+<body>
+
+<h1>STREETSMART INSURANCE QA SYSTEM — COMPLETE PROJECT HANDOFF DOCUMENT</h1>
+<p><strong>Document Version:</strong> 2.0 &nbsp;|&nbsp; <strong>Date:</strong> September 1, 2026 &nbsp;|&nbsp; <strong>System:</strong> StreetSmart AI QA Engineering</p>
+
+<div class="alert-box">
+  <strong>🛡️ Data Sanitization & Privacy Standard:</strong> All datasets, test cases, JSON files, Ruby evaluation scripts, and UI dashboards use <strong>100% synthetic, anonymized demo accounts</strong> (e.g., <em>Alex & Sarah Morgan</em>, <em>Metro Auto Body & Towing LLC</em>, <em>Apex Hauling & Logistics LLC</em>, <em>Horizon Freightways LLC</em>, <em>Pinnacle Mechanical Contractors LLC</em>). Zero real agency customer PII exists in this codebase.
+</div>
+
+<h2>1. Executive Summary & Architecture</h2>
+<p>The <strong>StreetSmart SOP QA System</strong> is an automated quality assurance evaluation engine and interactive management dashboard designed to audit, score, and provide actionable coaching for agency workflows across three core Standard Operating Procedures:</p>
+<ol>
+  <li><strong>SOP 1: New Business</strong> (Lead Qualification, 2-3 Market Quoting, CENT Phone Presentation, EFT Binding, SalesCenter).</li>
+  <li><strong>SOP 2: Policy Change Requests</strong> (Authority Verification, Category Question Guides, EZLynx Processing, 48h Follow-up, Carrier Download Match).</li>
+  <li><strong>SOP 3: Certificate of Insurance (COI) Requests</strong> (Written Request Intake, Red Flag Screening, Progressive LOB Breakouts, Dedicated Folders, <strong>Mandatory 7-Day Carlo Escalation Rule</strong>).</li>
+</ol>
+
+<h2>2. Standard Operating Procedures & 100-Point Rubrics</h2>
+
+<h3>SOP 1: New Business</h3>
+<ul>
+  <li><strong>SLA:</strong> 5-min response, 2-hr prepare, 24-hr client delivery.</li>
+  <li><strong>Non-Negotiables:</strong> <code>NN_NB_01</code> Never email quote before phone presentation (Critical Fail); <code>NN_NB_02</code> Do not request decs page at intake (Major Flag); <code>NN_NB_03</code> EFT required before binding (Critical Fail).</li>
+  <li><strong>5 Categories:</strong> 1. Intake & Lead Qual (20 pts), 2. Quoting & Multi-Market (20 pts), 3. Phone Presentation & CENT (25 pts), 4. Won Policy & EFT (20 pts), 5. Follow-Up & Systems (15 pts).</li>
+</ul>
+
+<h3>SOP 2: Policy Change Requests</h3>
+<ul>
+  <li><strong>SLA:</strong> Same-day portal entry; 48-hour follow-up cadence until carrier download verification.</li>
+  <li><strong>Non-Negotiables:</strong> <code>NN_PC_01</code> Never close or confirm without verified carrier download (Critical Fail); <code>NN_PC_02</code> Never bind agency-bill endorsement before payment received (Critical Fail); <code>NN_PC_03</code> Never omit task/labels (Major Flag).</li>
+  <li><strong>5 Categories:</strong> 1. Verification & Core Intake (25 pts), 2. Branch Question Guides (25 pts), 3. EZLynx Processing & Billing (20 pts), 4. Follow-Up & Carrier Verification (20 pts), 5. Final Confirmation & Docs (10 pts).</li>
+</ul>
+
+<h3>SOP 3: Certificate of Insurance (COI) Requests</h3>
+<ul>
+  <li><strong>SLA:</strong> &lt;1 hour turnaround from written request.</li>
+  <li><strong>Non-Negotiables:</strong> <code>NN_COI_01</code> Unsupported Proof (Critical Fail); <code>NN_COI_02</code> Finance-Only Reinstatement (Critical Fail); <code>NN_COI_03</code> Uncompleted Changes (Critical Fail); <code>NN_COI_04</code> <strong>Carlo Escalation Failure for &gt;7 Days Pending (Critical Fail)</strong>; <code>NN_COI_05</code> Oral-only Requests (Major Flag); <code>NN_COI_06</code> Duplicate Holder Creation (Major Flag).</li>
+  <li><strong>5 Categories:</strong> 1. Intake & Written Verification (20 pts), 2. Coverage & Red Flag Screening (25 pts), 3. Master Preparation (20 pts), 4. Digital Delivery & Client Center (20 pts), 5. Tracking & Carlo Escalation (15 pts).</li>
+</ul>
+
+<h2>3. Benchmark Department Audit Results Matrix (12 Scenarios)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Department</th>
+      <th>Test ID</th>
+      <th>Fictitious Insured Profile</th>
+      <th>Audited Employee</th>
+      <th>Score</th>
+      <th>Grade</th>
+      <th>Status</th>
+      <th>Key Finding / Root Cause</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Personal Lines</td><td><code>PL_TC_01</code></td><td>Alex & Sarah Morgan</td><td>Jazmin Molina</td><td>100/100</td><td>A+</td><td><span class="badge badge-pass">PASS</span></td><td>Flawless Producer sales presentation & EFT binding</td></tr>
+    <tr><td>Personal Lines</td><td><code>PL_TC_02</code></td><td>David & Lisa Miller</td><td>Amber Voigt</td><td>41/100</td><td>F</td><td><span class="badge badge-fail">CRITICAL FAIL</span></td><td>NN_NB_01: Emailed quote before phone presentation</td></tr>
+    <tr><td>Personal Lines</td><td><code>PL_TC_03</code></td><td>Michael & Elena Vance</td><td>Ana Flores</td><td>100/100</td><td>A+</td><td><span class="badge badge-pass">PASS</span></td><td>HNW vehicle addition with umbrella cross-check</td></tr>
+    <tr><td>Personal Lines</td><td><code>PL_TC_04</code></td><td>Jonathan & Karen Hayes</td><td>Ana Flores</td><td>100/100</td><td>A+</td><td><span class="badge badge-pass">PASS</span></td><td>High-value condo master COI with ACORD 101</td></tr>
+    <tr><td>Commercial Lines</td><td><code>CL_TC_01</code></td><td>Metro Auto Body & Towing LLC</td><td>Carlo Ferrara</td><td>100/100</td><td>A+</td><td><span class="badge badge-pass">PASS</span></td><td>Commercial garagekeepers & towing multi-market quote</td></tr>
+    <tr><td>Commercial Lines</td><td><code>CL_TC_02</code></td><td>Summit Climate Systems LLC</td><td>Andrea Illanes</td><td>100/100</td><td>A+</td><td><span class="badge badge-pass">PASS</span></td><td>Certificate endorsement with blanket AI & primary wording</td></tr>
+    <tr><td>Commercial Lines</td><td><code>CL_TC_03</code></td><td>Tri-County Roofing & Gutter LLC</td><td>Jackie Arriola</td><td>88/100</td><td>F</td><td><span class="badge badge-fail">CRITICAL FAIL</span></td><td>NN_PC_02: Bound unpaid $1,800 agency bill endorsement</td></tr>
+    <tr><td>Commercial Lines</td><td><code>CL_TC_04</code></td><td>Pinnacle Mechanical Contractors</td><td>Andrea Illanes</td><td>100/100</td><td>A+</td><td><span class="badge badge-pass">PASS</span></td><td>GC certificate with CG 2010/2037 completed ops</td></tr>
+    <tr><td>Trucking & Trans</td><td><code>TRK_TC_01</code></td><td>Horizon Freightways LLC</td><td>Ricardo Aguilar</td><td>100/100</td><td>A+</td><td><span class="badge badge-pass">PASS</span></td><td>Fleet multi-market binding & Form E filing auth</td></tr>
+    <tr><td>Trucking & Trans</td><td><code>TRK_TC_02</code></td><td>Apex Hauling & Logistics LLC</td><td>Ricardo Aguilar</td><td>100/100</td><td>A+</td><td><span class="badge badge-pass">PASS</span></td><td>CDL driver MVR verification & Cascadia tractor add</td></tr>
+    <tr><td>Trucking & Trans</td><td><code>TRK_TC_03</code></td><td>Eagle Express Intermodal LLC</td><td>Diana Cabrera</td><td>66/100</td><td>F</td><td><span class="badge badge-fail">CRITICAL FAIL</span></td><td>NN_PC_01: Premature confirmation on DOT Form E filing</td></tr>
+    <tr><td>Trucking & Trans</td><td><code>TRK_TC_04</code></td><td>Vanguard Freight Transport LLC</td><td>Diana Cabrera</td><td>39/100</td><td>F</td><td><span class="badge badge-fail">CRITICAL FAIL</span></td><td>NN_COI_04: 9-day pending COI without Carlo escalation</td></tr>
+  </tbody>
+</table>
+
+<h2>4. CLI Commands & Execution</h2>
+<pre><code># Run all 12 department audits
+cd /Users/carloferrara/.gemini/antigravity/scratch
+ruby engine/run_department_audits.rb
+
+# Run engine test suite (10 unit tests)
+ruby engine/qa_evaluator.rb
+</code></pre>
+
+<h2>5. How to Save / Convert to Google Docs</h2>
+<ol>
+  <li>Open <strong>Google Docs</strong> (<a href="https://docs.google.com" target="_blank">docs.google.com</a>).</li>
+  <li>Create a new doc: <em>"StreetSmart SOP QA System — Complete Project Handoff"</em>.</li>
+  <li>Copy and paste the formatted content directly into Google Docs, or upload <code>HANDOFF_DOCUMENT.html</code> to Google Drive and click <strong>Open with > Google Docs</strong>.</li>
+</ol>
+
+</body>
+</html>

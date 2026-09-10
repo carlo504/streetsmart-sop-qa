@@ -1,0 +1,753 @@
+{
+  "Personal Lines": [
+    {
+      "department": "Personal Lines",
+      "test_id": "PL_TC_01",
+      "sop_id": "sop1_new_business",
+      "sop_title": "SOP 1: New Business",
+      "title": "Personal Lines - Compliant Producer Sales Cycle (Auto, Home & Umbrella Bundle)",
+      "employee_name": "Jazmin Molina",
+      "role": "Producer",
+      "account_number": "PL-100821",
+      "insured_name": "Alex & Sarah Morgan",
+      "carrier_name": "Plymouth Rock & Selective (Quoted: Plymouth Rock, Selective, Travelers)",
+      "primary_carrier": "Plymouth Rock Assurance Corp",
+      "line_of_business": "Personal Auto, Homeowners & Personal Umbrella",
+      "policy_numbers": [
+        "PA-882190 (Auto)",
+        "HO-441029 (Home)",
+        "UMB-10294 (Umbrella)"
+      ],
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-PL-20260901-01",
+          "initial_response_time_seconds": 40,
+          "warm_transfer_completed": true,
+          "total_talk_time_minutes": 18.5,
+          "phone_presentation_completed": true
+        },
+        "magellan": {
+          "overall_sentiment": "High Positive",
+          "sentiment_score": 0.86,
+          "empathy_score": 95,
+          "talk_to_listen_ratio": "45/55",
+          "objection_detected": "Price comparison on auto renewal rate hike",
+          "objection_handling_detected": "CENT Framework: Clarified replacement cost and 500k underlying liability, empathized with rate hike, neutralized with multi-policy bundling package."
+        },
+        "ezlynx": {
+          "carrier_name": "Plymouth Rock Assurance Corp",
+          "lead_created": "2026-09-01 09:15 AM",
+          "line_of_business_logged": "Personal Lines - Auto & Home",
+          "x_date_logged": "2026-09-20",
+          "sales_center_pipeline_stage": "Won",
+          "discussion_title": "New Business",
+          "folder": "New Business/Application/Declarations",
+          "labels": [
+            "New Business Follow Up"
+          ],
+          "markets_quoted": [
+            "Plymouth Rock",
+            "Selective",
+            "Travelers"
+          ],
+          "coverage_options_prepared": 3,
+          "agency_coverage_standards_met": true,
+          "quote_presentation_order": "Presented on phone at 11:30 AM before sending proposal link",
+          "payment_method_collected": "EFT Monthly (Routing & Account captured)",
+          "agency_fee_collected": "$100 Agency Fee applied",
+          "won_premium_recorded": "$9,047.00 Annual Written Premium",
+          "won_carrier_recorded": "Plymouth Rock Assurance Corp",
+          "uploaded_documents": [
+            "Signed Application.pdf",
+            "EFT Authorization.pdf"
+          ],
+          "onboarding_explained": true
+        }
+      },
+      "transcript_snippet": "JAZMIN MOLINA: Alex and Sarah, before I email the proposal link, I want to review the 3 coverage packages we built across Plymouth Rock, Selective, and Travelers. Plymouth Rock gives you full replacement cost on your home, $500k underlying liability on auto to support your Umbrella, and locks in a multi-policy discount on monthly EFT."
+    },
+    {
+      "department": "Personal Lines",
+      "test_id": "PL_TC_02",
+      "sop_id": "sop1_new_business",
+      "sop_title": "SOP 1: New Business",
+      "title": "Personal Lines - Producer Emailed Quote Before Phone Presentation (Critical Fail)",
+      "employee_name": "Amber Voigt",
+      "role": "Producer",
+      "account_number": "PL-100822",
+      "insured_name": "David & Lisa Miller",
+      "carrier_name": "Progressive Insurance",
+      "primary_carrier": "Progressive Insurance",
+      "line_of_business": "Personal Auto",
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-PL-20260901-02",
+          "initial_response_time_seconds": 180,
+          "warm_transfer_completed": false,
+          "total_talk_time_minutes": 1.8,
+          "phone_presentation_completed": false
+        },
+        "magellan": {
+          "overall_sentiment": "Cold / Detached",
+          "sentiment_score": 0.1,
+          "empathy_score": 40,
+          "talk_to_listen_ratio": "70/30",
+          "objection_detected": "Client ghosted after receiving raw email PDF quote",
+          "objection_handling_detected": "None. Quote was emailed without presentation."
+        },
+        "ezlynx": {
+          "carrier_name": "Progressive Insurance",
+          "lead_created": "2026-09-01 10:00 AM",
+          "line_of_business_logged": "Personal Auto",
+          "x_date_logged": "2026-09-18",
+          "sales_center_pipeline_stage": "Quoted",
+          "discussion_title": "Auto Quote",
+          "folder": "Default",
+          "labels": [
+            "Auto Quote"
+          ],
+          "markets_quoted": [
+            "Progressive"
+          ],
+          "coverage_options_prepared": 1,
+          "agency_coverage_standards_met": false,
+          "quote_presentation_order": "Emailed PDF quote directly at 2:00 PM with note Here is the Progressive quote without phone presentation",
+          "payment_method_collected": "None",
+          "agency_fee_collected": "None",
+          "won_premium_recorded": "None",
+          "won_carrier_recorded": "None",
+          "uploaded_documents": [
+
+          ],
+          "onboarding_explained": false
+        }
+      },
+      "transcript_snippet": "EMAIL FROM AMBER VOIGT: Hi David, attached is your Progressive auto quote for $5,807/year. Review the attachment and let me know if you want to bind."
+    },
+    {
+      "department": "Personal Lines",
+      "test_id": "PL_TC_03",
+      "sop_id": "sop2_policy_change",
+      "sop_title": "SOP 2: Policy Change Request",
+      "title": "Personal Lines - CSR High-Net-Worth Endorsement & Umbrella Cross-Check (Pass 100%)",
+      "employee_name": "Ana Flores",
+      "role": "CSR / Technician",
+      "account_number": "PL-100823",
+      "insured_name": "Michael & Elena Vance",
+      "carrier_name": "Chubb Group & Markel (PersonalUmbrella)",
+      "primary_carrier": "Chubb Group (Atlantic Employers Ins Co)",
+      "line_of_business": "Personal Auto, High-Value Home & Excess Liability",
+      "date": "2026-09-01",
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-PL-20260901-03",
+          "initial_response_time_seconds": 25,
+          "total_talk_time_minutes": 14.2,
+          "caller_authority_verified": true
+        },
+        "magellan": {
+          "overall_sentiment": "High Positive",
+          "sentiment_score": 0.94,
+          "empathy_score": 98,
+          "policy_cross_check_detected": "Verified underlying $500k auto limit supports $5M Markel umbrella."
+        },
+        "ezlynx": {
+          "discussion_title": "Policy Change Request",
+          "folder": "Policy Changes/Declarations",
+          "labels": [
+            "Policy Change Request",
+            "Personal Auto",
+            "High Net Worth",
+            "Signed Change Form"
+          ],
+          "core_questions_completed": {
+            "caller_authority_verified": true,
+            "effective_date_confirmed": "2026-09-01",
+            "losses_in_last_30_days": false,
+            "umbrella_cross_checked": true,
+            "expectation_setting_done": true
+          },
+          "branch_guides_completed": {
+            "vehicle_added": "2024 Luxury SUV",
+            "lienholder_added": "Premier Financial Services",
+            "supporting_docs_uploaded": [
+              "BillOfSale.pdf",
+              "SignedChangeRequest.pdf"
+            ]
+          },
+          "carrier_portal_direct_entry": true,
+          "billing_type": "Direct Bill",
+          "task_action": "Reassign to CSR for follow up",
+          "follow_up_cadence_hours": 48,
+          "carrier_download_verified": true,
+          "client_center_delivered": true,
+          "closed_with_full_docs": true
+        }
+      },
+      "transcript_snippet": "ANA FLORES: Mr. Vance, I have verified your account and added the 2024 Luxury SUV to your Chubb auto policy. I cross-referenced your Markel Umbrella policy to confirm that the underlying $500,000 bodily injury liability meets all umbrella maintenance requirements. I have submitted the change in Chubb portal and reassigned the follow-up task to verify carrier download within 48 hours."
+    },
+    {
+      "department": "Personal Lines",
+      "test_id": "PL_TC_04",
+      "sop_id": "sop3_coi_request",
+      "sop_title": "SOP 3: Certificate of Insurance",
+      "title": "Personal Lines - Compliant HOA Property Proof & Loss Payee Certificate",
+      "employee_name": "Ana Flores",
+      "role": "CSR / Technician",
+      "account_number": "PL-100824",
+      "insured_name": "Jonathan & Karen Hayes",
+      "carrier_name": "Chubb Group & Markel",
+      "primary_carrier": "Chubb Custom Insurance",
+      "line_of_business": "High-Value Homeowners & Excess Liability",
+      "date": "2026-09-01",
+      "data_sources": {
+        "intake": {
+          "request_in_writing": true,
+          "written_source": "Email request from HOA Property Manager",
+          "contact_info_verified": true,
+          "authorized_requester": true,
+          "turnaround_minutes": 35,
+          "sla_met": true
+        },
+        "coverage_verification": {
+          "policy_active_in_ezlynx": true,
+          "additional_insured_verified": true,
+          "waiver_of_subrogation_verified": true,
+          "commercial_red_flags_screened": true,
+          "ny_work_action_over_checked": true,
+          "written_contract_requirement_verified": true
+        },
+        "master_preparation": {
+          "full_legal_holder_name_used": true,
+          "holder_name": "Beacon Ridge Condominium Association, Inc.",
+          "holder_deduped_in_ezlynx": true,
+          "reinstatement_or_renewal_status": "Active in-force",
+          "finance_company_only_reinstatement": false,
+          "ai_wos_endorsements_attached": true,
+          "form_numbers_cited_in_description": true,
+          "acord_101_attached": true,
+          "policy_change_entered_prior": true
+        },
+        "digital_delivery": {
+          "issued_via_ezlynx_on_behalf_of": true,
+          "insured_copied_on_delivery": true,
+          "client_center_delivered": true,
+          "client_center_self_service_educated": true,
+          "folder": "Certificate Masters/Beacon Ridge",
+          "document_labels": [
+            "Certificate of Insurance"
+          ],
+          "ezlynx_labels": [
+            "Certificate"
+          ]
+        },
+        "tracking_and_escalation": {
+          "coi_forms_tracker_updated": true,
+          "pending_tracker_updated": true,
+          "days_pending": 0,
+          "carlo_escalation_required": false,
+          "subcontractor_matching_verified": true
+        }
+      },
+      "transcript_snippet": "ANA FLORES: Verified Chubb policy in EZLynx. Added Beacon Ridge Condominium Association as Certificate Holder using full legal name. Attached ACORD 101. Issued via EZLynx on-behalf-of, copied Jonathan and Karen, updated COI Forms Tracker, and delivered through Client Center."
+    }
+  ],
+  "Commercial Lines": [
+    {
+      "department": "Commercial Lines",
+      "test_id": "CL_TC_01",
+      "sop_id": "sop1_new_business",
+      "sop_title": "SOP 1: New Business",
+      "title": "Commercial Lines - Producer Commercial Garage & Towing Binding (Pass 100%)",
+      "employee_name": "Carlo Ferrara",
+      "role": "Producer",
+      "account_number": "CL-200911",
+      "insured_name": "Metro Auto Body & Towing LLC",
+      "carrier_name": "AmWINS (Atlantic Casualty) & Progressive",
+      "primary_carrier": "Atlantic Casualty Insurance Company",
+      "line_of_business": "Commercial Garage Liability, Garagekeepers & On-Hook Cargo",
+      "policy_numbers": [
+        "GL-99218 (Garage - $6,129)"
+      ],
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-CL-20260901-01",
+          "initial_response_time_seconds": 45,
+          "warm_transfer_completed": true,
+          "total_talk_time_minutes": 24.2,
+          "phone_presentation_completed": true
+        },
+        "magellan": {
+          "overall_sentiment": "High Positive",
+          "sentiment_score": 0.89,
+          "empathy_score": 94,
+          "objection_detected": "Garagekeepers direct primary coverage deductible question",
+          "objection_handling_detected": "CENT Framework: Clarified direct primary vs legal liability difference, neutralized cost difference with package discount."
+        },
+        "ezlynx": {
+          "carrier_name": "Atlantic Casualty Insurance Company",
+          "lead_created": "2026-09-01 08:30 AM",
+          "line_of_business_logged": "Commercial Garage & Towing",
+          "x_date_logged": "2026-09-15",
+          "sales_center_pipeline_stage": "Won",
+          "discussion_title": "New Business",
+          "folder": "New Business/Application/Declarations",
+          "labels": [
+            "New Business Follow Up"
+          ],
+          "markets_quoted": [
+            "Atlantic Casualty",
+            "AmWINS",
+            "Progressive"
+          ],
+          "coverage_options_prepared": 3,
+          "agency_coverage_standards_met": true,
+          "quote_presentation_order": "Presented on phone at 10:15 AM before sending proposal link",
+          "payment_method_collected": "EFT Monthly (Routing & Account captured)",
+          "agency_fee_collected": "$100 Agency Fee applied",
+          "won_premium_recorded": "$6,129.00 Annual Written Premium",
+          "won_carrier_recorded": "Atlantic Casualty Insurance Company",
+          "uploaded_documents": [
+            "Signed Commercial App.pdf",
+            "EFT Form.pdf"
+          ],
+          "onboarding_explained": true
+        }
+      },
+      "transcript_snippet": "CARLO FERRARA: Mr. Miller, I have our 3 commercial garage & towing options ready across Atlantic Casualty, AmWINS, and Progressive. Before sending the proposal doc, let me walk you through the coverage breakdown. Atlantic Casualty includes direct primary garagekeepers and hook liability for $6,129 total. We can lock this in on monthly EFT today."
+    },
+    {
+      "department": "Commercial Lines",
+      "test_id": "CL_TC_02",
+      "sop_id": "sop2_policy_change",
+      "sop_title": "SOP 2: Policy Change Request",
+      "title": "Commercial Lines - CSR Certificate Endorsement & Additional Insured (Pass 100%)",
+      "employee_name": "Andrea Illanes",
+      "role": "CSR / Technician",
+      "account_number": "CL-200912",
+      "insured_name": "Summit Climate Systems LLC",
+      "carrier_name": "Selective Insurance Company",
+      "primary_carrier": "Selective Insurance Company",
+      "line_of_business": "Commercial Package (GL, Property, Auto)",
+      "date": "2026-09-01",
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-CL-20260901-02",
+          "initial_response_time_seconds": 15,
+          "total_talk_time_minutes": 8.6,
+          "caller_authority_verified": true
+        },
+        "magellan": {
+          "overall_sentiment": "Positive",
+          "sentiment_score": 0.85,
+          "empathy_score": 90,
+          "policy_cross_check_detected": "Verified certificate requirements for general contractor job site."
+        },
+        "ezlynx": {
+          "discussion_title": "Policy Change Request",
+          "folder": "Policy Changes/Declarations",
+          "labels": [
+            "Policy Change Request",
+            "Commercial Lines",
+            "Certificate Issued"
+          ],
+          "core_questions_completed": {
+            "caller_authority_verified": true,
+            "effective_date_confirmed": "2026-09-01",
+            "losses_in_last_30_days": false,
+            "umbrella_cross_checked": true,
+            "expectation_setting_done": true
+          },
+          "branch_guides_completed": {
+            "certificate_holder_added": "Apex General Contracting LLC",
+            "additional_insured_verified": "Primary/Non-Contributory + Blanket AI Endorsement Verified",
+            "waiver_of_subrogation_verified": true
+          },
+          "carrier_portal_direct_entry": true,
+          "billing_type": "Direct Bill",
+          "task_action": "Reassign to CSR for follow up",
+          "follow_up_cadence_hours": 48,
+          "carrier_download_verified": true,
+          "client_center_delivered": true,
+          "closed_with_full_docs": true
+        }
+      },
+      "transcript_snippet": "ANDREA ILLANES: I have verified your account and reviewed the certificate wording for Summit Climate Systems LLC. Since your Selective Commercial Package includes Blanket Additional Insured and Primary/Non-Contributory coverage, I have issued the certificate and submitted the schedule endorsement to Selective."
+    },
+    {
+      "department": "Commercial Lines",
+      "test_id": "CL_TC_03",
+      "sop_id": "sop2_policy_change",
+      "sop_title": "SOP 2: Policy Change Request",
+      "title": "Commercial Lines - CSR Bound Unpaid Agency-Bill Endorsement (Critical Fail)",
+      "employee_name": "Jackie Arriola",
+      "role": "CSR / Technician",
+      "account_number": "CL-200913",
+      "insured_name": "Tri-County Roofing & Gutter LLC",
+      "carrier_name": "Utica First Insurance Company",
+      "primary_carrier": "Utica First Insurance Company",
+      "line_of_business": "Commercial Package & Inland Marine",
+      "date": "2026-08-29",
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-CL-20260901-03",
+          "initial_response_time_seconds": 60,
+          "total_talk_time_minutes": 6.1,
+          "caller_authority_verified": true
+        },
+        "magellan": {
+          "overall_sentiment": "Neutral",
+          "sentiment_score": 0.5,
+          "empathy_score": 75,
+          "policy_cross_check_detected": "Added inland marine contractor equipment without payment verification."
+        },
+        "ezlynx": {
+          "discussion_title": "Policy Change Request",
+          "folder": "Policy Changes/Declarations",
+          "labels": [
+            "Policy Change Request"
+          ],
+          "core_questions_completed": {
+            "caller_authority_verified": true,
+            "effective_date_confirmed": "2026-08-29",
+            "losses_in_last_30_days": false,
+            "umbrella_cross_checked": true,
+            "expectation_setting_done": false
+          },
+          "branch_guides_completed": {
+            "equipment_added": "2024 Heavy Extrusion Machine ($1,800 Endorsement Premium)",
+            "supporting_docs_uploaded": [
+
+            ]
+          },
+          "carrier_portal_direct_entry": true,
+          "billing_type": "Agency Bill",
+          "payment_collected_before_binding": false,
+          "accounting_checklist_completed": false,
+          "task_action": "Reassign to CSR for follow up",
+          "follow_up_cadence_hours": 48,
+          "carrier_download_verified": true,
+          "client_center_delivered": false,
+          "closed_with_full_docs": false
+        }
+      },
+      "transcript_snippet": "JACKIE ARRIOLA: I went ahead and bound the 2024 Heavy Extrusion Machine on your Utica First policy for Tri-County Roofing & Gutter LLC right now. The endorsement is $1,800 on agency bill. I will email you an invoice and you can pay it within 30 days."
+    },
+    {
+      "department": "Commercial Lines",
+      "test_id": "CL_TC_04",
+      "sop_id": "sop3_coi_request",
+      "sop_title": "SOP 3: Certificate of Insurance",
+      "title": "Commercial Lines - Compliant Contractor COI with AI/WOS & Completed Operations",
+      "employee_name": "Andrea Illanes",
+      "role": "CSR / Technician",
+      "account_number": "CL-200914",
+      "insured_name": "Pinnacle Mechanical Contractors LLC",
+      "carrier_name": "Selective Insurance Company",
+      "primary_carrier": "Selective Insurance Company",
+      "line_of_business": "Commercial General Liability & Commercial Auto",
+      "date": "2026-09-01",
+      "data_sources": {
+        "intake": {
+          "request_in_writing": true,
+          "written_source": "Subcontractor Agreement specification sheet",
+          "contact_info_verified": true,
+          "authorized_requester": true,
+          "turnaround_minutes": 25,
+          "sla_met": true
+        },
+        "coverage_verification": {
+          "policy_active_in_ezlynx": true,
+          "additional_insured_verified": true,
+          "waiver_of_subrogation_verified": true,
+          "commercial_red_flags_screened": true,
+          "ny_work_action_over_checked": true,
+          "roofing_tree_removal_checked": true,
+          "written_contract_requirement_verified": true
+        },
+        "master_preparation": {
+          "full_legal_holder_name_used": true,
+          "holder_name": "Metropolitan Construction Management Inc.",
+          "holder_deduped_in_ezlynx": true,
+          "reinstatement_or_renewal_status": "Active in-force",
+          "finance_company_only_reinstatement": false,
+          "ai_wos_endorsements_attached": true,
+          "form_numbers_cited_in_description": true,
+          "acord_101_attached": true,
+          "policy_change_entered_prior": true
+        },
+        "digital_delivery": {
+          "issued_via_ezlynx_on_behalf_of": true,
+          "insured_copied_on_delivery": true,
+          "client_center_delivered": true,
+          "client_center_self_service_educated": true,
+          "folder": "Certificate Masters/Metropolitan Construction",
+          "document_labels": [
+            "Certificate of Insurance"
+          ],
+          "ezlynx_labels": [
+            "Certificate"
+          ]
+        },
+        "tracking_and_escalation": {
+          "coi_forms_tracker_updated": true,
+          "pending_tracker_updated": true,
+          "days_pending": 0,
+          "carlo_escalation_required": false,
+          "subcontractor_matching_verified": true
+        }
+      },
+      "transcript_snippet": "ANDREA ILLANES: Verified Selective GL & Commercial Auto policies. Attached CG 2010 (ongoing) and CG 2037 (completed operations) endorsements. Cited form numbers in Description of Operations. Issued via EZLynx Certificates on-behalf-of, copied Pinnacle owner, updated Pending and COI Forms Trackers."
+    }
+  ],
+  "Trucking and Transportation": [
+    {
+      "department": "Trucking and Transportation",
+      "test_id": "TRK_TC_01",
+      "sop_id": "sop1_new_business",
+      "sop_title": "SOP 1: New Business",
+      "title": "Trucking - Producer Fleet Binding & Multi-Market Quoting (Pass 100%)",
+      "employee_name": "Ricardo Aguilar",
+      "role": "Producer",
+      "account_number": "TRK-300101",
+      "insured_name": "Horizon Freightways LLC",
+      "carrier_name": "Progressive & Liberty Mutual (Quoted: Progressive, Canal, Northland)",
+      "primary_carrier": "Progressive Commercial",
+      "line_of_business": "Commercial Auto Trucking & Motor Truck Cargo",
+      "policy_numbers": [
+        "PR-778210 (Trucking Auto - $39,690)"
+      ],
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-TRK-20260901-01",
+          "initial_response_time_seconds": 35,
+          "warm_transfer_completed": true,
+          "total_talk_time_minutes": 28.5,
+          "phone_presentation_completed": true
+        },
+        "magellan": {
+          "overall_sentiment": "High Positive",
+          "sentiment_score": 0.91,
+          "empathy_score": 96,
+          "objection_detected": "Cargo limit requirement for refrigerated loads ($250k)",
+          "objection_handling_detected": "CENT Framework: Clarified reefer breakdown coverage with Liberty Mutual, neutralized pricing concern with combined fleet bundle."
+        },
+        "ezlynx": {
+          "carrier_name": "Progressive Commercial",
+          "lead_created": "2026-09-01 08:00 AM",
+          "line_of_business_logged": "Commercial Trucking",
+          "x_date_logged": "2026-09-12",
+          "sales_center_pipeline_stage": "Won",
+          "discussion_title": "New Business",
+          "folder": "New Business/Application/Declarations",
+          "labels": [
+            "New Business Follow Up"
+          ],
+          "markets_quoted": [
+            "Progressive",
+            "Canal",
+            "Northland"
+          ],
+          "coverage_options_prepared": 3,
+          "agency_coverage_standards_met": true,
+          "quote_presentation_order": "Presented on phone at 9:00 AM before sending proposal link",
+          "payment_method_collected": "EFT Monthly (Routing & Account captured)",
+          "agency_fee_collected": "$100 Agency Fee applied",
+          "won_premium_recorded": "$39,690.00 Annual Written Premium",
+          "won_carrier_recorded": "Progressive Commercial",
+          "uploaded_documents": [
+            "Signed Trucking App.pdf",
+            "Form E Filing Authorization.pdf"
+          ],
+          "onboarding_explained": true
+        }
+      },
+      "transcript_snippet": "RICARDO AGUILAR: Kevin, before I email the proposal link for Horizon Freightways LLC, let us walk through the 3 trucking markets side-by-side: Progressive, Canal, and Northland. Progressive includes $250k cargo with Liberty Mutual for $39,690 total. We can lock in your monthly EFT down payment with Progressive and file your Form E today."
+    },
+    {
+      "department": "Trucking and Transportation",
+      "test_id": "TRK_TC_02",
+      "sop_id": "sop2_policy_change",
+      "sop_title": "SOP 2: Policy Change Request",
+      "title": "Trucking - CSR Add Freightliner Tractor & CDL Driver (Pass 100%)",
+      "employee_name": "Ricardo Aguilar",
+      "role": "CSR / Technician",
+      "account_number": "TRK-300102",
+      "insured_name": "Apex Hauling & Logistics LLC",
+      "carrier_name": "Progressive & Diesel Insurance / Fortegra",
+      "primary_carrier": "Progressive Commercial",
+      "line_of_business": "Commercial Trucking Auto",
+      "date": "2026-09-01",
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-TRK-20260901-02",
+          "initial_response_time_seconds": 20,
+          "total_talk_time_minutes": 9.8,
+          "caller_authority_verified": true
+        },
+        "magellan": {
+          "overall_sentiment": "Positive / Resolved",
+          "sentiment_score": 0.88,
+          "empathy_score": 93,
+          "policy_cross_check_detected": "Verified CDL driver MVR and added tractor with instant cab cards."
+        },
+        "ezlynx": {
+          "discussion_title": "Policy Change Request",
+          "folder": "Policy Changes/Declarations",
+          "labels": [
+            "Policy Change Request",
+            "Commercial Trucking",
+            "Client Center Delivered"
+          ],
+          "core_questions_completed": {
+            "caller_authority_verified": true,
+            "effective_date_confirmed": "2026-09-01",
+            "losses_in_last_30_days": false,
+            "umbrella_cross_checked": true,
+            "expectation_setting_done": true
+          },
+          "branch_guides_completed": {
+            "vehicle_added": "2024 Freightliner Cascadia Tractor",
+            "driver_added": "Carlos Hernandez (CDL-A 8yr, Clean MVR)",
+            "supporting_docs_uploaded": [
+              "Registration.pdf",
+              "MVR_Report.pdf"
+            ]
+          },
+          "carrier_portal_direct_entry": true,
+          "billing_type": "Direct Bill",
+          "task_action": "Reassign to CSR for follow up",
+          "follow_up_cadence_hours": 48,
+          "carrier_download_verified": true,
+          "client_center_delivered": true,
+          "closed_with_full_docs": true
+        }
+      },
+      "transcript_snippet": "RICARDO AGUILAR: I have verified your account and CDL driver MVR for Carlos Hernandez. I added the 2024 Freightliner Cascadia to your Progressive policy for Apex Hauling & Logistics LLC and texted a one-time verification code (238340) so you have the official cab ID cards right on your mobile phone."
+    },
+    {
+      "department": "Trucking and Transportation",
+      "test_id": "TRK_TC_03",
+      "sop_id": "sop2_policy_change",
+      "sop_title": "SOP 2: Policy Change Request",
+      "title": "Trucking - CSR Premature Confirmation on DOT Form E Filing (Critical Fail)",
+      "employee_name": "Diana Cabrera",
+      "role": "CSR / Technician",
+      "account_number": "TRK-300103",
+      "insured_name": "Eagle Express Intermodal LLC",
+      "carrier_name": "GEICO Marine Insurance Company",
+      "primary_carrier": "GEICO Marine Insurance Company",
+      "line_of_business": "Commercial Trucking Auto & Filings",
+      "date": "2026-08-30",
+      "data_sources": {
+        "ringcentral": {
+          "call_id": "RC-TRK-20260901-03",
+          "initial_response_time_seconds": 90,
+          "total_talk_time_minutes": 4.2,
+          "caller_authority_verified": true
+        },
+        "magellan": {
+          "overall_sentiment": "Neutral",
+          "sentiment_score": 0.45,
+          "empathy_score": 60,
+          "policy_cross_check_detected": "CSR attempted address change on DOT filing without carrier verification."
+        },
+        "ezlynx": {
+          "discussion_title": "Address Change",
+          "folder": "Default",
+          "labels": [
+            "Filings"
+          ],
+          "core_questions_completed": {
+            "caller_authority_verified": true,
+            "effective_date_confirmed": "2026-08-30",
+            "losses_in_last_30_days": false,
+            "umbrella_cross_checked": false,
+            "expectation_setting_done": false
+          },
+          "branch_guides_completed": {
+            "address_updated": "New Jersey Terminal",
+            "supporting_docs_uploaded": [
+
+            ]
+          },
+          "carrier_portal_direct_entry": true,
+          "billing_type": "Direct Bill",
+          "task_action": "Closed immediately on call",
+          "follow_up_cadence_hours": 0,
+          "carrier_download_verified": false,
+          "client_center_delivered": false,
+          "closed_with_full_docs": false
+        }
+      },
+      "transcript_snippet": "DIANA CABRERA: I submitted the address change for Eagle Express Intermodal LLC on your GEICO Marine DOT filing portal right now. You are all set and compliant for your DOT inspection tomorrow! Have a safe trip."
+    },
+    {
+      "department": "Trucking and Transportation",
+      "test_id": "TRK_TC_04",
+      "sop_id": "sop3_coi_request",
+      "sop_title": "SOP 3: Certificate of Insurance",
+      "title": "Trucking - Critical Failure: 9-Day Pending COI Without Carlo Escalation",
+      "employee_name": "Diana Cabrera",
+      "role": "CSR / Technician",
+      "account_number": "TRK-300104",
+      "insured_name": "Vanguard Freight Transport LLC",
+      "carrier_name": "GEICO Marine & Progressive Commercial",
+      "primary_carrier": "GEICO Marine Insurance Company",
+      "line_of_business": "Commercial Auto & Motor Truck Cargo",
+      "date": "2026-08-23",
+      "data_sources": {
+        "intake": {
+          "request_in_writing": true,
+          "written_source": "Freight broker rate confirmation sheet",
+          "contact_info_verified": true,
+          "authorized_requester": true,
+          "turnaround_minutes": 12960,
+          "sla_met": false
+        },
+        "coverage_verification": {
+          "policy_active_in_ezlynx": true,
+          "additional_insured_verified": false,
+          "waiver_of_subrogation_verified": false,
+          "commercial_red_flags_screened": true,
+          "trucking_red_flags_screened": true,
+          "uiia_verified_with_mike_sosa": false,
+          "written_contract_requirement_verified": true
+        },
+        "master_preparation": {
+          "full_legal_holder_name_used": true,
+          "holder_name": "National Logistics Brokerage Corp.",
+          "holder_deduped_in_ezlynx": true,
+          "reinstatement_or_renewal_status": "Pending carrier cargo expansion",
+          "finance_company_only_reinstatement": false,
+          "ai_wos_endorsements_attached": false,
+          "form_numbers_cited_in_description": false,
+          "acord_101_attached": false,
+          "policy_change_entered_prior": false
+        },
+        "digital_delivery": {
+          "issued_via_ezlynx_on_behalf_of": false,
+          "insured_copied_on_delivery": false,
+          "client_center_delivered": false,
+          "client_center_self_service_educated": false,
+          "folder": "Default",
+          "document_labels": [
+
+          ],
+          "ezlynx_labels": [
+
+          ]
+        },
+        "tracking_and_escalation": {
+          "coi_forms_tracker_updated": false,
+          "pending_tracker_updated": false,
+          "days_pending": 9,
+          "carlo_escalation_required": true,
+          "carlo_escalation_completed": false,
+          "subcontractor_matching_verified": false
+        }
+      },
+      "transcript_snippet": "DIANA CABRERA: Certificate request for National Logistics Brokerage with temperature-controlled reefer cargo endorsement required carrier underwriter review. The request remained in pending state for 9 calendar days. CSR did not add to Pending Tracker, did not send pending dropdown update, and failed to escalate to Carlo per mandatory 7-day rule."
+    }
+  ]
+}
